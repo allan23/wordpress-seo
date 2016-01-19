@@ -52,7 +52,7 @@ class WPSEO_Taxonomy_Metabox {
 			$product_title .= ' Premium';
 		}
 		/* translators: %1$s expands to Yoast SEO */
-		$metabox_heading = sprintf( __( '%1$s Settings', 'wordpress-seo' ), $product_title );
+		$metabox_heading = sprintf( esc_html__( '%1$s Settings', 'wordpress-seo' ), $product_title );
 
 		printf( '<div id="poststuff" class="postbox"><h3><span>%1$s</span></h3><div id="taxonomy_overall"></div><div class="inside">' , $metabox_heading );
 		echo '<div class="wpseo-metabox-sidebar"><ul>';
@@ -96,10 +96,10 @@ class WPSEO_Taxonomy_Metabox {
 		$tab = new WPSEO_Metabox_Form_Tab(
 			'content',
 			$content,
-			__( 'Content', 'wordpress-seo' ),
+			esc_html__( 'Content', 'wordpress-seo' ),
 			array(
 				'link_class' => 'wpseo_keyword_tab',
-				'link_title' => __( 'Content', 'wordpress-seo' ),
+				'link_title' => esc_html__( 'Content', 'wordpress-seo' ),
 			)
 		);
 
@@ -108,8 +108,8 @@ class WPSEO_Taxonomy_Metabox {
 			'<span class="yst-traffic-light-container">' . $this->traffic_light_svg() . '</span>',
 			array( $tab ),
 			array(
-				'link_alt'   => __( 'Content', 'wordpress-seo' ),
-				'link_title' => __( 'Content', 'wordpress-seo' ),
+				'link_alt'   => esc_attr__( 'Content', 'wordpress-seo' ),
+				'link_title' => esc_attr__( 'Content', 'wordpress-seo' ),
 			)
 		);
 	}
@@ -126,9 +126,9 @@ class WPSEO_Taxonomy_Metabox {
 		$tab = new WPSEO_Metabox_Form_Tab(
 			'settings',
 			$content,
-			__( 'Settings', 'wordpress-seo' ),
+			esc_html__( 'Settings', 'wordpress-seo' ),
 			array(
-				'link_title' => __( 'Settings', 'wordpress-seo' ),
+				'link_title' => esc_html__( 'Settings', 'wordpress-seo' ),
 			)
 		);
 
@@ -137,8 +137,8 @@ class WPSEO_Taxonomy_Metabox {
 			'<span class="dashicons dashicons-admin-generic"></span>',
 			array( $tab ),
 			array(
-				'link_alt'   => __( 'Settings', 'wordpress-seo' ),
-				'link_title' => __( 'Settings', 'wordpress-seo' ),
+				'link_alt'   => esc_attr__( 'Settings', 'wordpress-seo' ),
+				'link_title' => esc_attr__( 'Settings', 'wordpress-seo' ),
 			)
 		);
 	}
@@ -161,8 +161,8 @@ class WPSEO_Taxonomy_Metabox {
 				$this->taxonomy_tab_content->html( $facebook_meta_fields ),
 				'<span class="dashicons dashicons-facebook-alt"></span>',
 				array(
-					'link_alt'   => __( 'Facebook / Opengraph metadata', 'wordpress-seo' ),
-					'link_title' => __( 'Facebook / Opengraph metadata', 'wordpress-seo' ),
+					'link_alt'   => esc_attr__( 'Facebook / Opengraph metadata', 'wordpress-seo' ),
+					'link_title' => esc_html__( 'Facebook / Opengraph metadata', 'wordpress-seo' ),
 				)
 			);
 		}
@@ -175,8 +175,8 @@ class WPSEO_Taxonomy_Metabox {
 				$this->taxonomy_tab_content->html( $twitter_meta_fields ),
 				'<span class="dashicons dashicons-twitter"></span>',
 				array(
-					'link_alt'   => __( 'Twitter metadata', 'wordpress-seo' ),
-					'link_title' => __( 'Twitter metadata', 'wordpress-seo' ),
+					'link_alt'   => esc_attr__( 'Twitter metadata', 'wordpress-seo' ),
+					'link_title' => esc_html__( 'Twitter metadata', 'wordpress-seo' ),
 				)
 			);
 		}
@@ -189,8 +189,8 @@ class WPSEO_Taxonomy_Metabox {
 				$this->taxonomy_tab_content->html( $googleplus_meta_fields ),
 				'<span class="dashicons dashicons-googleplus"></span>',
 				array(
-					'link_alt'   => __( 'Google+ metadata', 'wordpress-seo' ),
-					'link_title' => __( 'Google+ metadata', 'wordpress-seo' ),
+					'link_alt'   => esc_attr__( 'Google+ metadata', 'wordpress-seo' ),
+					'link_title' => esc_html__( 'Google+ metadata', 'wordpress-seo' ),
 				)
 			);
 		}
@@ -200,8 +200,8 @@ class WPSEO_Taxonomy_Metabox {
 			'<span class="dashicons dashicons-share"></span>',
 			$tabs,
 			array(
-				'link_alt'   => __( 'Social', 'wordpress-seo' ),
-				'link_title' => __( 'Social', 'wordpress-seo' ),
+				'link_alt'   => esc_attr__( 'Social', 'wordpress-seo' ),
+				'link_title' => esc_html__( 'Social', 'wordpress-seo' ),
 			)
 		);
 	}

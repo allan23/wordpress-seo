@@ -17,27 +17,27 @@ $yform->admin_header( true, 'wpseo_social' );
 ?>
 
 	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
-		<a class="nav-tab" id="accounts-tab" href="#top#accounts"><?php _e( 'Accounts', 'wordpress-seo' ); ?></a>
-		<a class="nav-tab" id="facebook-tab" href="#top#facebook"><span class="dashicons dashicons-facebook-alt"></span> <?php _e( 'Facebook', 'wordpress-seo' ); ?></a>
-		<a class="nav-tab" id="twitterbox-tab" href="#top#twitterbox"><span class="dashicons dashicons-twitter"></span> <?php _e( 'Twitter', 'wordpress-seo' ); ?></a>
-		<a class="nav-tab" id="pinterest-tab" href="#top#pinterest"><?php _e( 'Pinterest', 'wordpress-seo' ); ?></a>
-		<a class="nav-tab" id="google-tab" href="#top#google"><span class="dashicons dashicons-googleplus"></span> <?php _e( 'Google+', 'wordpress-seo' ); ?></a>
+		<a class="nav-tab" id="accounts-tab" href="#top#accounts"><?php esc_html_e( 'Accounts', 'wordpress-seo' ); ?></a>
+		<a class="nav-tab" id="facebook-tab" href="#top#facebook"><span class="dashicons dashicons-facebook-alt"></span> <?php esc_html_e( 'Facebook', 'wordpress-seo' ); ?></a>
+		<a class="nav-tab" id="twitterbox-tab" href="#top#twitterbox"><span class="dashicons dashicons-twitter"></span> <?php esc_html_e( 'Twitter', 'wordpress-seo' ); ?></a>
+		<a class="nav-tab" id="pinterest-tab" href="#top#pinterest"><?php esc_html_e( 'Pinterest', 'wordpress-seo' ); ?></a>
+		<a class="nav-tab" id="google-tab" href="#top#google"><span class="dashicons dashicons-googleplus"></span> <?php esc_html_e( 'Google+', 'wordpress-seo' ); ?></a>
 	</h2>
 
 	<div id="accounts" class="wpseotab">
 		<p>
-			<?php _e( 'To inform Google about your social profiles, we need to know their URLs.', 'wordpress-seo' ); ?>
-			<?php _e( 'For each, pick the main account associated with this site and please enter them below:', 'wordpress-seo' ); ?>
+			<?php esc_html_e( 'To inform Google about your social profiles, we need to know their URLs.', 'wordpress-seo' ); ?>
+			<?php esc_html_e( 'For each, pick the main account associated with this site and please enter them below:', 'wordpress-seo' ); ?>
 		</p>
 		<?php
-		$yform->textinput( 'facebook_site', __( 'Facebook Page URL', 'wordpress-seo' ) );
-		$yform->textinput( 'twitter_site', __( 'Twitter Username', 'wordpress-seo' ) );
-		$yform->textinput( 'instagram_url', __( 'Instagram URL', 'wordpress-seo' ) );
-		$yform->textinput( 'linkedin_url', __( 'LinkedIn URL', 'wordpress-seo' ) );
-		$yform->textinput( 'myspace_url', __( 'MySpace URL', 'wordpress-seo' ) );
-		$yform->textinput( 'pinterest_url', __( 'Pinterest URL', 'wordpress-seo' ) );
-		$yform->textinput( 'youtube_url', __( 'YouTube URL', 'wordpress-seo' ) );
-		$yform->textinput( 'google_plus_url', __( 'Google+ URL', 'wordpress-seo' ) );
+		$yform->textinput( 'facebook_site', esc_html__( 'Facebook Page URL', 'wordpress-seo' ) );
+		$yform->textinput( 'twitter_site', esc_html__( 'Twitter Username', 'wordpress-seo' ) );
+		$yform->textinput( 'instagram_url', esc_html__( 'Instagram URL', 'wordpress-seo' ) );
+		$yform->textinput( 'linkedin_url', esc_html__( 'LinkedIn URL', 'wordpress-seo' ) );
+		$yform->textinput( 'myspace_url', esc_html__( 'MySpace URL', 'wordpress-seo' ) );
+		$yform->textinput( 'pinterest_url', esc_html__( 'Pinterest URL', 'wordpress-seo' ) );
+		$yform->textinput( 'youtube_url', esc_html__( 'YouTube URL', 'wordpress-seo' ) );
+		$yform->textinput( 'google_plus_url', esc_html__( 'Google+ URL', 'wordpress-seo' ) );
 
 		do_action( 'wpseo_admin_other_section' );
 		?>
@@ -47,19 +47,19 @@ $yform->admin_header( true, 'wpseo_social' );
 		<p>
 			<?php
 				/* translators: %s expands to <code>&lt;head&gt;</code> */
-				printf( __( 'Add Open Graph meta data to your site\'s %s section, Facebook and other social networks use this data when your pages are shared.', 'wordpress-seo' ), '<code>&lt;head&gt;</code>' );
+				printf( esc_html__( 'Add Open Graph meta data to your site\'s %s section, Facebook and other social networks use this data when your pages are shared.', 'wordpress-seo' ), '<code>&lt;head&gt;</code>' );
 			?>
 		</p>
-		<?php $yform->checkbox( 'opengraph', __( 'Add Open Graph meta data', 'wordpress-seo' ) ); ?>
+		<?php $yform->checkbox( 'opengraph', esc_html__( 'Add Open Graph meta data', 'wordpress-seo' ) ); ?>
 
 		<?php
 		if ( 'posts' == get_option( 'show_on_front' ) ) {
 			echo '<p><strong>' . esc_html__( 'Frontpage settings', 'wordpress-seo' ) . '</strong></p>';
 			echo '<p>' . esc_html__( 'These are the title, description and image used in the Open Graph meta tags on the front page of your site.', 'wordpress-seo' ) . '</p>';
 
-			$yform->media_input( 'og_frontpage_image', __( 'Image URL', 'wordpress-seo' ) );
-			$yform->textinput( 'og_frontpage_title', __( 'Title', 'wordpress-seo' ) );
-			$yform->textinput( 'og_frontpage_desc', __( 'Description', 'wordpress-seo' ) );
+			$yform->media_input( 'og_frontpage_image', esc_html__( 'Image URL', 'wordpress-seo' ) );
+			$yform->textinput( 'og_frontpage_title', esc_html__( 'Title', 'wordpress-seo' ) );
+			$yform->textinput( 'og_frontpage_desc', esc_html__( 'Description', 'wordpress-seo' ) );
 
 			// Offer copying of meta description.
 			$meta_options = get_option( 'wpseo_titles' );
@@ -69,7 +69,7 @@ $yform->admin_header( true, 'wpseo_social' );
 		} ?>
 
 		<p><strong><?php esc_html_e( 'Default settings', 'wordpress-seo' ); ?></strong></p>
-		<?php $yform->media_input( 'og_default_image', __( 'Image URL', 'wordpress-seo' ) ); ?>
+		<?php $yform->media_input( 'og_default_image', esc_html__( 'Image URL', 'wordpress-seo' ) ); ?>
 		<p class="desc label">
 			<?php esc_html_e( 'This image is used if the post/page being shared does not contain any images.', 'wordpress-seo' ); ?>
 		</p>
@@ -83,30 +83,30 @@ $yform->admin_header( true, 'wpseo_social' );
 		<p>
 			<?php
 			/* translators: %s expands to <code>&lt;head&gt;</code> */
-			printf( __( 'Add Twitter card meta data to your site\'s %s section.', 'wordpress-seo' ), '<code>&lt;head&gt;</code>' );
+			printf( esc_html__( 'Add Twitter card meta data to your site\'s %s section.', 'wordpress-seo' ), '<code>&lt;head&gt;</code>' );
 			?>
 		</p>
 
-		<?php $yform->checkbox( 'twitter', __( 'Add Twitter card meta data', 'wordpress-seo' ) ); ?>
+		<?php $yform->checkbox( 'twitter', esc_html__( 'Add Twitter card meta data', 'wordpress-seo' ) ); ?>
 
 		<?php
-		$yform->select( 'twitter_card_type', __( 'The default card type to use', 'wordpress-seo' ), WPSEO_Option_Social::$twitter_card_types );
+		$yform->select( 'twitter_card_type', esc_html__( 'The default card type to use', 'wordpress-seo' ), WPSEO_Option_Social::$twitter_card_types );
 		do_action( 'wpseo_admin_twitter_section' );
 		?>
 	</div>
 
 	<div id="pinterest" class="wpseotab">
 		<p>
-			<?php _e( 'Pinterest uses Open Graph metadata just like Facebook, so be sure to keep the Open Graph checkbox on the Facebook tab checked if you want to optimize your site for Pinterest.', 'wordpress-seo' ); ?>
+			<?php esc_html_e( 'Pinterest uses Open Graph metadata just like Facebook, so be sure to keep the Open Graph checkbox on the Facebook tab checked if you want to optimize your site for Pinterest.', 'wordpress-seo' ); ?>
 		</p>
 		<p>
 			<?php
 				/* translators: %1$s / %2$s expands to a link to pinterest.com's help page. */
-				printf( __( 'To %1$sverify your site with Pinterest%2$s, add the meta tag here:', 'wordpress-seo' ), '<a target="_blank" href="https://help.pinterest.com/en/articles/verify-your-website#meta_tag">', '</a>' );
+				printf( esc_html__( 'To %1$sverify your site with Pinterest%2$s, add the meta tag here:', 'wordpress-seo' ), '<a target="_blank" href="https://help.pinterest.com/en/articles/verify-your-website#meta_tag">', '</a>' );
 			?>
 		</p>
 
-		<?php $yform->textinput( 'pinterestverify', __( 'Pinterest verification', 'wordpress-seo' ) ); ?>
+		<?php $yform->textinput( 'pinterestverify', esc_html__( 'Pinterest verification', 'wordpress-seo' ) ); ?>
 
 		<?php
 		do_action( 'wpseo_admin_pinterest_section' );
@@ -115,12 +115,12 @@ $yform->admin_header( true, 'wpseo_social' );
 
 	<div id="google" class="wpseotab">
 		<p>
-			<?php $yform->checkbox( 'googleplus', __( 'Add Google+ specific post meta data', 'wordpress-seo' ) ); ?>
+			<?php $yform->checkbox( 'googleplus', esc_html__( 'Add Google+ specific post meta data', 'wordpress-seo' ) ); ?>
 		</p>
 
-		<p><?php _e( 'If you have a Google+ page for your business, add that URL here and link it on your Google+ page\'s about page.', 'wordpress-seo' ); ?></p>
+		<p><?php esc_html_e( 'If you have a Google+ page for your business, add that URL here and link it on your Google+ page\'s about page.', 'wordpress-seo' ); ?></p>
 
-		<?php $yform->textinput( 'plus-publisher', __( 'Google Publisher Page', 'wordpress-seo' ) ); ?>
+		<?php $yform->textinput( 'plus-publisher', esc_html__( 'Google Publisher Page', 'wordpress-seo' ) ); ?>
 
 		<?php do_action( 'wpseo_admin_googleplus_section' ); ?>
 	</div>

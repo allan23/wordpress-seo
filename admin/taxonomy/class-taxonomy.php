@@ -52,13 +52,13 @@ class WPSEO_Taxonomy {
 		$this->no_index_options        = WPSEO_Taxonomy_Meta::$no_index_options;
 		$this->sitemap_include_options = WPSEO_Taxonomy_Meta::$sitemap_include_options;
 
-		$this->no_index_options['default'] = __( 'Use %s default (Currently: %s)', 'wordpress-seo' );
-		$this->no_index_options['index']   = __( 'Always index', 'wordpress-seo' );
-		$this->no_index_options['noindex'] = __( 'Always noindex', 'wordpress-seo' );
+		$this->no_index_options['default'] = esc_html__( 'Use %s default (Currently: %s)', 'wordpress-seo' );
+		$this->no_index_options['index']   = esc_html__( 'Always index', 'wordpress-seo' );
+		$this->no_index_options['noindex'] = esc_html__( 'Always noindex', 'wordpress-seo' );
 
-		$this->sitemap_include_options['-']      = __( 'Auto detect', 'wordpress-seo' );
-		$this->sitemap_include_options['always'] = __( 'Always include', 'wordpress-seo' );
-		$this->sitemap_include_options['never']  = __( 'Never include', 'wordpress-seo' );
+		$this->sitemap_include_options['-']      = esc_html__( 'Auto detect', 'wordpress-seo' );
+		$this->sitemap_include_options['always'] = esc_html__( 'Always include', 'wordpress-seo' );
+		$this->sitemap_include_options['never']  = esc_html__( 'Never include', 'wordpress-seo' );
 	}
 
 
@@ -204,11 +204,11 @@ class WPSEO_Taxonomy {
 			'taxonomy'          => $term->taxonomy,
 			'keyword_usage'     => WPSEO_Taxonomy_Meta::get_keyword_usage( $focuskw, $term->term_id, $term->taxonomy ),
 			// Todo: a column needs to be added on the termpages to add a filter for the keyword, so this can be used in the focus kw doubles.
-			'search_url'        => admin_url( 'edit-tags.php?taxonomy=' . $term->taxonomy . '&seo_kw_filter={keyword}' ),
-			'post_edit_url'     => admin_url( 'edit-tags.php?action=edit&taxonomy=' . $term->taxonomy . '&tag_ID={id}' ),
+			'search_url'        => esc_url(admin_url( 'edit-tags.php?taxonomy=' . $term->taxonomy . '&seo_kw_filter={keyword}' )),
+			'post_edit_url'     => esc_url(admin_url( 'edit-tags.php?action=edit&taxonomy=' . $term->taxonomy . '&tag_ID={id}' )),
 			'title_template'    => WPSEO_Taxonomy::get_title_template( $term ),
 			'metadesc_template' => WPSEO_Taxonomy::get_metadesc_template( $term ),
-			'contentTab'        => __( 'Content:', 'wordpress-seo' ),
+			'contentTab'        => esc_html__( 'Content:', 'wordpress-seo' ),
 			'locale'            => get_locale(),
 		);
 	}
@@ -252,7 +252,7 @@ class WPSEO_Taxonomy {
 	 */
 	public function localize_replace_vars_script() {
 		return array(
-			'no_parent_text' => __( '(no parent)', 'wordpress-seo' ),
+			'no_parent_text' => esc_html__( '(no parent)', 'wordpress-seo' ),
 			'replace_vars'   => $this->get_replace_vars(),
 		);
 	}

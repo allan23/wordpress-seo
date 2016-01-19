@@ -34,18 +34,18 @@ class WPSEO_Taxonomy_Settings_Fields extends WPSEO_Taxonomy_Fields {
 	public function get() {
 		$fields = array(
 			'metakey'         => $this->get_field_config(
-				__( 'Meta keywords', 'wordpress-seo' ),
+				esc_html__( 'Meta keywords', 'wordpress-seo' ),
 				esc_html__( 'Meta keywords used on the archive page for this term.', 'wordpress-seo' ),
 				'text',
 				'',
 				$this->options['usemetakeywords'] !== true
 			),
 			'canonical'       => $this->get_field_config(
-				__( 'Canonical', 'wordpress-seo' ),
+				esc_html__( 'Canonical', 'wordpress-seo' ),
 				esc_html__( 'The canonical link is shown on the archive page for this term.', 'wordpress-seo' )
 			),
 			'bctitle'         => $this->get_field_config(
-				__( 'Breadcrumbs title', 'wordpress-seo' ),
+				esc_html__( 'Breadcrumbs title', 'wordpress-seo' ),
 				/* translators: %s expands to the taxonomy name  */
 				sprintf( esc_html__( 'The Breadcrumbs title is used in the breadcrumbs where this %s appears.', 'wordpress-seo' ), $this->term->taxonomy ),
 				'text',
@@ -54,7 +54,7 @@ class WPSEO_Taxonomy_Settings_Fields extends WPSEO_Taxonomy_Fields {
 			),
 			'noindex'         => $this->get_field_config(
 				/* translators: %s expands to taxonomy name  */
-				sprintf( __( 'Noindex this %s', 'wordpress-seo' ), $this->term->taxonomy ),
+				sprintf( esc_html__( 'Noindex this %s', 'wordpress-seo' ), $this->term->taxonomy ),
 				/* translators: %s expands to taxonomy name  */
 				sprintf( esc_html__( 'This %s follows the indexation rules set under Metas and Titles, you can override it here.', 'wordpress-seo' ), $this->term->taxonomy ),
 				'select',
@@ -62,7 +62,7 @@ class WPSEO_Taxonomy_Settings_Fields extends WPSEO_Taxonomy_Fields {
 			),
 			'sitemap_include' => $this->get_field_config(
 				/* translators: %1$s expands to the taxonomy name  */
-				sprintf( __( 'Include %1$s in sitemap?', 'wordpress-seo' ), $this->term->taxonomy ),
+				sprintf( esc_html__( 'Include %1$s in sitemap?', 'wordpress-seo' ), $this->term->taxonomy ),
 				'',
 				'select',
 				$this->sitemap_include_options
@@ -83,13 +83,13 @@ class WPSEO_Taxonomy_Settings_Fields extends WPSEO_Taxonomy_Fields {
 		$this->sitemap_include_options = WPSEO_Taxonomy_Meta::$sitemap_include_options;
 
 		/* translators: %s$s expands to the taxonomy name and %2$s to the current index value */
-		$this->no_index_options['default'] = __( 'Use %1$s default (Currently: %2$s)', 'wordpress-seo' );
-		$this->no_index_options['index']   = __( 'Always index', 'wordpress-seo' );
-		$this->no_index_options['noindex'] = __( 'Always noindex', 'wordpress-seo' );
+		$this->no_index_options['default'] = esc_html__( 'Use %1$s default (Currently: %2$s)', 'wordpress-seo' );
+		$this->no_index_options['index']   = esc_html__( 'Always index', 'wordpress-seo' );
+		$this->no_index_options['noindex'] = esc_html__( 'Always noindex', 'wordpress-seo' );
 
-		$this->sitemap_include_options['-']      = __( 'Auto detect', 'wordpress-seo' );
-		$this->sitemap_include_options['always'] = __( 'Always include', 'wordpress-seo' );
-		$this->sitemap_include_options['never']  = __( 'Never include', 'wordpress-seo' );
+		$this->sitemap_include_options['-']      = esc_html__( 'Auto detect', 'wordpress-seo' );
+		$this->sitemap_include_options['always'] = esc_html__( 'Always include', 'wordpress-seo' );
+		$this->sitemap_include_options['never']  = esc_html__( 'Never include', 'wordpress-seo' );
 	}
 
 	/**

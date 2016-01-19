@@ -154,7 +154,7 @@ class WPSEO_Taxonomy_Fields_Presenter {
 	 */
 	private function get_label( $label, $field_name ) {
 		if ( $label !== '' ) {
-			return '<label for="' . $field_name . '">' . esc_html( $label ) . '</label>';
+			return '<label for="' . esc_attr($field_name) . '">' . esc_html( $label ) . '</label>';
 		}
 
 		return '';
@@ -194,7 +194,7 @@ class WPSEO_Taxonomy_Fields_Presenter {
 
 		return sprintf(
 			'<img src="%1$s" class="alignright yoast_help" id="%2$s" alt="%3$s" />',
-			$image_src,
+			esc_url($image_src),
 			esc_attr( $field_name . 'help' ),
 			esc_attr( $help_text )
 		);
