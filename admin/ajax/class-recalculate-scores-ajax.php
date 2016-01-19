@@ -89,7 +89,7 @@ class WPSEO_Recalculate_Scores_Ajax {
 				'next_page'   => ( $paged + 1 ),
 			);
 
-			return json_encode( $response );
+			return wp_json_encode( $response );
 		}
 
 		return '';

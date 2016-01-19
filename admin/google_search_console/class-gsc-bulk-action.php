@@ -24,7 +24,7 @@ class WPSEO_GSC_Bulk_Action {
 		if ( $bulk_action = $this->determine_bulk_action() ) {
 			$this->run_bulk_action( $bulk_action, $this->posted_issues() );
 
-			wp_redirect( filter_input( INPUT_POST, '_wp_http_referer' ) );
+			wp_safe_redirect( filter_input( INPUT_POST, '_wp_http_referer' ) );
 			exit;
 		}
 	}

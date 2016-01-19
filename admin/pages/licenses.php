@@ -15,32 +15,32 @@ $extensions = array(
 		'url'       => 'https://yoast.com/wordpress/plugins/seo-premium/',
 		'title'     => 'Yoast SEO Premium',
 		/* translators: %1$s expands to Yoast SEO */
-		'desc'      => sprintf( __( 'The premium version of %1$s with more features & support.', 'wordpress-seo' ), 'Yoast SEO' ),
+		'desc'      => sprintf( esc_html__( 'The premium version of %1$s with more features & support.', 'wordpress-seo' ), 'Yoast SEO' ),
 		'installed' => false,
 	),
 	'video-seo'       => (object) array(
 		'url'       => 'https://yoast.com/wordpress/plugins/video-seo/',
 		'title'     => 'Video SEO',
-		'desc'      => __( 'Optimize your videos to show them off in search results and get more clicks!', 'wordpress-seo' ),
+		'desc'      => esc_html__( 'Optimize your videos to show them off in search results and get more clicks!', 'wordpress-seo' ),
 		'installed' => false,
 	),
 	'news-seo'        => (object) array(
 		'url'       => 'https://yoast.com/wordpress/plugins/news-seo/',
 		'title'     => 'News SEO',
-		'desc'      => __( 'Are you in Google News? Increase your traffic from Google News by optimizing for it!', 'wordpress-seo' ),
+		'desc'      => esc_html__( 'Are you in Google News? Increase your traffic from Google News by optimizing for it!', 'wordpress-seo' ),
 		'installed' => false,
 	),
 	'local-seo'       => (object) array(
 		'url'       => 'https://yoast.com/wordpress/plugins/local-seo/',
 		'title'     => 'Local SEO',
-		'desc'      => __( 'Rank better locally and in Google Maps, without breaking a sweat!', 'wordpress-seo' ),
+		'desc'      => esc_html__( 'Rank better locally and in Google Maps, without breaking a sweat!', 'wordpress-seo' ),
 		'installed' => false,
 	),
 	'woocommerce-seo' => (object) array(
 		'url'       => 'https://yoast.com/wordpress/plugins/yoast-woocommerce-seo/',
 		'title'     => 'Yoast WooCommerce SEO',
 		/* translators: %1$s expands to Yoast SEO */
-		'desc'      => sprintf( __( 'Seamlessly integrate WooCommerce with %1$s and get extra features!', 'wordpress-seo' ), 'Yoast SEO' ),
+		'desc'      => sprintf(esc_html__( 'Seamlessly integrate WooCommerce with %1$s and get extra features!', 'wordpress-seo' ), 'Yoast SEO' ),
 		'installed' => false,
 	),
 );
@@ -70,12 +70,12 @@ elseif ( class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 
 	<h1 id="wpseo-title"><?php
 		/* translators: %1$s expands to Yoast SEO */
-		printf( __( '%1$s Extensions', 'wordpress-seo' ), 'Yoast SEO' );
+		printf( esc_html__( '%1$s Extensions', 'wordpress-seo' ), 'Yoast SEO' );
 		?></h1>
 
 	<h2 class="nav-tab-wrapper" id="wpseo-tabs">
-		<a class="nav-tab" id="extensions-tab" href="#top#extensions"><?php _e( 'Extensions', 'wordpress-seo' ); ?></a>
-		<a class="nav-tab" id="licenses-tab" href="#top#licenses"><?php _e( 'Licenses', 'wordpress-seo' ); ?></a>
+		<a class="nav-tab" id="extensions-tab" href="#top#extensions"><?php esc_html_e( 'Extensions', 'wordpress-seo' ); ?></a>
+		<a class="nav-tab" id="licenses-tab" href="#top#licenses"><?php esc_html_e( 'Licenses', 'wordpress-seo' ); ?></a>
 	</h2>
 
 	<div class="tabwrapper">
@@ -96,7 +96,7 @@ elseif ( class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 							<button class="button-primary installed">Installed</button>
 						<?php else : ?>
 							<a target="_blank" href="<?php echo esc_url( $extension->url . $utm ); ?>" class="button-primary">
-								<?php _e( 'Get this extension', 'wordpress-seo' ); ?>
+								<?php esc_html_e( 'Get this extension', 'wordpress-seo' ); ?>
 							</a>
 						<?php endif; ?>
 					</p>
@@ -114,7 +114,7 @@ elseif ( class_exists( 'Yoast_WooCommerce_SEO' ) ) {
 			 */
 			settings_errors();
 			if ( ! has_action( 'wpseo_licenses_forms' ) ) {
-				echo '<div class="msg"><p>', __( 'This is where you would enter the license keys for one of our premium plugins, should you activate one.', 'wordpress-seo' ), '</p></div>';
+				echo '<div class="msg"><p>', esc_html__( 'This is where you would enter the license keys for one of our premium plugins, should you activate one.', 'wordpress-seo' ), '</p></div>';
 			}
 			else {
 				do_action( 'wpseo_licenses_forms' );

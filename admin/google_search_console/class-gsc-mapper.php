@@ -48,7 +48,7 @@ class WPSEO_GSC_Mapper {
 			return $current_platform;
 		}
 
-		wp_redirect( add_query_arg( $platform, key( self::$platforms ) ) );
+		wp_safe_redirect( add_query_arg( $platform, key( self::$platforms ) ) );
 		exit;
 	}
 

@@ -40,7 +40,7 @@ Yoast_Form::get_instance()->admin_header( true, $tabs[ $active_tab ]['opt_group'
 			if ( $active_tab == $tab_key ) {
 				$active = ' nav-tab-active';
 			}
-			echo '<a class="nav-tab' . $active . '" id="' . $tab_key . '-tab" href="' . admin_url( 'admin.php?page=wpseo_advanced&tab=' . $tab_key ) . '">' . $tab_opt['label'] . '</a>';
+			echo '<a class="nav-tab' . esc_attr($active) . '" id="' . esc_attr($tab_key) . '-tab" href="' . esc_url(admin_url( 'admin.php?page=wpseo_advanced&tab=' . $tab_key )) . '">' . esc_html($tab_opt['label']) . '</a>';
 		}
 		?>
 	</h2>

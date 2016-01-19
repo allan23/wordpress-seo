@@ -92,7 +92,7 @@ class WPSEO_GSC_Category_Filters {
 			}
 
 			// Just redirect to set the category.
-			wp_redirect( add_query_arg( 'category', $current_category ) );
+			wp_safe_redirect( add_query_arg( 'category', $current_category ) );
 			exit;
 		}
 	}
