@@ -437,7 +437,7 @@ function yoast_wpseo_missing_filter_notice() {
  * @param string $message Message string.
  */
 function yoast_wpseo_activation_failed_notice( $message ) {
-	echo '<div class="error"><p>' . __( 'Activation failed:', 'wordpress-seo' ) . ' ' . $message . '</p></div>';
+	echo '<div class="error"><p>' .esc_html__( 'Activation failed:', 'wordpress-seo' ) . ' ' . wp_kses_post($message) . '</p></div>';
 }
 
 /**

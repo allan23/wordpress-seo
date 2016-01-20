@@ -409,7 +409,7 @@ class WPSEO_Meta {
 					$robots_adv = implode( ', ', $robots_adv );
 				}
 				else {
-					$robots_adv = __( 'None', 'wordpress-seo' );
+					$robots_adv = esc_html__( 'None', 'wordpress-seo' );
 				}
 				$field_defs['meta-robots-adv']['options']['-'] = sprintf( $field_defs['meta-robots-adv']['options']['-'], $robots_adv );
 				unset( $robots_adv );

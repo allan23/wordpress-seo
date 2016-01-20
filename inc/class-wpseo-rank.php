@@ -98,11 +98,11 @@ class WPSEO_Rank {
 	 */
 	public function get_label() {
 		$labels = array(
-			self::NO_FOCUS => __( 'N/A', 'wordpress-seo' ),
-			self::NO_INDEX => __( 'No index', 'wordpress-seo' ),
-			self::BAD      => __( 'Bad', 'wordpress-seo' ),
-			self::OK       => __( 'OK', 'wordpress-seo' ),
-			self::GOOD     => __( 'Good', 'wordpress-seo' ),
+			self::NO_FOCUS => esc_html__( 'N/A', 'wordpress-seo' ),
+			self::NO_INDEX => esc_html__( 'No index', 'wordpress-seo' ),
+			self::BAD      => esc_html__( 'Bad', 'wordpress-seo' ),
+			self::OK       => esc_html__( 'OK', 'wordpress-seo' ),
+			self::GOOD     => esc_html__( 'Good', 'wordpress-seo' ),
 		);
 
 		return $labels[ $this->rank ];
@@ -115,11 +115,11 @@ class WPSEO_Rank {
 	 */
 	public function get_drop_down_label() {
 		$labels = array(
-			self::NO_FOCUS => __( 'SEO: No Focus Keyword', 'wordpress-seo' ),
-			self::BAD      => __( 'SEO: Bad', 'wordpress-seo' ),
-			self::OK       => __( 'SEO: OK', 'wordpress-seo' ),
-			self::GOOD     => __( 'SEO: Good', 'wordpress-seo' ),
-			self::NO_INDEX => __( 'SEO: Post Noindexed', 'wordpress-seo' ),
+			self::NO_FOCUS => esc_html__( 'SEO: No Focus Keyword', 'wordpress-seo' ),
+			self::BAD      => esc_html__( 'SEO: Bad', 'wordpress-seo' ),
+			self::OK       => esc_html__( 'SEO: OK', 'wordpress-seo' ),
+			self::GOOD     => esc_html__( 'SEO: Good', 'wordpress-seo' ),
+			self::NO_INDEX => esc_html__( 'SEO: Post Noindexed', 'wordpress-seo' ),
 		);
 
 		return $labels[ $this->rank ];

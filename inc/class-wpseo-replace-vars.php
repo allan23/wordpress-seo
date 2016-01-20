@@ -103,10 +103,10 @@ class WPSEO_Replace_Vars {
 			$var = self::remove_var_delimiter( $var );
 
 			if ( preg_match( '`^[A-Z0-9_-]+$`i', $var ) === false ) {
-				trigger_error( __( 'A replacement variable can only contain alphanumeric characters, an underscore or a dash. Try renaming your variable.', 'wordpress-seo' ), E_USER_WARNING );
+				trigger_error( esc_html__( 'A replacement variable can only contain alphanumeric characters, an underscore or a dash. Try renaming your variable.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 			elseif ( strpos( $var, 'cf_' ) === 0 || strpos( $var, 'ct_' ) === 0 ) {
-				trigger_error( __( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the WPSEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'wordpress-seo' ), E_USER_WARNING );
+				trigger_error( esc_html__( 'A replacement variable can not start with "%%cf_" or "%%ct_" as these are reserved for the WPSEO standard variable variables for custom fields and custom taxonomies. Try making your variable name unique.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 			elseif ( ! method_exists( __CLASS__, 'retrieve_' . $var ) ) {
 				if ( ! isset( self::$external_replacements[ $var ] ) ) {
@@ -115,11 +115,11 @@ class WPSEO_Replace_Vars {
 					$success = true;
 				}
 				else {
-					trigger_error( __( 'A replacement variable with the same name has already been registered. Try making your variable name more unique.', 'wordpress-seo' ), E_USER_WARNING );
+					trigger_error( esc_html__( 'A replacement variable with the same name has already been registered. Try making your variable name more unique.', 'wordpress-seo' ), E_USER_WARNING );
 				}
 			}
 			else {
-				trigger_error( __( 'You cannot overrule a WPSEO standard variable replacement by registering a variable with the same name. Use the "wpseo_replacements" filter instead to adjust the replacement value.', 'wordpress-seo' ), E_USER_WARNING );
+				trigger_error( esc_html__( 'You cannot overrule a WPSEO standard variable replacement by registering a variable with the same name. Use the "wpseo_replacements" filter instead to adjust the replacement value.', 'wordpress-seo' ), E_USER_WARNING );
 			}
 		}
 
@@ -876,7 +876,7 @@ class WPSEO_Replace_Vars {
 		$sep = $this->retrieve_sep();
 
 		if ( $max > 1 && $nr > 1 ) {
-			$replacement = sprintf( $sep . ' ' . __( 'Page %1$d of %2$d', 'wordpress-seo' ), $nr, $max );
+			$replacement = sprintf( $sep . ' ' . esc_html__( 'Page %1$d of %2$d', 'wordpress-seo' ), $nr, $max );
 		}
 
 		return $replacement;
@@ -1064,23 +1064,23 @@ class WPSEO_Replace_Vars {
 	 */
 	private static function set_basic_help_texts() {
 		self::$help_texts['basic'] = array(
-			'date'                 => __( 'Replaced with the date of the post/page', 'wordpress-seo' ),
-			'title'                => __( 'Replaced with the title of the post/page', 'wordpress-seo' ),
-			'parent_title'         => __( 'Replaced with the title of the parent page of the current page', 'wordpress-seo' ),
-			'sitename'             => __( 'The site\'s name', 'wordpress-seo' ),
-			'sitedesc'             => __( 'The site\'s tag line / description', 'wordpress-seo' ),
-			'excerpt'              => __( 'Replaced with the post/page excerpt (or auto-generated if it does not exist)', 'wordpress-seo' ),
-			'excerpt_only'         => __( 'Replaced with the post/page excerpt (without auto-generation)', 'wordpress-seo' ),
-			'tag'                  => __( 'Replaced with the current tag/tags', 'wordpress-seo' ),
-			'category'             => __( 'Replaced with the post categories (comma separated)', 'wordpress-seo' ),
-			'category_description' => __( 'Replaced with the category description', 'wordpress-seo' ),
-			'tag_description'      => __( 'Replaced with the tag description', 'wordpress-seo' ),
-			'term_description'     => __( 'Replaced with the term description', 'wordpress-seo' ),
-			'term_title'           => __( 'Replaced with the term name', 'wordpress-seo' ),
-			'searchphrase'         => __( 'Replaced with the current search phrase', 'wordpress-seo' ),
+			'date'                 => esc_html__( 'Replaced with the date of the post/page', 'wordpress-seo' ),
+			'title'                => esc_html__( 'Replaced with the title of the post/page', 'wordpress-seo' ),
+			'parent_title'         => esc_html__( 'Replaced with the title of the parent page of the current page', 'wordpress-seo' ),
+			'sitename'             => esc_html__( 'The site\'s name', 'wordpress-seo' ),
+			'sitedesc'             => esc_html__( 'The site\'s tag line / description', 'wordpress-seo' ),
+			'excerpt'              => esc_html__( 'Replaced with the post/page excerpt (or auto-generated if it does not exist)', 'wordpress-seo' ),
+			'excerpt_only'         => esc_html__( 'Replaced with the post/page excerpt (without auto-generation)', 'wordpress-seo' ),
+			'tag'                  => esc_html__( 'Replaced with the current tag/tags', 'wordpress-seo' ),
+			'category'             => esc_html__( 'Replaced with the post categories (comma separated)', 'wordpress-seo' ),
+			'category_description' => esc_html__( 'Replaced with the category description', 'wordpress-seo' ),
+			'tag_description'      => esc_html__( 'Replaced with the tag description', 'wordpress-seo' ),
+			'term_description'     => esc_html__( 'Replaced with the term description', 'wordpress-seo' ),
+			'term_title'           => esc_html__( 'Replaced with the term name', 'wordpress-seo' ),
+			'searchphrase'         => esc_html__( 'Replaced with the current search phrase', 'wordpress-seo' ),
 			'sep'                  => sprintf(
 				/* translators: %s: wp_title() function */
-				__( 'The separator defined in your theme\'s %s tag.', 'wordpress-seo' ),
+				esc_html__( 'The separator defined in your theme\'s %s tag.', 'wordpress-seo' ),
 				'<code>wp_title()</code>'
 			),
 		);
@@ -1091,27 +1091,27 @@ class WPSEO_Replace_Vars {
 	 */
 	private static function set_advanced_help_texts() {
 		self::$help_texts['advanced'] = array(
-			'pt_single'                 => __( 'Replaced with the post type single label', 'wordpress-seo' ),
-			'pt_plural'                 => __( 'Replaced with the post type plural label', 'wordpress-seo' ),
-			'modified'                  => __( 'Replaced with the post/page modified time', 'wordpress-seo' ),
-			'id'                        => __( 'Replaced with the post/page ID', 'wordpress-seo' ),
-			'name'                      => __( 'Replaced with the post/page author\'s \'nicename\'', 'wordpress-seo' ),
-			'user_description'          => __( 'Replaced with the post/page author\'s \'Biographical Info\'', 'wordpress-seo' ),
-			'userid'                    => __( 'Replaced with the post/page author\'s userid', 'wordpress-seo' ),
-			'currenttime'               => __( 'Replaced with the current time', 'wordpress-seo' ),
-			'currentdate'               => __( 'Replaced with the current date', 'wordpress-seo' ),
-			'currentday'                => __( 'Replaced with the current day', 'wordpress-seo' ),
-			'currentmonth'              => __( 'Replaced with the current month', 'wordpress-seo' ),
-			'currentyear'               => __( 'Replaced with the current year', 'wordpress-seo' ),
-			'page'                      => __( 'Replaced with the current page number with context (i.e. page 2 of 4)', 'wordpress-seo' ),
-			'pagetotal'                 => __( 'Replaced with the current page total', 'wordpress-seo' ),
-			'pagenumber'                => __( 'Replaced with the current page number', 'wordpress-seo' ),
-			'caption'                   => __( 'Attachment caption', 'wordpress-seo' ),
-			'focuskw'                   => __( 'Replaced with the posts focus keyword', 'wordpress-seo' ),
-			'term404'                   => __( 'Replaced with the slug which caused the 404', 'wordpress-seo' ),
-			'cf_<custom-field-name>'    => __( 'Replaced with a posts custom field value', 'wordpress-seo' ),
-			'ct_<custom-tax-name>'      => __( 'Replaced with a posts custom taxonomies, comma separated.', 'wordpress-seo' ),
-			'ct_desc_<custom-tax-name>' => __( 'Replaced with a custom taxonomies description', 'wordpress-seo' ),
+			'pt_single'                 => esc_html__( 'Replaced with the post type single label', 'wordpress-seo' ),
+			'pt_plural'                 => esc_html__( 'Replaced with the post type plural label', 'wordpress-seo' ),
+			'modified'                  => esc_html__( 'Replaced with the post/page modified time', 'wordpress-seo' ),
+			'id'                        => esc_html__( 'Replaced with the post/page ID', 'wordpress-seo' ),
+			'name'                      => esc_html__( 'Replaced with the post/page author\'s \'nicename\'', 'wordpress-seo' ),
+			'user_description'          => esc_html__( 'Replaced with the post/page author\'s \'Biographical Info\'', 'wordpress-seo' ),
+			'userid'                    => esc_html__( 'Replaced with the post/page author\'s userid', 'wordpress-seo' ),
+			'currenttime'               => esc_html__( 'Replaced with the current time', 'wordpress-seo' ),
+			'currentdate'               => esc_html__( 'Replaced with the current date', 'wordpress-seo' ),
+			'currentday'                => esc_html__( 'Replaced with the current day', 'wordpress-seo' ),
+			'currentmonth'              => esc_html__( 'Replaced with the current month', 'wordpress-seo' ),
+			'currentyear'               => esc_html__( 'Replaced with the current year', 'wordpress-seo' ),
+			'page'                      => esc_html__( 'Replaced with the current page number with context (i.e. page 2 of 4)', 'wordpress-seo' ),
+			'pagetotal'                 => esc_html__( 'Replaced with the current page total', 'wordpress-seo' ),
+			'pagenumber'                => esc_html__( 'Replaced with the current page number', 'wordpress-seo' ),
+			'caption'                   => esc_html__( 'Attachment caption', 'wordpress-seo' ),
+			'focuskw'                   => esc_html__( 'Replaced with the posts focus keyword', 'wordpress-seo' ),
+			'term404'                   => esc_html__( 'Replaced with the slug which caused the 404', 'wordpress-seo' ),
+			'cf_<custom-field-name>'    => esc_html__( 'Replaced with a posts custom field value', 'wordpress-seo' ),
+			'ct_<custom-tax-name>'      => esc_html__( 'Replaced with a posts custom taxonomies, comma separated.', 'wordpress-seo' ),
+			'ct_desc_<custom-tax-name>' => esc_html__( 'Replaced with a custom taxonomies description', 'wordpress-seo' ),
 		);
 	}
 

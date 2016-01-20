@@ -48,7 +48,7 @@ class WPSEO_Statistics {
 
 		$posts['fields']      = 'ids';
 		$posts['post_status'] = 'publish';
-
+		$posts[ 'posts_per_page' ] = 1;
 		if ( current_user_can( 'edit_others_posts' ) === false ) {
 			$posts['author'] = get_current_user_id();
 		}
