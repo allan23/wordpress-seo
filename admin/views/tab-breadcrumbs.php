@@ -33,7 +33,7 @@ echo '<br/><br/>';
 
 $post_types = get_post_types( array( 'public' => true ), 'objects' );
 if ( is_array( $post_types ) && $post_types !== array() ) {
-	echo '<h3>' . __( 'Taxonomy to show in breadcrumbs for post types', 'wordpress-seo' ) . '</h3>';
+	echo '<h3>' . esc_html__( 'Taxonomy to show in breadcrumbs for post types', 'wordpress-seo' ) . '</h3>';
 	foreach ( $post_types as $pt ) {
 		$taxonomies = get_object_taxonomies( $pt->name, 'objects' );
 		if ( is_array( $taxonomies ) && $taxonomies !== array() ) {
@@ -52,11 +52,11 @@ echo '<br/>';
 
 $taxonomies = get_taxonomies( array( 'public' => true, '_builtin' => false ), 'objects' );
 if ( is_array( $taxonomies ) && $taxonomies !== array() ) {
-	echo '<h3>' . __( 'Post type archive to show in breadcrumbs for taxonomies', 'wordpress-seo' ) . '</h3>';
+	echo '<h3>' . esc_html__( 'Post type archive to show in breadcrumbs for taxonomies', 'wordpress-seo' ) . '</h3>';
 	foreach ( $taxonomies as $tax ) {
-		$values = array( 0 => __( 'None', 'wordpress-seo' ) );
+		$values = array( 0 => esc_html__( 'None', 'wordpress-seo' ) );
 		if ( get_option( 'show_on_front' ) == 'page' && get_option( 'page_for_posts' ) > 0 ) {
-			$values['post'] = __( 'Blog', 'wordpress-seo' );
+			$values['post'] = esc_html__( 'Blog', 'wordpress-seo' );
 		}
 
 		if ( is_array( $post_types ) && $post_types !== array() ) {
@@ -76,10 +76,10 @@ unset( $taxonomies, $post_types );
 ?>
 <br class="clear"/>
 </div>
-<h3><?php _e( 'How to insert breadcrumbs in your theme', 'wordpress-seo' ); ?></h3>
+<h3><?php esc_html_e( 'How to insert breadcrumbs in your theme', 'wordpress-seo' ); ?></h3>
 <p>
 	<?php
 		/* translators: %1$s / %2$s: links to the breadcrumbs implementation page on the Yoast knowledgebase */
-		printf( __( 'Usage of this breadcrumbs feature is explained in %1$sour knowledge-base article on breadcrumbs implementation%2$s.', 'wordpress-seo' ), '<a href="http://yoa.st/breadcrumbs" target="_blank">', '</a>' );
+		printf( esc_html__( 'Usage of this breadcrumbs feature is explained in %1$sour knowledge-base article on breadcrumbs implementation%2$s.', 'wordpress-seo' ), '<a href="http://yoa.st/breadcrumbs" target="_blank">', '</a>' );
 	?>
 </p>

@@ -17,7 +17,9 @@ if ( isset( $_POST['wpseo_submit'] ) ) {
 	check_admin_referer( 'wpseo-network-settings' );
 
 	foreach ( array( 'access', 'defaultblog' ) as $opt ) {
-		$options[ $opt ] = $_POST['wpseo_ms'][ $opt ];
+		if ( isset( $_POST[ 'wpseo_ms' ][ $opt ] ) ) {
+			$options[ $opt ] = sanitize_text_field( wp_unslash( $_POST[ 'wpseo_ms' ][ $opt ] ) );
+		}
 	}
 	unset( $opt );
 	WPSEO_Options::update_site_option( 'wpseo_ms', $options );
@@ -27,7 +29,7 @@ if ( isset( $_POST['wpseo_submit'] ) ) {
 if ( isset( $_POST['wpseo_restore_blog'] ) ) {
 	check_admin_referer( 'wpseo-network-restore' );
 	if ( isset( $_POST['wpseo_ms']['restoreblog'] ) && is_numeric( $_POST['wpseo_ms']['restoreblog'] ) ) {
-		$restoreblog = (int) WPSEO_Utils::validate_int( $_POST['wpseo_ms']['restoreblog'] );
+		$restoreblog = (int) WPSEO_Utils::validate_int( wp_unslash($_POST['wpseo_ms']['restoreblog']) ); // input okay
 		$blog        = get_blog_details( $restoreblog );
 
 		if ( $blog ) {

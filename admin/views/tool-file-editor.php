@@ -14,7 +14,7 @@ $ht_access_file = get_home_path() . '.htaccess';
 
 if ( isset( $_POST['create_robots'] ) ) {
 	if ( ! current_user_can( 'manage_options' ) ) {
-		die( __( 'You cannot create a robots.txt file.', 'wordpress-seo' ) );
+		die( esc_html__( 'You cannot create a robots.txt file.', 'wordpress-seo' ) );
 	}
 
 	check_admin_referer( 'wpseo_create_robots' );
@@ -30,7 +30,7 @@ if ( isset( $_POST['create_robots'] ) ) {
 
 if ( isset( $_POST['submitrobots'] ) ) {
 	if ( ! current_user_can( 'manage_options' ) ) {
-		die( __( 'You cannot edit the robots.txt file.', 'wordpress-seo' ) );
+		die( esc_html__( 'You cannot edit the robots.txt file.', 'wordpress-seo' ) );
 	}
 
 	check_admin_referer( 'wpseo-robotstxt' );
@@ -41,7 +41,7 @@ if ( isset( $_POST['submitrobots'] ) ) {
 			$f = fopen( $robots_file, 'w+' );
 			fwrite( $f, $robotsnew );
 			fclose( $f );
-			$msg = __( 'Updated Robots.txt', 'wordpress-seo' );
+			$msg = esc_html__( 'Updated Robots.txt', 'wordpress-seo' );
 		}
 	}
 }

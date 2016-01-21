@@ -26,7 +26,7 @@ class WPSEO_GSC_Ajax {
 		if ( $this->valid_nonce() ) {
 			$marker = new WPSEO_GSC_Marker( filter_input( INPUT_POST, 'url' ) );
 
-			wp_die( $marker->get_response() );
+			wp_die( esc_html($marker->get_response()) );
 		}
 
 		wp_die( 'false' );

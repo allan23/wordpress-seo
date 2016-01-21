@@ -57,8 +57,8 @@ if ( '' === $tool_page ) {
 		$href = ( ! empty( $tool['href'] ) ) ? esc_attr( $tool['href'] ) : '&tool=' . esc_attr($slug);
 		$attr = ( ! empty( $tool['attr'] ) ) ? $tool['attr'] : '';
 		echo '<li>';
-		echo '<strong><a href="', esc_url(admin_url( 'admin.php?page=wpseo_tools' . $href )), '" ' , $attr, '>', esc_html($tool['title']), '</a></strong><br/>';
-		echo $tool['desc'];
+		echo '<strong><a href="', esc_url(admin_url( 'admin.php?page=wpseo_tools' . $href )), '" ' , $attr, '>', esc_html($tool['title']), '</a></strong><br/>'; // xss okay
+		echo $tool['desc']; // xss okay
 		echo '</li>';
 	}
 	echo '</ul>';

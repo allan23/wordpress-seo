@@ -122,8 +122,8 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 			'<span class="dashicons dashicons-share"></span>',
 			$tabs,
 			array(
-				'link_alt' => __( 'Social', 'wordpress-seo' ),
-				'link_title' => __( 'Social', 'wordpress-seo' ),
+				'link_alt' => esc_html__( 'Social', 'wordpress-seo' ),
+				'link_title' => esc_html__( 'Social', 'wordpress-seo' ),
 			)
 		);
 	}

@@ -144,7 +144,7 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 		<a class="nav-tab nav-tab-active" id="general-tab"
 		   href="#top#general"><?php esc_html_e( 'General', 'wordpress-seo' ); ?></a>
 		<a class="nav-tab" id="knowledge-graph-tab"
-		   href="#top#knowledge-graph"><?php echo ( 'company' === $options['company_or_person'] ) ? esc_html__( 'Company Info', 'wordpress-seo' ) : esc_html__( 'Your Info', 'wordpress-seo' ); ?></a>
+		   href="#top#knowledge-graph"><?php echo ( 'company' === $options['company_or_person'] ) ? esc_html__( 'Company Info', 'wordpress-seo' ) : esc_html__( 'Your Info', 'wordpress-seo' ); /* xss okay */ ?></a>
 		<a class="nav-tab" id="webmaster-tools-tab"
 		   href="#top#webmaster-tools"><?php esc_html_e( 'Webmaster Tools', 'wordpress-seo' ); ?></a>
 		<a class="nav-tab" id="security-tab" href="#top#security"><?php esc_html_e( 'Security', 'wordpress-seo' ); ?></a>

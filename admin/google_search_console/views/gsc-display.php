@@ -16,7 +16,7 @@ if ( defined( 'WP_DEBUG' ) && WP_DEBUG && WPSEO_GSC_Settings::get_profile() !== 
 				   style="float: right;" value="<?php esc_attr_e( 'Reload crawl issues', 'wordpress-seo' ); ?>">
 		</form>
 <?php } ?>
-		<?php echo $platform_tabs = new WPSEO_GSC_Platform_Tabs; ?>
+		<?php echo $platform_tabs = new WPSEO_GSC_Platform_Tabs; /* xss okay */ ?>
 	</h2>
 
 <?php

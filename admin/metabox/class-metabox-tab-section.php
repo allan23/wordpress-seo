@@ -76,7 +76,7 @@ class WPSEO_Metabox_Tab_Section implements WPSEO_Metabox_Section {
 			$html .= '<ul class="wpseo-metabox-tabs" id="wpseo-metabox-tabs">%2$s</ul>%3$s';
 			$html .= '</div></div>';
 
-			printf( $html, esc_attr( $this->name ), $this->tab_links(), $this->tab_content() );
+			printf( $html, esc_attr( $this->name ), $this->tab_links(), $this->tab_content() ); // xss okay
 		}
 	}
 

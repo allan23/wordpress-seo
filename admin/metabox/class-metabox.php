@@ -168,12 +168,12 @@ class WPSEO_Metabox extends WPSEO_Meta {
 
 		printf( '
 		<div title="%s" id="wpseo-score">
-			' . $this->traffic_light_svg() . '
+			' . $this->traffic_light_svg() /* xss okay */ . ' 
 		</div>',
 			esc_html__( 'SEO score', 'wordpress-seo' ),
 			esc_attr( 'wpseo-score-icon ' . $score_label ),
 			esc_html__( 'SEO:', 'wordpress-seo' ),
-			$score_title,
+			esc_html($score_title),
 			esc_html__( 'Check', 'wordpress-seo' )
 		);
 	}
@@ -324,7 +324,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		<div id="wpseo_<?php echo esc_attr( $id ) ?>" class="wpseotab <?php echo esc_attr( $id ) ?>">
 			<h4 class="wpseo-heading"><?php echo esc_html( $heading ); ?></h4>
 			<table class="form-table">
-				<?php echo $content ?>
+				<?php echo $content; /* xss okay */ ?>
 			</table>
 		</div>
 	<?php
@@ -385,10 +385,10 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		$tabs[] = new WPSEO_Metabox_Form_Tab(
 			'content',
 			$content,
-			__( 'Content', 'wordpress-seo' ),
+			esc_attr__( 'Content', 'wordpress-seo' ),
 			array(
 				'link_class' => 'wpseo_keyword_tab',
-				'link_title' => __( 'Content', 'wordpress-seo' ),
+				'link_title' => esc_attr__( 'Content', 'wordpress-seo' ),
 			)
 		);
 
@@ -399,8 +399,8 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'<span class="yst-traffic-light-container">' . $this->traffic_light_svg() . '</span>',
 			$tabs,
 			array(
-				'link_alt' => __( 'Content', 'wordpress-seo' ),
-				'link_title' => __( 'Content', 'wordpress-seo' ),
+				'link_alt' => esc_attr__( 'Content', 'wordpress-seo' ),
+				'link_title' => esc_attr__( 'Content', 'wordpress-seo' ),
 			)
 		);
 	}
@@ -416,7 +416,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		$tab = new WPSEO_Metabox_Form_Tab(
 			'advanced',
 			$content,
-			__( 'Advanced', 'wordpress-seo' ),
+			esc_attr__( 'Advanced', 'wordpress-seo' ),
 			array(
 				'link_title' => __( 'Advanced', 'wordpress-seo' ),
 			)
@@ -427,8 +427,8 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'<span class="dashicons dashicons-admin-generic"></span>',
 			array( $tab ),
 			array(
-				'link_alt' => __( 'Advanced', 'wordpress-seo' ),
-				'link_title' => __( 'Advanced', 'wordpress-seo' ),
+				'link_alt' => esc_attr__( 'Advanced', 'wordpress-seo' ),
+				'link_title' => esc_attr__( 'Advanced', 'wordpress-seo' ),
 			)
 		);
 	}
@@ -445,8 +445,8 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'<span class="dashicons dashicons-admin-plugins"></span>',
 			array(),
 			array(
-				'link_alt' => __( 'Add-ons', 'wordpress-seo' ),
-				'link_title' => __( 'Add-ons', 'wordpress-seo' ),
+				'link_alt' => esc_attr__( 'Add-ons', 'wordpress-seo' ),
+				'link_title' => esc_attr__( 'Add-ons', 'wordpress-seo' ),
 			)
 		);
 	}

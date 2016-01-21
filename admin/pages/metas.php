@@ -200,7 +200,7 @@ $yform->admin_header( true, 'wpseo_titles' );
 			$yform->checkbox( 'noindex-author-wpseo', sprintf( esc_html__( 'Add %s to the author archives', 'wordpress-seo' ), '<code>noindex, follow</code>' ) );
 			$yform->checkbox( 'disable-author', esc_html__( 'Disable the author archives', 'wordpress-seo' ) );
 			echo '<p>';
-			_e( 'Date-based archives could in some cases also be seen as duplicate content.', 'wordpress-seo' );
+			esc_html_e( 'Date-based archives could in some cases also be seen as duplicate content.', 'wordpress-seo' );
 			echo '</p>';
 			/* translators: %s expands to <code>noindex, follow</code> */
 			$yform->checkbox( 'noindex-archive-wpseo', sprintf( esc_html__( 'Add %s to the date-based archives', 'wordpress-seo' ), '<code>noindex, follow</code>' ) );

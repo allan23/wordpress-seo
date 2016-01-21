@@ -61,7 +61,7 @@ $yform->checkbox( 'enablexmlsitemap', esc_html__( 'Check this box to enable XML 
 
 			<p>
 				<strong><?php esc_html_e( 'Entries per page', 'wordpress-seo' ); ?></strong><br/>
-				<?php printf( esc_html__( 'Please enter the maximum number of entries per sitemap page (defaults to %s, you might want to lower this to prevent memory issues on some installs):', 'wordpress-seo' ), WPSEO_Options::get_default( 'wpseo_xml', 'entries-per-page' ) ); ?>
+				<?php printf( esc_html__( 'Please enter the maximum number of entries per sitemap page (defaults to %s, you might want to lower this to prevent memory issues on some installs):', 'wordpress-seo' ), esc_html(WPSEO_Options::get_default( 'wpseo_xml', 'entries-per-page' ) )); ?>
 			</p>
 
 			<?php
