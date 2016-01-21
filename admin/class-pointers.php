@@ -108,7 +108,7 @@ class WPSEO_Pointers {
 
 				wpseo_pointer_options = $.extend(wpseo_pointer_options, {
 					buttons: function (event, t) {
-						var button = jQuery('<a href="<?php echo $this->get_ignore_url(); ?>" id="pointer-close" style="margin:0 5px;" class="button-secondary">' + '<?php _e( 'Close', 'wordpress-seo' ) ?>' + '</a>');
+						var button = jQuery('<a href="<?php echo esc_url($this->get_ignore_url()); ?>" id="pointer-close" style="margin:0 5px;" class="button-secondary">' + '<?php esc_html_e( 'Close', 'wordpress-seo' ) ?>' + '</a>');
 						button.bind('click.pointer', function () {
 							t.element.pointer('close');
 						});
@@ -119,7 +119,7 @@ class WPSEO_Pointers {
 				});
 
 				setup = function () {
-					$('<?php echo $selector; ?>').pointer(wpseo_pointer_options).pointer('open');
+					$('<?php echo esc_js($selector); ?>').pointer(wpseo_pointer_options).pointer('open');
 					var lastOpenedPointer = jQuery( '.wp-pointer').slice( -1 );
 					<?php
 					$this->button2();
@@ -144,7 +144,7 @@ class WPSEO_Pointers {
 		if ( $this->button_array['button2']['text'] ) {
 			?>
 			lastOpenedPointer.find( '#pointer-close' ).after('<a id="pointer-primary" class="button-primary">' +
-				'<?php echo $this->button_array['button2']['text']; ?>' + '</a>');
+				'<?php echo esc_js($this->button_array['button2']['text']); ?>' + '</a>');
 			lastOpenedPointer.find('#pointer-primary').click(function () {
 			<?php echo $this->button_array['button2']['function']; ?>
 			});
@@ -159,7 +159,7 @@ class WPSEO_Pointers {
 		if ( $this->button_array['button3']['text'] ) {
 			?>
 			lastOpenedPointer.find('#pointer-primary').after('<a id="pointer-ternary" style="float: left;" class="button-secondary">' +
-				'<?php echo $this->button_array['button3']['text']; ?>' + '</a>');
+				'<?php echo esc_js($this->button_array['button3']['text']); ?>' + '</a>');
 			lastOpenedPointer.find('#pointer-ternary').click(function () {
 			<?php echo $this->button_array['button3']['function']; ?>
 			});

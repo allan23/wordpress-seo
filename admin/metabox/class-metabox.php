@@ -168,7 +168,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 
 		printf( '
 		<div title="%s" id="wpseo-score">
-			' . $this->traffic_light_svg() /* xss okay */ . ' 
+			' . $this->traffic_light_svg() /* WPCS: XSS ok. */ . ' 
 		</div>',
 			esc_html__( 'SEO score', 'wordpress-seo' ),
 			esc_attr( 'wpseo-score-icon ' . $score_label ),

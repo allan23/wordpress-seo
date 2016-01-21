@@ -90,7 +90,7 @@ if ( isset( $import ) ) {
 	}
 
 	if ( $msg != '' ) {
-		echo '<div id="message" class="message updated" style="width:94%;"><p>', $msg, '</p></div>';
+		echo '<div id="message" class="message updated" style="width:94%;"><p>', esc_html($msg), '</p></div>';
 	}
 }
 
@@ -98,12 +98,12 @@ if ( isset( $import ) ) {
 <br/><br/>
 <h2 class="nav-tab-wrapper" id="wpseo-tabs">
 	<a class="nav-tab nav-tab-active" id="wpseo-import-tab"
-	   href="#top#wpseo-import"><?php _e( 'Import', 'wordpress-seo' ); ?></a>
-	<a class="nav-tab" id="wpseo-export-tab" href="#top#wpseo-export"><?php _e( 'Export', 'wordpress-seo' ); ?></a>
+	   href="#top#wpseo-import"><?php esc_html_e( 'Import', 'wordpress-seo' ); ?></a>
+	<a class="nav-tab" id="wpseo-export-tab" href="#top#wpseo-export"><?php esc_html_e( 'Export', 'wordpress-seo' ); ?></a>
 	<a class="nav-tab" id="import-seo-tab"
-	   href="#top#import-seo"><?php _e( 'Import from other SEO plugins', 'wordpress-seo' ); ?></a>
+	   href="#top#import-seo"><?php esc_html_e( 'Import from other SEO plugins', 'wordpress-seo' ); ?></a>
 	<a class="nav-tab" id="import-other-tab"
-	   href="#top#import-other"><?php _e( 'Import from other plugins', 'wordpress-seo' ); ?></a>
+	   href="#top#import-other"><?php esc_html_e( 'Import from other plugins', 'wordpress-seo' ); ?></a>
 	<?php
 	/**
 	 * Allow adding a custom import tab header
@@ -123,29 +123,29 @@ if ( isset( $import ) ) {
 		<input type="file" name="settings_import_file" accept="application/x-zip,application/x-zip-compressed,application/zip" />
 		<input type="hidden" name="action" value="wp_handle_upload"/><br/>
 		<br/>
-		<input type="submit" class="button-primary" value="<?php _e( 'Import settings', 'wordpress-seo' ); ?>"/>
+		<input type="submit" class="button-primary" value="<?php esc_html_e( 'Import settings', 'wordpress-seo' ); ?>"/>
 	</form>
 </div>
 
 <div id="wpseo-export" class="wpseotab">
 	<p><?php
 		/* translators: %1$s expands to Yoast SEO */
-		printf( __( 'Export your %1$s settings here, to import them again later or to import them on another site.', 'wordpress-seo' ), 'Yoast SEO' );
+		printf( esc_html__( 'Export your %1$s settings here, to import them again later or to import them on another site.', 'wordpress-seo' ), 'Yoast SEO' );
 		?></p>
 	<?php $yform->checkbox( 'include_taxonomy_meta', __( 'Include Taxonomy Metadata', 'wordpress-seo' ) ); ?><br/>
 	<button class="button-primary" id="export-button"><?php
 		/* translators: %1$s expands to Yoast SEO */
-		printf( __( 'Export your %1$s settings', 'wordpress-seo' ), 'Yoast SEO' );
+		printf( esc_html__( 'Export your %1$s settings', 'wordpress-seo' ), 'Yoast SEO' );
 		?></button>
 	<script>
-		var wpseo_export_nonce = '<?php echo wp_create_nonce( 'wpseo-export' ); ?>';
+		var wpseo_export_nonce = '<?php echo esc_js(wp_create_nonce( 'wpseo-export' )); ?>';
 	</script>
 </div>
 
 <div id="import-seo" class="wpseotab">
-	<p><?php _e( 'No doubt you\'ve used an SEO plugin before if this site isn\'t new. Let\'s make it easy on you, you can import the data below. If you want, you can import first, check if it was imported correctly, and then import &amp; delete. No duplicate data will be imported.', 'wordpress-seo' ); ?></p>
+	<p><?php esc_html_e( 'No doubt you\'ve used an SEO plugin before if this site isn\'t new. Let\'s make it easy on you, you can import the data below. If you want, you can import first, check if it was imported correctly, and then import &amp; delete. No duplicate data will be imported.', 'wordpress-seo' ); ?></p>
 
-	<p><?php printf( __( 'If you\'ve used another SEO plugin, try the %sSEO Data Transporter%s plugin to move your data into this plugin, it rocks!', 'wordpress-seo' ), '<a href="https://wordpress.org/plugins/seo-data-transporter/">', '</a>' ); ?></p>
+	<p><?php printf( esc_html__( 'If you\'ve used another SEO plugin, try the %sSEO Data Transporter%s plugin to move your data into this plugin, it rocks!', 'wordpress-seo' ), '<a href="https://wordpress.org/plugins/seo-data-transporter/">', '</a>' ); ?></p>
 
 	<form
 		action="<?php echo esc_attr( admin_url( 'admin.php?page=wpseo_tools&tool=import-export#top#import-seo' ) ); ?>"
@@ -163,33 +163,33 @@ if ( isset( $import ) ) {
 		?>
 		<br/>
 		<input type="submit" class="button-primary" name="import"
-		       value="<?php _e( 'Import', 'wordpress-seo' ); ?>"/>
+		       value="<?php esc_attr_e( 'Import', 'wordpress-seo' ); ?>"/>
 	</form>
 	<br/>
 	<br/>
 </div>
 
 <div id="import-other" class="wpseotab">
-	<p><?php _e( 'If you want to import data from (by now ancient) Yoast plugins, you can do so here:', 'wordpress-seo' ); ?></p>
+	<p><?php esc_html_e( 'If you want to import data from (by now ancient) Yoast plugins, you can do so here:', 'wordpress-seo' ); ?></p>
 
 	<form
 		action="<?php echo esc_attr( admin_url( 'admin.php?page=wpseo_tools&tool=import-export#top#import-other' ) ); ?>"
 		method="post" accept-charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>">
 		<?php
 		wp_nonce_field( 'wpseo-import', '_wpnonce', true, true );
-		$yform->checkbox( 'importrobotsmeta', __( 'Import from Robots Meta (by Yoast)?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importrssfooter', __( 'Import from RSS Footer (by Yoast)?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importbreadcrumbs', __( 'Import from Yoast Breadcrumbs?', 'wordpress-seo' ) );
+		$yform->checkbox( 'importrobotsmeta', esc_html__( 'Import from Robots Meta (by Yoast)?', 'wordpress-seo' ) );
+		$yform->checkbox( 'importrssfooter', esc_html__( 'Import from RSS Footer (by Yoast)?', 'wordpress-seo' ) );
+		$yform->checkbox( 'importbreadcrumbs', esc_html__( 'Import from Yoast Breadcrumbs?', 'wordpress-seo' ) );
 
 		/**
 		 * Allow option of importing from other 'other' plugins
 		 * @api  string  $content  The content containing all import and export methods
 		 */
-		echo apply_filters( 'wpseo_import_other_plugins', '' );
+		echo wp_kses_post(apply_filters( 'wpseo_import_other_plugins', '' ));
 
 		?>
 		<br/>
-		<input type="submit" class="button-primary" name="import" value="<?php _e( 'Import', 'wordpress-seo' ); ?>"/>
+		<input type="submit" class="button-primary" name="import" value="<?php esc_attr_e( 'Import', 'wordpress-seo' ); ?>"/>
 	</form>
 	<br/>
 </div>

@@ -399,10 +399,10 @@ class WPSEO_Admin {
 					<a href="javascript:wpseoSetIgnore(\'blog_public_warning\',\'robotsmessage\',\'%3$s\');" class="button">%4$s</a>
 				</p>
 			</div>',
-			__( 'Huge SEO Issue: You\'re blocking access to robots.', 'wordpress-seo' ),
-			sprintf( __( 'You must %sgo to your Reading Settings%s and uncheck the box for Search Engine Visibility.', 'wordpress-seo' ), sprintf( '<a href="%s">', esc_url( admin_url( 'options-reading.php' ) ) ), '</a>' ),
+			esc_html__( 'Huge SEO Issue: You\'re blocking access to robots.', 'wordpress-seo' ),
+			sprintf( esc_html__( 'You must %sgo to your Reading Settings%s and uncheck the box for Search Engine Visibility.', 'wordpress-seo' ), sprintf( '<a href="%s">', esc_url( admin_url( 'options-reading.php' ) ) ), '</a>' ),
 			esc_js( wp_create_nonce( 'wpseo-ignore' ) ),
-			__( 'I know, don\'t bug me.', 'wordpress-seo' )
+			esc_html__( 'I know, don\'t bug me.', 'wordpress-seo' )
 		);
 	}
 
@@ -433,11 +433,11 @@ class WPSEO_Admin {
 					<a href="javascript:wpseoSetIgnore(\'meta_description_warning\',\'metamessage\',\'%3$s\');" class="button">%4$s</a>
 				</p>
 			</div>',
-			__( 'SEO Issue:', 'wordpress-seo' ),
+			esc_html__( 'SEO Issue:', 'wordpress-seo' ),
 			/* translators: %1$s expands to Yoast SEO, %2$s to opening anchor and %3$s the anchor closing tag */
-			sprintf( __( 'Your theme contains a meta description, which blocks %1$s from working properly. Please visit the %2$sSEO Dashboard%3$s to fix this.', 'wordpress-seo' ), 'Yoast SEO', sprintf( '<a href="%s">', esc_url( admin_url( 'admin.php?page=wpseo_dashboard' ) ) ), '</a>' ),
+			sprintf( esc_html__( 'Your theme contains a meta description, which blocks %1$s from working properly. Please visit the %2$sSEO Dashboard%3$s to fix this.', 'wordpress-seo' ), 'Yoast SEO', sprintf( '<a href="%s">', esc_url( admin_url( 'admin.php?page=wpseo_dashboard' ) ) ), '</a>' ),
 			esc_js( wp_create_nonce( 'wpseo-ignore' ) ),
-			__( 'I know, don\'t bug me.', 'wordpress-seo' )
+			esc_html__( 'I know, don\'t bug me.', 'wordpress-seo' )
 		);
 	}
 

@@ -61,7 +61,7 @@ class WPSEO_Metabox_Tab_Section implements WPSEO_Metabox_Section {
 				esc_attr( $this->name ),
 				esc_attr( $this->link_alt ),
 				esc_attr( $this->link_title ),
-				$this->link_content
+				$this->link_content /* WPCS: XSS ok. */
 			);
 		}
 	}

@@ -61,8 +61,8 @@ class WPSEO_Bulk_Description_List_Table extends WPSEO_Bulk_List_Table {
 			case 'col_new_yoast_seo_metadesc':
 				return sprintf(
 					'<textarea id="%1$s" name="%1$s" class="wpseo-new-metadesc" data-id="%2$s"></textarea>',
-					'wpseo-new-metadesc-' . $record->ID,
-					$record->ID
+					'wpseo-new-metadesc-' . esc_attr($record->ID),
+					esc_attr($record->ID)
 				);
 				break;
 

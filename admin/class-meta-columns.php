@@ -134,11 +134,11 @@ class WPSEO_Meta_Columns {
 
 		echo '
 			<select name="seo_filter">
-				<option value="">', __( 'All SEO Scores', 'wordpress-seo' ), '</option>';
+				<option value="">', esc_html__( 'All SEO Scores', 'wordpress-seo' ), '</option>';
 		foreach ( $ranks as $rank ) {
 			$sel = selected( $current_seo_filter, $rank->get_rank(), false );
 			echo '
-				<option ', $sel, 'value="', $rank->get_rank(), '">', $rank->get_drop_down_label(). '</option>';
+				<option ', $sel, 'value="', esc_attr($rank->get_rank()), '">', esc_attr($rank->get_drop_down_label()). '</option>';
 		}
 		echo '
 			</select>';

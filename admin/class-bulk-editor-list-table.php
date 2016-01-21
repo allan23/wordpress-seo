@@ -105,13 +105,13 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	function __construct() {
 		parent::__construct( $this->settings );
 
-		$this->request_url    = $_SERVER['REQUEST_URI'];
-		$this->current_page   = ( ! empty( $_GET['paged'] ) ) ? $_GET['paged'] : 1;
-		$this->current_filter = ( ! empty( $_GET['post_type_filter'] ) ) ? $_GET['post_type_filter'] : 1;
-		$this->current_status = ( ! empty( $_GET['post_status'] ) ) ? $_GET['post_status'] : 1;
+		$this->request_url    = esc_url_raw($_SERVER['REQUEST_URI']);
+		$this->current_page   = ( ! empty( $_GET['paged'] ) ) ? absint($_GET['paged']) : 1;
+		$this->current_filter = ( ! empty( $_GET['post_type_filter'] ) ) ? sanitize_text_field($_GET['post_type_filter']) : 1;
+		$this->current_status = ( ! empty( $_GET['post_status'] ) ) ? sanitize_text_field($_GET['post_status']) : 1;
 		$this->current_order  = array(
-			'order'   => ( ! empty( $_GET['order'] ) ) ? $_GET['order'] : 'asc',
-			'orderby' => ( ! empty( $_GET['orderby'] ) ) ? $_GET['orderby'] : 'post_title',
+			'order'   => ( ! empty( $_GET['order'] ) ) ? sanitize_text_field($_GET['order']) : 'asc',
+			'orderby' => ( ! empty( $_GET['orderby'] ) ) ? sanitize_text_field($_GET['orderby']) : 'post_title',
 		);
 
 		$this->verify_nonce();
@@ -207,7 +207,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 
 			<?php if ( 'top' === $which ) { ?>
 			<form id="posts-filter" action="" method="get">
-				<input type="hidden" name="nonce" value="<?php echo $this->nonce; ?>"/>
+				<input type="hidden" name="nonce" value="<?php echo esc_attr($this->nonce); ?>"/>
 				<input type="hidden" name="page" value="wpseo_tools"/>
 				<input type="hidden" name="tool" value="bulk-editor"/>
 				<input type="hidden" name="type" value="<?php echo esc_attr( $this->page_type ); ?>"/>
@@ -383,8 +383,8 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 					}
 				}
 
-				echo sprintf( '<select name="post_type_filter">%1$s</select>', $options );
-				submit_button( __( 'Filter', 'wordpress-seo' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
+				echo sprintf( '<select name="post_type_filter">%1$s</select>', $options ); // WPCS: XSS ok.
+				submit_button( esc_attr__( 'Filter', 'wordpress-seo' ), 'button', false, false, array( 'id' => 'post-query-submit' ) );
 				echo '</div>';
 			}
 		}
@@ -684,7 +684,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 
 			foreach ( $records as $rec ) {
 
-				echo '<tr id="record_', $rec->ID, '">';
+				echo '<tr id="record_', esc_attr($rec->ID), '">';
 
 				foreach ( $columns as $column_name => $column_display_name ) {
 
@@ -836,7 +836,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 			$meta_value = $values[ $meta_value ];
 		}
 
-		return sprintf( '<td %2$s id="wpseo-existing-%4$s-%3$s">%1$s</td>', $meta_value, $attributes, $record_id, $this->target_db_field );
+		return sprintf( '<td %2$s id="wpseo-existing-%4$s-%3$s">%1$s</td>', esc_html($meta_value), $attributes, esc_attr($record_id), esc_attr($this->target_db_field) );
 	}
 
 	/**

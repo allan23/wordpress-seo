@@ -19,7 +19,7 @@ if ( ! defined( 'WPSEO_VERSION' ) ) {
  * @param array $results Results array for encoding.
  */
 function wpseo_ajax_json_echo_die( $results ) {
-	echo WPSEO_Utils::json_encode( $results );
+	echo WPSEO_Utils::json_encode( $results ); /* WPCS: XSS ok. */
 	die();
 }
 
@@ -128,7 +128,7 @@ function wpseo_kill_blocking_files() {
 		}
 	}
 
-	die( $message );
+	die( esc_html($message) );
 }
 
 add_action( 'wp_ajax_wpseo_kill_blocking_files', 'wpseo_kill_blocking_files' );

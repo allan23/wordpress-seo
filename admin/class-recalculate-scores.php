@@ -16,7 +16,7 @@ class WPSEO_Recalculate_Scores {
 	private $query_fields   = array(
 		'post_type'      => 'any',
 		'meta_key'       => '_yoast_wpseo_focuskw',
-		'posts_per_page' => -1,
+		'posts_per_page' => 1,
 		'fields'		 => 'ids',
 	);
 
@@ -39,7 +39,7 @@ class WPSEO_Recalculate_Scores {
 			/* translators: 1: expands to a <span> containing the number of posts recalculated. 2: expands to a <strong> containing the total number of posts. */
 			__( '%1$s of %2$s done.', 'wordpress-seo' ),
 			'<span id="wpseo_count">0</span>',
-			'<strong id="wpseo_count_total">' . $this->calculate_posts() . '</strong>'
+			'<strong id="wpseo_count_total">' . absint($this->calculate_posts()) . '</strong>'
 		);
 
 		?>
