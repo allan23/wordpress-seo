@@ -50,7 +50,7 @@ class WPSEO_OpenGraph {
 	 * Main OpenGraph output.
 	 */
 	public function opengraph() {
-		wp_reset_query();
+		wp_reset_postdata();
 		/**
 		 * Action: 'wpseo_opengraph' - Hook to add all Facebook OpenGraph output to so they're close together.
 		 */

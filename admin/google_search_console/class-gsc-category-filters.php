@@ -110,15 +110,15 @@ class WPSEO_GSC_Category_Filters {
 	 * Setting the values for the filter
 	 */
 	private function set_filter_values() {
-		$this->set_filter_value( 'access_denied', __( 'Access denied', 'wordpress-seo' ), __( 'Server requires authentication or is blocking Googlebot from accessing the site.', 'wordpress-seo' ) );
-		$this->set_filter_value( 'faulty_redirects', __( 'Faulty redirects', 'wordpress-seo' ) );
-		$this->set_filter_value( 'not_followed',__( 'Not followed', 'wordpress-seo' ) );
-		$this->set_filter_value( 'not_found', __( 'Not found', 'wordpress-seo' ), __( 'URL points to a non-existent page.', 'wordpress-seo' ) );
-		$this->set_filter_value( 'other', __( 'Other', 'wordpress-seo' ), __( 'Google was unable to crawl this URL due to an undetermined issue.', 'wordpress-seo' ) );
+		$this->set_filter_value( 'access_denied', esc_html__( 'Access denied', 'wordpress-seo' ), esc_html__( 'Server requires authentication or is blocking Googlebot from accessing the site.', 'wordpress-seo' ) );
+		$this->set_filter_value( 'faulty_redirects', esc_html__( 'Faulty redirects', 'wordpress-seo' ) );
+		$this->set_filter_value( 'not_followed',esc_html__( 'Not followed', 'wordpress-seo' ) );
+		$this->set_filter_value( 'not_found', esc_html__( 'Not found', 'wordpress-seo' ), esc_html__( 'URL points to a non-existent page.', 'wordpress-seo' ) );
+		$this->set_filter_value( 'other', esc_html__( 'Other', 'wordpress-seo' ), esc_html__( 'Google was unable to crawl this URL due to an undetermined issue.', 'wordpress-seo' ) );
 		/* Translators: %1$s: expands to '<code>robots.txt</code>'. */
-		$this->set_filter_value( 'roboted', __( 'Blocked', 'wordpress-seo' ), sprintf( __( 'Googlebot could access your site, but certain URLs are blocked for Googlebot in your %1$s file. This block could either be for all Googlebots or even specifically for Googlebot-mobile.', 'wordpress-seo' ), '<code>robots.txt</code>' ) );
-		$this->set_filter_value( 'server_error', __( 'Server Error', 'wordpress-seo' ), __( 'Request timed out or site is blocking Google.', 'wordpress-seo' ) );
-		$this->set_filter_value( 'soft_404', __( 'Soft 404', 'wordpress-seo' ), __( "The target URL doesn't exist, but your server is not returning a 404 (file not found) error.", 'wordpress-seo' ) );
+		$this->set_filter_value( 'roboted', esc_html__( 'Blocked', 'wordpress-seo' ), wp_kses_post(sprintf( __( 'Googlebot could access your site, but certain URLs are blocked for Googlebot in your %1$s file. This block could either be for all Googlebots or even specifically for Googlebot-mobile.', 'wordpress-seo' ), '<code>robots.txt</code>' ) ));
+		$this->set_filter_value( 'server_error', esc_html__( 'Server Error', 'wordpress-seo' ), esc_html__( 'Request timed out or site is blocking Google.', 'wordpress-seo' ) );
+		$this->set_filter_value( 'soft_404', esc_html__( 'Soft 404', 'wordpress-seo' ), esc_html__( "The target URL doesn't exist, but your server is not returning a 404 (file not found) error.", 'wordpress-seo' ) );
 	}
 
 	/**

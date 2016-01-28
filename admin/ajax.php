@@ -115,8 +115,8 @@ function wpseo_kill_blocking_files() {
 		$message       = 'success';
 		$files_removed = 0;
 		foreach ( $options['blocking_files'] as $k => $file ) {
-			if ( ! @unlink( $file ) ) {
-				$message = __( 'Some files could not be removed. Please remove them via FTP.', 'wordpress-seo' );
+			if ( ! unlink( $file ) ) {
+				$message = esc_html__( 'Some files could not be removed. Please remove them via FTP.', 'wordpress-seo' );
 			}
 			else {
 				unset( $options['blocking_files'][ $k ] );
@@ -215,7 +215,7 @@ function wpseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta_k
 	if ( empty( $the_post ) ) {
 
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = __( 'Post doesn\'t exist.', 'wordpress-seo' );
+		$upsert_results['results'] = esc_html__( 'Post doesn\'t exist.', 'wordpress-seo' );
 
 		return $upsert_results;
 	}
@@ -224,7 +224,7 @@ function wpseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta_k
 	if ( ! $post_type_object ) {
 
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = sprintf( __( 'Post has an invalid Post Type: %s.', 'wordpress-seo' ), $the_post->post_type );
+		$upsert_results['results'] = sprintf( esc_html__( 'Post has an invalid Post Type: %s.', 'wordpress-seo' ), $the_post->post_type );
 
 		return $upsert_results;
 	}
@@ -232,7 +232,7 @@ function wpseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta_k
 	if ( ! current_user_can( $post_type_object->cap->edit_posts ) ) {
 
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = sprintf( __( 'You can\'t edit %s.', 'wordpress-seo' ), $post_type_object->label );
+		$upsert_results['results'] = sprintf( esc_html__( 'You can\'t edit %s.', 'wordpress-seo' ), $post_type_object->label );
 
 		return $upsert_results;
 	}
@@ -240,7 +240,7 @@ function wpseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta_k
 	if ( ! current_user_can( $post_type_object->cap->edit_others_posts ) && $the_post->post_author != get_current_user_id() ) {
 
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = sprintf( __( 'You can\'t edit %s that aren\'t yours.', 'wordpress-seo' ), $post_type_object->label );
+		$upsert_results['results'] = sprintf( esc_html__( 'You can\'t edit %s that aren\'t yours.', 'wordpress-seo' ), $post_type_object->label );
 
 		return $upsert_results;
 
@@ -248,7 +248,7 @@ function wpseo_upsert_meta( $post_id, $new_meta_value, $orig_meta_value, $meta_k
 
 	if ( $sanitized_new_meta_value === $orig_meta_value && $sanitized_new_meta_value !== $new_meta_value ) {
 		$upsert_results['status']  = 'failure';
-		$upsert_results['results'] = __( 'You have used HTML in your value which is not allowed.', 'wordpress-seo' );
+		$upsert_results['results'] = esc_html__( 'You have used HTML in your value which is not allowed.', 'wordpress-seo' );
 
 		return $upsert_results;
 	}
@@ -287,10 +287,8 @@ add_action( 'wp_ajax_wpseo_save_all_descriptions', 'wpseo_save_all_descriptions'
 function wpseo_save_all( $what ) {
 	check_ajax_referer( 'wpseo-bulk-editor' );
 
-	// @todo the WPSEO Utils class can't filter arrays in POST yet.
-	$new_values      = $_POST['items'];
-	$original_values = $_POST['existing_items'];
-
+	$new_values		 = wpseo_ajax_sanitize( $_POST[ 'items' ] );
+	$original_values = wpseo_ajax_sanitize( $_POST[ 'existing_items' ] );
 	$results = array();
 
 	if ( is_array( $new_values ) && $new_values !== array() ) {
@@ -300,6 +298,19 @@ function wpseo_save_all( $what ) {
 		}
 	}
 	wpseo_ajax_json_echo_die( $results );
+}
+
+	/**
+ * Sanitizes value.
+ * @param string|array|int $value
+ */
+function wpseo_ajax_sanitize( $value ) {
+	if ( is_array( $value ) ) {
+		$value = array_map( 'sanitize_text_field', $value );
+	} else {
+		$value = sanitize_text_field( $value );
+	}
+	return $value;
 }
 
 /**

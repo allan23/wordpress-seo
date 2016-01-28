@@ -48,7 +48,7 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc',
 			if ( $backupfile ) {
 				fwrite( $backupfile, $fcontent );
 				fclose( $backupfile );
-				$msg = __( 'Backed up the original file header.php to <strong><em>' . esc_html( $backup_file ) . '</em></strong>, ', 'wordpress-seo' );
+				$msg = wp_kses_post(__( 'Backed up the original file header.php to <strong><em>' . esc_html( $backup_file ) . '</em></strong>, ', 'wordpress-seo' ));
 
 				$count    = 0;
 				$fcontent = str_replace( $options['theme_description_found'], '', $fcontent, $count );
@@ -56,20 +56,20 @@ if ( isset( $_GET['fixmetadesc'] ) && check_admin_referer( 'wpseo-fix-metadesc',
 					$header_file = fopen( $path . '/header.php', 'w+' );
 					if ( $header_file ) {
 						if ( fwrite( $header_file, $fcontent ) !== false ) {
-							$msg .= __( 'Removed hardcoded meta description.', 'wordpress-seo' );
+							$msg .= esc_html__( 'Removed hardcoded meta description.', 'wordpress-seo' );
 							$options['theme_has_description']   = false;
 							$options['theme_description_found'] = '';
 							update_option( 'wpseo', $options );
 						}
 						else {
-							$msg .= '<span class="error">' . __( 'Failed to remove hardcoded meta description.', 'wordpress-seo' ) . '</span>';
+							$msg .= '<span class="error">' . esc_html__( 'Failed to remove hardcoded meta description.', 'wordpress-seo' ) . '</span>';
 						}
 						fclose( $header_file );
 					}
 				}
 				else {
 					wpseo_description_test();
-					$msg .= '<span class="warning">' . __( 'Earlier found meta description was not found in file. Renewed the description test data.', 'wordpress-seo' ) . '</span>';
+					$msg .= '<span class="warning">' . esc_html__( 'Earlier found meta description was not found in file. Renewed the description test data.', 'wordpress-seo' ) . '</span>';
 				}
 				add_settings_error( 'yoast_wpseo_dashboard_options', 'error', esc_html($msg), 'updated' );
 			}
@@ -200,8 +200,8 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 			?>
 		</p>
 		<?php
-		$yform->textinput( 'website_name', __( 'Website name', 'wordpress-seo' ), array( 'placeholder' => get_bloginfo( 'name' ) ) );
-		$yform->textinput( 'alternate_website_name', __( 'Alternate name', 'wordpress-seo' ) );
+		$yform->textinput( 'website_name', esc_html__( 'Website name', 'wordpress-seo' ), array( 'placeholder' => get_bloginfo( 'name' ) ) );
+		$yform->textinput( 'alternate_website_name', esc_html__( 'Alternate name', 'wordpress-seo' ) );
 		?>
 		<h3><?php esc_html_e( 'Company or person', 'wordpress-seo' ); ?></h3>
 		<p>
@@ -211,44 +211,44 @@ if ( get_option( 'page_comments' ) && $options['ignore_page_comments'] === false
 			?>
 		</p>
 		<?php
-		$yform->select( 'company_or_person', __( 'Company or person', 'wordpress-seo' ), array(
-			''        => __( 'Choose whether you\'re a company or person', 'wordpress-seo' ),
-			'company' => __( 'Company', 'wordpress-seo' ),
-			'person'  => __( 'Person', 'wordpress-seo' ),
+		$yform->select( 'company_or_person', esc_html__( 'Company or person', 'wordpress-seo' ), array(
+			''        => esc_html__( 'Choose whether you\'re a company or person', 'wordpress-seo' ),
+			'company' => esc_html__( 'Company', 'wordpress-seo' ),
+			'person'  => esc_html__( 'Person', 'wordpress-seo' ),
 		) );
 		?>
 		<div id="knowledge-graph-company">
 			<h2><?php esc_html_e( 'Company', 'wordpress-seo' ); ?></h2>
 			<?php
-			$yform->textinput( 'company_name', __( 'Company Name', 'wordpress-seo' ) );
-			$yform->media_input( 'company_logo', __( 'Company Logo', 'wordpress-seo' ) );
+			$yform->textinput( 'company_name', esc_html__( 'Company Name', 'wordpress-seo' ) );
+			$yform->media_input( 'company_logo', esc_html__( 'Company Logo', 'wordpress-seo' ) );
 			?>
 		</div>
 		<div id="knowledge-graph-person">
 			<h2><?php esc_html_e( 'Person', 'wordpress-seo' ); ?></h2>
-			<?php $yform->textinput( 'person_name', __( 'Your name', 'wordpress-seo' ) ); ?>
+			<?php $yform->textinput( 'person_name', esc_html__( 'Your name', 'wordpress-seo' ) ); ?>
 		</div>
 	</div>
 	<div id="webmaster-tools" class="wpseotab">
 		<?php
 		echo '<p>', esc_html__( 'You can use the boxes below to verify with the different Webmaster Tools, if your site is already verified, you can just forget about these. Enter the verify meta values for:', 'wordpress-seo' ), '</p>';
-		$yform->textinput( 'alexaverify', '<a target="_blank" href="http://www.alexa.com/siteowners/claim">' . __( 'Alexa Verification ID', 'wordpress-seo' ) . '</a>' );
-		$yform->textinput( 'msverify', '<a target="_blank" href="' . esc_url( 'http://www.bing.com/webmaster/?rfp=1#/Dashboard/?url=' . urlencode( str_replace( 'http://', '', get_bloginfo( 'url' ) ) ) ) . '">' . __( 'Bing Webmaster Tools', 'wordpress-seo' ) . '</a>' );
+		$yform->textinput( 'alexaverify', '<a target="_blank" href="http://www.alexa.com/siteowners/claim">' . esc_html__( 'Alexa Verification ID', 'wordpress-seo' ) . '</a>' );
+		$yform->textinput( 'msverify', '<a target="_blank" href="' . esc_url( 'http://www.bing.com/webmaster/?rfp=1#/Dashboard/?url=' . urlencode( str_replace( 'http://', '', get_bloginfo( 'url' ) ) ) ) . '">' . esc_html__( 'Bing Webmaster Tools', 'wordpress-seo' ) . '</a>' );
 		$yform->textinput( 'googleverify', '<a target="_blank" href="' . esc_url( 'https://www.google.com/webmasters/verification/verification?hl=en&siteUrl=' . urlencode( get_bloginfo( 'url' ) ) . '/' ) . '">Google Search Console</a>' );
-		$yform->textinput( 'yandexverify', '<a target="_blank" href="http://help.yandex.com/webmaster/service/rights.xml#how-to">' . __( 'Yandex Webmaster Tools', 'wordpress-seo' ) . '</a>' );
+		$yform->textinput( 'yandexverify', '<a target="_blank" href="http://help.yandex.com/webmaster/service/rights.xml#how-to">' . esc_html__( 'Yandex Webmaster Tools', 'wordpress-seo' ) . '</a>' );
 		?>
 	</div>
 	<div id="security" class="wpseotab">
 		<?php
 		echo '<p>', esc_html__( 'Unchecking this box allows authors and editors to redirect posts, noindex them and do other things you might not want if you don\'t trust your authors.', 'wordpress-seo' ), '</p>';
 		/* translators: %1$s expands to Yoast SEO */
-		$yform->checkbox( 'disableadvanced_meta', sprintf( __( 'Disable the Advanced part of the %1$s meta box', 'wordpress-seo' ), 'Yoast SEO' ) );
+		$yform->checkbox( 'disableadvanced_meta', sprintf( esc_html__( 'Disable the Advanced part of the %1$s meta box', 'wordpress-seo' ), 'Yoast SEO' ) );
 		?>
 	</div>
 	<div id="onpage" class="wpseotab">
 		<?php
 		/* translators: %1$s expands to OnPage.org */
-		$yform->checkbox( 'onpage_indexability', sprintf( __( 'Enable %1$s indexability check', 'wordpress-seo' ), 'OnPage.org' ) );
+		$yform->checkbox( 'onpage_indexability', sprintf( esc_html__( 'Enable %1$s indexability check', 'wordpress-seo' ), 'OnPage.org' ) );
 		?>
 	</div>
 <?php

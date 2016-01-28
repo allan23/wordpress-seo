@@ -49,7 +49,7 @@ class Yoast_Form {
 			$option_long_name = WPSEO_Options::get_group_name( $option );
 		}
 		?>
-		<div class="wrap wpseo-admin-page page-<?php echo $option; ?>">
+		<div class="wrap wpseo-admin-page page-<?php echo esc_attr($option); ?>">
 		<?php
 		/**
 		 * Display the updated/error messages
@@ -127,7 +127,7 @@ class Yoast_Form {
 			<div id="poststuff">
 			<div id="wpseo-debug-info" class="postbox">
 
-				<h3 class="hndle"><span>' . __( 'Debug Information', 'wordpress-seo' ) . '</span></h3>
+				<h3 class="hndle"><span>' . esc_html__( 'Debug Information', 'wordpress-seo' ) . '</span></h3>
 				<div class="inside">
 					<h4>' . esc_html( __( 'Current option:', 'wordpress-seo' ) ) . ' <span class="wpseo-debug">' . esc_html( $this->option_name ) . '</span></h4>
 					' . ( ( $xdebug ) ? '' : '<pre>' );
@@ -218,21 +218,21 @@ class Yoast_Form {
 
 		$service_banner = $service_banners[0];
 
-		echo '<a target="_blank" href="' . esc_url( $service_banner['url'] ) . '"><img width="261" height="190" src="' . plugins_url( 'images/' . $service_banner['img'], WPSEO_FILE ) . '" alt="' . esc_attr( $service_banner['alt'] ) . '"/></a><br/><br/>';
+		echo '<a target="_blank" href="' . esc_url( $service_banner['url'] ) . '"><img width="261" height="190" src="' . esc_url(plugins_url( 'images/' . $service_banner['img'], WPSEO_FILE )) . '" alt="' . esc_attr( $service_banner['alt'] ) . '"/></a><br/><br/>';
 
 		$i = 0;
 		foreach ( $plugin_banners as $banner ) {
 			if ( $i == 2 ) {
 				break;
 			}
-			echo '<a target="_blank" href="' . esc_url( $banner['url'] ) . '"><img width="261" height="152" src="' . plugins_url( 'images/' . $banner['img'], WPSEO_FILE ) . '" alt="' . esc_attr( $banner['alt'] ) . '"/></a><br/><br/>';
+			echo '<a target="_blank" href="' . esc_url( $banner['url'] ) . '"><img width="261" height="152" src="' . esc_url(plugins_url( 'images/' . $banner['img'], WPSEO_FILE )) . '" alt="' . esc_attr( $banner['alt'] ) . '"/></a><br/><br/>';
 			$i ++;
 		}
 		?>
-				<strong><?php _e( 'Remove these ads?', 'wordpress-seo' ); ?></strong><br/>
+				<strong><?php esc_html_e( 'Remove these ads?', 'wordpress-seo' ); ?></strong><br/>
 				<a target="_blank" href="https://yoast.com/wordpress/plugins/seo-premium/#utm_source=wordpress-seo-config&amp;utm_medium=textlink&amp;utm_campaign=remove-ads-link"><?php
 				 /* translators: %1$s expands to Yoast SEO Premium */
-				printf( __( 'Upgrade to %1$s &raquo;', 'wordpress-seo' ), 'Yoast SEO Premium' ); ?></a><br/><br/>
+				printf( esc_html__( 'Upgrade to %1$s &raquo;', 'wordpress-seo' ), 'Yoast SEO Premium' ); ?></a><br/><br/>
 			</div>
 		</div>
 	<?php
@@ -251,7 +251,7 @@ class Yoast_Form {
 				'for'   => '',
 			)
 		);
-		echo "<label class='" . $attr['class'] . "' for='" . esc_attr( $attr['for'] ) . "'>$text";
+		echo "<label class='" . esc_attr($attr['class']) . "' for='" . esc_attr( $attr['for'] ) . "'>" . wp_kses_post($text);
 		if ( $attr['close'] ) {
 			echo '</label>';
 		}
@@ -377,7 +377,7 @@ class Yoast_Form {
 
 		foreach ( $values as $value => $label ) {
 			if ( ! empty( $label ) ) {
-				echo '<option value="', esc_attr( $value ), '"', selected( $val, $value, false ), '>', $label, '</option>';
+				echo '<option value="', esc_attr( $value ), '"', selected( $val, $value, false ), '>', esc_html($label), '</option>';
 			}
 		}
 		echo '</select>';
@@ -426,7 +426,7 @@ class Yoast_Form {
 
 		$this->label( $label . ':', array( 'for' => 'wpseo_' . $var, 'class' => 'select' ) );
 		echo '<input class="textinput" id="wpseo_', $var_esc, '" type="text" size="36" name="', esc_attr( $this->option_name ), '[', $var_esc, ']" value="', esc_attr( $val ), '" />';
-		echo '<input id="wpseo_', $var_esc, '_button" class="wpseo_image_upload_button button" type="button" value="', __( 'Upload Image', 'wordpress-seo' ), '" />';
+		echo '<input id="wpseo_', $var_esc, '_button" class="wpseo_image_upload_button button" type="button" value="', esc_attr__( 'Upload Image', 'wordpress-seo' ), '" />';
 		echo '<br class="clear"/>';
 	}
 

@@ -86,7 +86,7 @@ if ( isset( $import ) ) {
 
 	// Check if we've deleted old data and adjust message to match it.
 	if ( $replace ) {
-		$msg .= ' ' . __( 'The old data of the imported plugin was deleted successfully.', 'wordpress-seo' );
+		$msg .= ' ' . esc_html__( 'The old data of the imported plugin was deleted successfully.', 'wordpress-seo' );
 	}
 
 	if ( $msg != '' ) {
@@ -113,7 +113,7 @@ if ( isset( $import ) ) {
 </h2>
 
 <div id="wpseo-import" class="wpseotab">
-	<p><?php _e( 'Import settings by locating <em>settings.zip</em> and clicking "Import settings"', 'wordpress-seo' ); ?></p>
+	<p><?php echo wp_kses_post(__( 'Import settings by locating <em>settings.zip</em> and clicking "Import settings"', 'wordpress-seo' )); ?></p>
 
 	<form
 		action="<?php echo esc_attr( admin_url( 'admin.php?page=wpseo_tools&tool=import-export#top#wpseo-import' ) ); ?>"
@@ -132,7 +132,7 @@ if ( isset( $import ) ) {
 		/* translators: %1$s expands to Yoast SEO */
 		printf( esc_html__( 'Export your %1$s settings here, to import them again later or to import them on another site.', 'wordpress-seo' ), 'Yoast SEO' );
 		?></p>
-	<?php $yform->checkbox( 'include_taxonomy_meta', __( 'Include Taxonomy Metadata', 'wordpress-seo' ) ); ?><br/>
+	<?php $yform->checkbox( 'include_taxonomy_meta', esc_html__( 'Include Taxonomy Metadata', 'wordpress-seo' ) ); ?><br/>
 	<button class="button-primary" id="export-button"><?php
 		/* translators: %1$s expands to Yoast SEO */
 		printf( esc_html__( 'Export your %1$s settings', 'wordpress-seo' ), 'Yoast SEO' );
@@ -152,14 +152,14 @@ if ( isset( $import ) ) {
 		method="post" accept-charset="<?php echo esc_attr( get_bloginfo( 'charset' ) ); ?>">
 		<?php
 		wp_nonce_field( 'wpseo-import', '_wpnonce', true, true );
-		$yform->checkbox( 'importheadspace', __( 'Import from HeadSpace2?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importaioseo', __( 'Import from All-in-One SEO?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importwoo', __( 'Import from WooThemes SEO framework?', 'wordpress-seo' ) );
-		$yform->checkbox( 'importwpseo', __( 'Import from wpSEO', 'wordpress-seo' ) );
+		$yform->checkbox( 'importheadspace', esc_html__( 'Import from HeadSpace2?', 'wordpress-seo' ) );
+		$yform->checkbox( 'importaioseo', esc_html__( 'Import from All-in-One SEO?', 'wordpress-seo' ) );
+		$yform->checkbox( 'importwoo', esc_html__( 'Import from WooThemes SEO framework?', 'wordpress-seo' ) );
+		$yform->checkbox( 'importwpseo', esc_html__( 'Import from wpSEO', 'wordpress-seo' ) );
 		?>
 		<br/>
 		<?php
-		$yform->checkbox( 'deleteolddata', __( 'Delete the old data after import? (recommended)', 'wordpress-seo' ) );
+		$yform->checkbox( 'deleteolddata', esc_html__( 'Delete the old data after import? (recommended)', 'wordpress-seo' ) );
 		?>
 		<br/>
 		<input type="submit" class="button-primary" name="import"

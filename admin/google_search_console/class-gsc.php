@@ -115,7 +115,7 @@ class WPSEO_GSC {
 
 		// Preparing and displaying the table.
 		$list_table->prepare_items();
-		$list_table->search_box( __( 'Search', 'wordpress-seo' ), 'wpseo-crawl-issues-search' );
+		$list_table->search_box( esc_html__( 'Search', 'wordpress-seo' ), 'wpseo-crawl-issues-search' );
 		$list_table->display();
 	}
 
@@ -125,7 +125,7 @@ class WPSEO_GSC {
 	public function page_scripts() {
 		wp_enqueue_script( 'wp-seo-admin-gsc', plugin_dir_url( WPSEO_FILE ) . 'js/wp-seo-admin-gsc-' . '302' . WPSEO_CSSJS_SUFFIX . '.js', array( 'jquery' ), WPSEO_VERSION );
 		add_screen_option( 'per_page', array(
-			'label'   => __( 'Crawl errors per page', 'wordpress-seo' ),
+			'label'   => esc_html__( 'Crawl errors per page', 'wordpress-seo' ),
 			'default' => 50,
 			'option'  => 'errors_per_page',
 		) );
@@ -176,10 +176,10 @@ class WPSEO_GSC {
 
 			// Adding notification to the notification center.
 			/* Translators: %1$s: expands to Google Search Console. */
-			$this->add_notification( sprintf( __( 'The %1$s data has been removed. You will have to reauthenticate if you want to retrieve the data again.', 'wordpress-seo' ), 'Google Search Console' ), 'updated' );
+			$this->add_notification( sprintf( esc_html__( 'The %1$s data has been removed. You will have to reauthenticate if you want to retrieve the data again.', 'wordpress-seo' ), 'Google Search Console' ), 'updated' );
 
 			// Directly output the notifications.
-			wp_redirect( remove_query_arg( 'gsc_reset' ) );
+			wp__safe_redirect( remove_query_arg( 'gsc_reset' ) );
 			exit;
 		}
 
@@ -189,7 +189,7 @@ class WPSEO_GSC {
 			WPSEO_GSC_Settings::reload_issues();
 
 			// Adding the notification.
-			$this->add_notification( __( 'The issues have been successfully reloaded!', 'wordpress-seo' ), 'updated' );
+			$this->add_notification( esc_html__( 'The issues have been successfully reloaded!', 'wordpress-seo' ), 'updated' );
 
 			// Directly output the notifications.
 			Yoast_Notification_Center::get()->display_notifications();
@@ -207,7 +207,7 @@ class WPSEO_GSC {
 			$url = ( $search_string !== '' ) ? add_query_arg( 's', $search_string ) : remove_query_arg( 's' );
 
 			// Do the redirect.
-			wp_redirect( $url );
+			wp_safe_redirect( $url );
 			exit;
 		}
 	}
@@ -220,11 +220,11 @@ class WPSEO_GSC {
 		// Catch the authorization code POST.
 		if ( ! empty( $gsc_values['authorization_code'] ) && wp_verify_nonce( $gsc_values['gsc_nonce'], 'wpseo-gsc_nonce' ) ) {
 			if ( ! WPSEO_GSC_Settings::validate_authorization( trim( $gsc_values['authorization_code'] ), $this->service->get_client() ) ) {
-				$this->add_notification( __( 'Incorrect Google Authorization Code.', 'wordpress-seo' ), 'error' );
+				$this->add_notification( esc_html__( 'Incorrect Google Authorization Code.', 'wordpress-seo' ), 'error' );
 			}
 
 			// Redirect user to prevent a post resubmission which causes an oauth error.
-			wp_redirect( admin_url( 'admin.php' ) . '?page=' . esc_attr( filter_input( INPUT_GET, 'page' ) ) . '&tab=settings' );
+			wp_safe_redirect( admin_url( 'admin.php' ) . '?page=' . esc_attr( filter_input( INPUT_GET, 'page' ) ) . '&tab=settings' );
 			exit;
 		}
 	}
@@ -277,10 +277,10 @@ class WPSEO_GSC {
 		$screen->add_help_tab(
 			array(
 				'id'      => 'basic-help',
-				'title'   => __( 'Issue categories', 'wordpress-seo' ),
-				'content' => '<p><strong>' .__( 'Desktop', 'wordpress-seo' ) . '</strong><br />' . __( 'Errors that occurred when your site was crawled by Googlebot.', 'wordpress-seo' ) . '</p>'
-							. '<p><strong>' .__( 'Smartphone', 'wordpress-seo' ) . '</strong><br />' . __( 'Errors that occurred only when your site was crawled by Googlebot-Mobile (errors didn\'t appear for desktop).', 'wordpress-seo' ) . '</p>'
-							. '<p><strong>' .__( 'Feature phone', 'wordpress-seo' ) . '</strong><br />' . __( 'Errors that only occurred when your site was crawled by Googlebot for feature phones (errors didn\'t appear for desktop).', 'wordpress-seo' ) . '</p>',
+				'title'   => esc_html__( 'Issue categories', 'wordpress-seo' ),
+				'content' => '<p><strong>' .esc_html__( 'Desktop', 'wordpress-seo' ) . '</strong><br />' . esc_html__( 'Errors that occurred when your site was crawled by Googlebot.', 'wordpress-seo' ) . '</p>'
+							. '<p><strong>' .esc_html__( 'Smartphone', 'wordpress-seo' ) . '</strong><br />' . esc_html__( 'Errors that occurred only when your site was crawled by Googlebot-Mobile (errors didn\'t appear for desktop).', 'wordpress-seo' ) . '</p>'
+							. '<p><strong>' .esc_html__( 'Feature phone', 'wordpress-seo' ) . '</strong><br />' . esc_html__( 'Errors that only occurred when your site was crawled by Googlebot for feature phones (errors didn\'t appear for desktop).', 'wordpress-seo' ) . '</p>',
 			)
 		);
 	}

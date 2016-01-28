@@ -42,7 +42,7 @@ class WPSEO_Recalculate_Scores_Ajax {
 	public function recalculate_scores() {
 		check_ajax_referer( 'wpseo_recalculate', 'nonce' );
 		wp_die(
-			$this->get_posts( filter_input( INPUT_POST, 'paged', FILTER_VALIDATE_INT ) ) // WPCS: XSS ok.
+			$this->get_posts( filter_input( INPUT_POST, 'paged', FILTER_VALIDATE_INT ) ) // xss okay
 		);
 	}
 

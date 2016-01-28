@@ -40,8 +40,8 @@ class WPSEO_Bulk_Description_List_Table extends WPSEO_Bulk_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'col_existing_yoast_seo_metadesc' => __( 'Existing Yoast Meta Description', 'wordpress-seo' ),
-			'col_new_yoast_seo_metadesc'      => __( 'New Yoast Meta Description', 'wordpress-seo' ),
+			'col_existing_yoast_seo_metadesc' => esc_html__( 'Existing Yoast Meta Description', 'wordpress-seo' ),
+			'col_new_yoast_seo_metadesc'      => esc_html__( 'New Yoast Meta Description', 'wordpress-seo' ),
 		);
 
 		return $this->merge_columns( $columns );

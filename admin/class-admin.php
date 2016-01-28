@@ -114,7 +114,7 @@ class WPSEO_Admin {
 		$manage_options_cap = $this->get_manage_options_cap();
 
 		// Add main page.
-		$admin_page = add_menu_page( 'Yoast SEO: ' . __( 'General Settings', 'wordpress-seo' ), __( 'SEO', 'wordpress-seo' ), $manage_options_cap, 'wpseo_dashboard', array(
+		$admin_page = add_menu_page( 'Yoast SEO: ' . esc_html__( 'General Settings', 'wordpress-seo' ), esc_html__( 'SEO', 'wordpress-seo' ), $manage_options_cap, 'wpseo_dashboard', array(
 			$this,
 			'load_page',
 		), $icon_svg, '99.31337' );
@@ -124,7 +124,7 @@ class WPSEO_Admin {
 			array(
 				'wpseo_dashboard',
 				'',
-				__( 'Titles &amp; Metas', 'wordpress-seo' ),
+				esc_html__( 'Titles &amp; Metas', 'wordpress-seo' ),
 				$manage_options_cap,
 				'wpseo_titles',
 				array( $this, 'load_page' ),
@@ -133,7 +133,7 @@ class WPSEO_Admin {
 			array(
 				'wpseo_dashboard',
 				'',
-				__( 'Social', 'wordpress-seo' ),
+				esc_html__( 'Social', 'wordpress-seo' ),
 				$manage_options_cap,
 				'wpseo_social',
 				array( $this, 'load_page' ),
@@ -142,7 +142,7 @@ class WPSEO_Admin {
 			array(
 				'wpseo_dashboard',
 				'',
-				__( 'XML Sitemaps', 'wordpress-seo' ),
+				esc_html__( 'XML Sitemaps', 'wordpress-seo' ),
 				$manage_options_cap,
 				'wpseo_xml',
 				array( $this, 'load_page' ),
@@ -151,7 +151,7 @@ class WPSEO_Admin {
 			array(
 				'wpseo_dashboard',
 				'',
-				__( 'Advanced', 'wordpress-seo' ),
+				esc_html__( 'Advanced', 'wordpress-seo' ),
 				$manage_options_cap,
 				'wpseo_advanced',
 				array( $this, 'load_page' ),
@@ -160,7 +160,7 @@ class WPSEO_Admin {
 			array(
 				'wpseo_dashboard',
 				'',
-				__( 'Tools', 'wordpress-seo' ),
+				esc_html__( 'Tools', 'wordpress-seo' ),
 				$manage_options_cap,
 				'wpseo_tools',
 				array( $this, 'load_page' ),
@@ -169,7 +169,7 @@ class WPSEO_Admin {
 			array(
 				'wpseo_dashboard',
 				'',
-				__( 'Search Console', 'wordpress-seo' ),
+				esc_html__( 'Search Console', 'wordpress-seo' ),
 				$manage_options_cap,
 				'wpseo_search_console',
 				array( $this->page_gsc, 'display' ),
@@ -178,7 +178,7 @@ class WPSEO_Admin {
 			array(
 				'wpseo_dashboard',
 				'',
-				'<span style="color:#f18500">' . __( 'Extensions', 'wordpress-seo' ) . '</span>',
+				'<span style="color:#f18500">' . esc_html__( 'Extensions', 'wordpress-seo' ) . '</span>',
 				$manage_options_cap,
 				'wpseo_licenses',
 				array( $this, 'load_page' ),
@@ -208,7 +208,7 @@ class WPSEO_Admin {
 
 		global $submenu;
 		if ( isset( $submenu['wpseo_dashboard'] ) && current_user_can( $manage_options_cap ) ) {
-			$submenu['wpseo_dashboard'][0][0] = __( 'General', 'wordpress-seo' );
+			$submenu['wpseo_dashboard'][0][0] = esc_html__( 'General', 'wordpress-seo' );
 		}
 	}
 
@@ -235,33 +235,33 @@ class WPSEO_Admin {
 		$screen = get_current_screen();
 
 		$screen->set_help_sidebar( '
-			<p><strong>' . __( 'For more information:', 'wordpress-seo' ) . '</strong></p>
-			<p><a target="_blank" href="https://yoast.com/articles/wordpress-seo/#titles">' . __( 'Title optimization', 'wordpress-seo' ) . '</a></p>
-			<p><a target="_blank" href="https://yoast.com/google-page-title/">' . __( 'Why Google won\'t display the right page title', 'wordpress-seo' ) . '</a></p>'
+			<p><strong>' . esc_html__( 'For more information:', 'wordpress-seo' ) . '</strong></p>
+			<p><a target="_blank" href="https://yoast.com/articles/wordpress-seo/#titles">' . esc_html__( 'Title optimization', 'wordpress-seo' ) . '</a></p>
+			<p><a target="_blank" href="https://yoast.com/google-page-title/">' . esc_html__( 'Why Google won\'t display the right page title', 'wordpress-seo' ) . '</a></p>'
 		);
 
 		$screen->add_help_tab(
 			array(
 				'id'      => 'basic-help',
-				'title'   => __( 'Template explanation', 'wordpress-seo' ),
+				'title'   => esc_html__( 'Template explanation', 'wordpress-seo' ),
 				/* translators: %1$s expands to Yoast SEO */
-				'content' => '<p>' . sprintf( __( 'The title &amp; metas settings for %1$s are made up of variables that are replaced by specific values from the page when the page is displayed. The tabs on the left explain the available variables.', 'wordpress-seo' ), 'Yoast SEO' ) . '</p>' . '<p>' . __( 'Note that not all variables can be used in every template.', 'wordpress-seo' ) . '</p>',
+				'content' => '<p>' . sprintf( esc_html__( 'The title &amp; metas settings for %1$s are made up of variables that are replaced by specific values from the page when the page is displayed. The tabs on the left explain the available variables.', 'wordpress-seo' ), 'Yoast SEO' ) . '</p>' . '<p>' . esc_html__( 'Note that not all variables can be used in every template.', 'wordpress-seo' ) . '</p>',
 			)
 		);
 
 		$screen->add_help_tab(
 			array(
 				'id'      => 'title-vars',
-				'title'   => __( 'Basic Variables', 'wordpress-seo' ),
-				'content' => "\n\t\t<h2>" . __( 'Basic Variables', 'wordpress-seo' ) . "</h2>\n\t\t" . WPSEO_Replace_Vars::get_basic_help_texts(),
+				'title'   => esc_html__( 'Basic Variables', 'wordpress-seo' ),
+				'content' => "\n\t\t<h2>" . esc_html__( 'Basic Variables', 'wordpress-seo' ) . "</h2>\n\t\t" . WPSEO_Replace_Vars::get_basic_help_texts(),
 			)
 		);
 
 		$screen->add_help_tab(
 			array(
 				'id'      => 'title-vars-advanced',
-				'title'   => __( 'Advanced Variables', 'wordpress-seo' ),
-				'content' => "\n\t\t<h2>" . __( 'Advanced Variables', 'wordpress-seo' ) . "</h2>\n\t\t" . WPSEO_Replace_Vars::get_advanced_help_texts(),
+				'title'   => esc_html__( 'Advanced Variables', 'wordpress-seo' ),
+				'content' => "\n\t\t<h2>" . esc_html__( 'Advanced Variables', 'wordpress-seo' ) . "</h2>\n\t\t" . WPSEO_Replace_Vars::get_advanced_help_texts(),
 			)
 		);
 	}
@@ -273,20 +273,20 @@ class WPSEO_Admin {
 		if ( WPSEO_Utils::grant_access() ) {
 			// Base 64 encoded SVG image.
 			$icon_svg = $this->get_menu_svg();
-			add_menu_page( 'Yoast SEO: ' . __( 'MultiSite Settings', 'wordpress-seo' ), __( 'SEO', 'wordpress-seo' ), 'delete_users', 'wpseo_dashboard', array(
+			add_menu_page( 'Yoast SEO: ' . esc_html__( 'MultiSite Settings', 'wordpress-seo' ), esc_html__( 'SEO', 'wordpress-seo' ), 'delete_users', 'wpseo_dashboard', array(
 				$this,
 				'network_config_page',
 			), $icon_svg );
 
 			if ( WPSEO_Utils::allow_system_file_edit() === true ) {
-				add_submenu_page( 'wpseo_dashboard', 'Yoast SEO: ' . __( 'Edit Files', 'wordpress-seo' ), __( 'Edit Files', 'wordpress-seo' ), 'delete_users', 'wpseo_files', array(
+				add_submenu_page( 'wpseo_dashboard', 'Yoast SEO: ' . esc_html__( 'Edit Files', 'wordpress-seo' ), esc_html__( 'Edit Files', 'wordpress-seo' ), 'delete_users', 'wpseo_files', array(
 					$this,
 					'load_page',
 				) );
 			}
 
 			// Add Extension submenu page.
-			add_submenu_page( 'wpseo_dashboard', 'Yoast SEO: ' . __( 'Extensions', 'wordpress-seo' ), __( 'Extensions', 'wordpress-seo' ), 'delete_users', 'wpseo_licenses', array(
+			add_submenu_page( 'wpseo_dashboard', 'Yoast SEO: ' . esc_html__( 'Extensions', 'wordpress-seo' ), esc_html__( 'Extensions', 'wordpress-seo' ), 'delete_users', 'wpseo_licenses', array(
 				$this,
 				'load_page',
 			) );
@@ -352,7 +352,7 @@ class WPSEO_Admin {
 	function bulk_edit_options() {
 		$option = 'per_page';
 		$args   = array(
-			'label'   => __( 'Posts', 'wordpress-seo' ),
+			'label'   => esc_html__( 'Posts', 'wordpress-seo' ),
 			'default' => 10,
 			'option'  => 'wpseo_posts_per_page',
 		);
@@ -453,7 +453,7 @@ class WPSEO_Admin {
 	 */
 	function add_action_link( $links, $file ) {
 		if ( WPSEO_BASENAME === $file && WPSEO_Utils::grant_access() ) {
-			$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_dashboard' ) ) . '">' . __( 'Settings', 'wordpress-seo' ) . '</a>';
+			$settings_link = '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_dashboard' ) ) . '">' . esc_html__( 'Settings', 'wordpress-seo' ) . '</a>';
 			array_unshift( $links, $settings_link );
 		}
 
@@ -465,11 +465,11 @@ class WPSEO_Admin {
 		}
 
 		// Add link to premium support landing page.
-		$premium_link = '<a href="https://yoast.com/wordpress/plugins/seo-premium/support/#utm_source=wordpress-seo-settings-link&amp;utm_medium=textlink&amp;utm_campaign=support-link">' . __( 'Premium Support', 'wordpress-seo' ) . '</a>';
+		$premium_link = '<a href="https://yoast.com/wordpress/plugins/seo-premium/support/#utm_source=wordpress-seo-settings-link&amp;utm_medium=textlink&amp;utm_campaign=support-link">' . esc_html__( 'Premium Support', 'wordpress-seo' ) . '</a>';
 		array_unshift( $links, $premium_link );
 
 		// Add link to docs.
-		$faq_link = '<a href="https://yoast.com/wordpress/plugins/seo/faq/">' . __( 'FAQ', 'wordpress-seo' ) . '</a>';
+		$faq_link = '<a href="https://yoast.com/wordpress/plugins/seo/faq/">' . esc_html__( 'FAQ', 'wordpress-seo' ) . '</a>';
 		array_unshift( $links, $faq_link );
 
 		return $links;
@@ -495,11 +495,11 @@ class WPSEO_Admin {
 	 */
 	public function update_contactmethods( $contactmethods ) {
 		// Add Google+.
-		$contactmethods['googleplus'] = __( 'Google+', 'wordpress-seo' );
+		$contactmethods['googleplus'] = esc_html__( 'Google+', 'wordpress-seo' );
 		// Add Twitter.
-		$contactmethods['twitter'] = __( 'Twitter username (without @)', 'wordpress-seo' );
+		$contactmethods['twitter'] = esc_html__( 'Twitter username (without @)', 'wordpress-seo' );
 		// Add Facebook.
-		$contactmethods['facebook'] = __( 'Facebook profile URL', 'wordpress-seo' );
+		$contactmethods['facebook'] = esc_html__( 'Facebook profile URL', 'wordpress-seo' );
 
 		return $contactmethods;
 	}
@@ -568,7 +568,7 @@ class WPSEO_Admin {
 	 */
 	function stopwords() {
 		/* translators: this should be an array of stopwords for your language, separated by comma's. */
-		$stopwords = explode( ',', __( "a,about,above,after,again,against,all,am,an,and,any,are,as,at,be,because,been,before,being,below,between,both,but,by,could,did,do,does,doing,down,during,each,few,for,from,further,had,has,have,having,he,he'd,he'll,he's,her,here,here's,hers,herself,him,himself,his,how,how's,i,i'd,i'll,i'm,i've,if,in,into,is,it,it's,its,itself,let's,me,more,most,my,myself,nor,of,on,once,only,or,other,ought,our,ours,ourselves,out,over,own,same,she,she'd,she'll,she's,should,so,some,such,than,that,that's,the,their,theirs,them,themselves,then,there,there's,these,they,they'd,they'll,they're,they've,this,those,through,to,too,under,until,up,very,was,we,we'd,we'll,we're,we've,were,what,what's,when,when's,where,where's,which,while,who,who's,whom,why,why's,with,would,you,you'd,you'll,you're,you've,your,yours,yourself,yourselves", 'wordpress-seo' ) );
+		$stopwords = explode( ',', esc_html__( "a,about,above,after,again,against,all,am,an,and,any,are,as,at,be,because,been,before,being,below,between,both,but,by,could,did,do,does,doing,down,during,each,few,for,from,further,had,has,have,having,he,he'd,he'll,he's,her,here,here's,hers,herself,him,himself,his,how,how's,i,i'd,i'll,i'm,i've,if,in,into,is,it,it's,its,itself,let's,me,more,most,my,myself,nor,of,on,once,only,or,other,ought,our,ours,ourselves,out,over,own,same,she,she'd,she'll,she's,should,so,some,such,than,that,that's,the,their,theirs,them,themselves,then,there,there's,these,they,they'd,they'll,they're,they've,this,those,through,to,too,under,until,up,very,was,we,we'd,we'll,we're,we've,were,what,what's,when,when's,where,where's,which,while,who,who's,whom,why,why's,with,would,you,you'd,you'll,you're,you've,your,yours,yourself,yourselves", 'wordpress-seo' ) );
 
 		/**
 		 * Allows filtering of the stop words list

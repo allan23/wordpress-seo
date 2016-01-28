@@ -353,8 +353,12 @@ class WPSEO_Sitemaps {
 
 				// Using the same query with build_post_type_map($post_type) function to count number of posts.
 				$query = $wpdb->prepare( "SELECT COUNT(ID) FROM $wpdb->posts {$join_filter} WHERE post_status IN ('publish','inherit') AND post_password = '' AND post_date != '0000-00-00 00:00:00' AND post_type = %s " . $where_filter, $post_type );
-
-				$count = $wpdb->get_var( $query );
+				$cache_key	 = md5( $query );
+				$count		 = wp_cache_get( $cache_key, 'wpseo' );
+				if ( false === $count ) {
+					$count = $wpdb->get_var( $query );
+					wp_cache_set( $cache_key, $count, 'wpseo', 60 );
+				}
 				if ( $count == 0 ) {
 					continue;
 				}
@@ -368,7 +372,13 @@ class WPSEO_Sitemaps {
 					}
 					else {
 						if ( ! isset( $all_dates ) ) {
-							$all_dates = $wpdb->get_col( $wpdb->prepare( "SELECT post_modified_gmt FROM (SELECT @rownum:=@rownum+1 rownum, $wpdb->posts.post_modified_gmt FROM (SELECT @rownum:=0) r, $wpdb->posts WHERE post_status IN ('publish','inherit') AND post_type = %s ORDER BY post_modified_gmt ASC) x WHERE rownum %%%d=0", $post_type, $this->max_entries ) );
+							$date_query=$wpdb->prepare( "SELECT post_modified_gmt FROM (SELECT @rownum:=@rownum+1 rownum, $wpdb->posts.post_modified_gmt FROM (SELECT @rownum:=0) r, $wpdb->posts WHERE post_status IN ('publish','inherit') AND post_type = %s ORDER BY post_modified_gmt ASC) x WHERE rownum %%%d=0", $post_type, $this->max_entries );
+							$cache_key	 = md5( $date_query );
+							$all_dates	 = wp_cache_get( $cache_key, 'wpseo' );
+							if ( false === $all_dates ) {
+								$all_dates = $wpdb->get_col( $date_query );
+								wp_cache_set( $cache_key, $all_dates, 'wpseo', 60 );
+							}
 						}
 						$date = $this->timezone->get_datetime_with_timezone( $all_dates[ $i ] );
 						unset( $all_dates );
@@ -410,7 +420,12 @@ class WPSEO_Sitemaps {
 			// Retrieve all the taxonomies and their terms so we can do a proper count on them.
 			$hide_empty         = ( apply_filters( 'wpseo_sitemap_exclude_empty_terms', true, $taxonomy_names ) ) ? 'count != 0 AND' : '';
 			$query              = "SELECT taxonomy, term_id FROM $wpdb->term_taxonomy WHERE $hide_empty taxonomy IN ('" . implode( "','", $taxonomy_names ) . "');";
-			$all_taxonomy_terms = $wpdb->get_results( $query );
+			$cache_key			 = md5( $query );
+			$all_taxonomy_terms	 = wp_cache_get( $cache_key, 'wpseo' );
+			if ( false === $all_taxonomy_terms ) {
+				$all_taxonomy_terms = $wpdb->get_results( $query );
+				wp_cache_set( $cache_key, $all_taxonomy_terms, 'wpseo', 60 );
+			}
 			$all_taxonomies     = array();
 			foreach ( $all_taxonomy_terms as $obj ) {
 				$all_taxonomies[ $obj->taxonomy ][] = $obj->term_id;

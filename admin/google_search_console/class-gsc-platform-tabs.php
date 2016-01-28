@@ -37,12 +37,12 @@ class WPSEO_GSC_Platform_Tabs {
 	 * @return string
 	 */
 	private function platform_tabs() {
-		$tabs = array( 'settings' => __( 'Settings', 'wordpress-seo' ) );
+		$tabs = array( 'settings' => esc_html__( 'Settings', 'wordpress-seo' ) );
 
 		$platforms = array(
-			'web'             => __( 'Desktop', 'wordpress-seo' ),
-			'smartphone_only' => __( 'Smartphone', 'wordpress-seo' ),
-			'mobile'          => __( 'Feature phone', 'wordpress-seo' ),
+			'web'             => esc_html__( 'Desktop', 'wordpress-seo' ),
+			'smartphone_only' => esc_html__( 'Smartphone', 'wordpress-seo' ),
+			'mobile'          => esc_html__( 'Feature phone', 'wordpress-seo' ),
 		);
 
 		if ( WPSEO_GSC_Settings::get_profile() !== '' ) {

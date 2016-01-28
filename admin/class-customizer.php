@@ -49,7 +49,7 @@ class WPSEO_Customizer {
 		$this->wp_customize->add_section(
 			'wpseo_breadcrumbs_customizer_section', array(
 				/* translators: %s is the name of the plugin */
-				'title'           => sprintf( __( '%s Breadcrumbs', 'wordpress-seo' ), 'Yoast SEO' ),
+				'title'           => sprintf( esc_html__( '%s Breadcrumbs', 'wordpress-seo' ), 'Yoast SEO' ),
 				'priority'        => 999,
 				'active_callback' => array( $this, 'breadcrumbs_active_callback' ),
 			)
@@ -83,7 +83,7 @@ class WPSEO_Customizer {
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
 				$this->wp_customize, 'wpseo-breadcrumbs-blog-remove', array(
-					'label'           => __( 'Remove blog page from breadcrumbs', 'wordpress-seo' ),
+					'label'           => esc_html__( 'Remove blog page from breadcrumbs', 'wordpress-seo' ),
 					'type'            => 'checkbox',
 					'section'         => 'wpseo_breadcrumbs_customizer_section',
 					'settings'        => 'wpseo_internallinks[breadcrumbs-blog-remove]',
@@ -118,7 +118,7 @@ class WPSEO_Customizer {
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
 				$this->wp_customize, 'wpseo-breadcrumbs-separator', array(
-					'label'    => __( 'Breadcrumbs separator:', 'wordpress-seo' ),
+					'label'    => esc_html__( 'Breadcrumbs separator:', 'wordpress-seo' ),
 					'type'     => 'text',
 					'section'  => 'wpseo_breadcrumbs_customizer_section',
 					'settings' => 'wpseo_internallinks[breadcrumbs-sep]',
@@ -143,7 +143,7 @@ class WPSEO_Customizer {
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
 				$this->wp_customize, 'wpseo-breadcrumbs-home', array(
-					'label'    => __( 'Anchor text for the homepage:', 'wordpress-seo' ),
+					'label'    => esc_html__( 'Anchor text for the homepage:', 'wordpress-seo' ),
 					'type'     => 'text',
 					'section'  => 'wpseo_breadcrumbs_customizer_section',
 					'settings' => 'wpseo_internallinks[breadcrumbs-home]',
@@ -168,7 +168,7 @@ class WPSEO_Customizer {
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
 				$this->wp_customize, 'wpseo-breadcrumbs-prefix', array(
-					'label'    => __( 'Prefix for breadcrumbs:', 'wordpress-seo' ),
+					'label'    => esc_html__( 'Prefix for breadcrumbs:', 'wordpress-seo' ),
 					'type'     => 'text',
 					'section'  => 'wpseo_breadcrumbs_customizer_section',
 					'settings' => 'wpseo_internallinks[breadcrumbs-prefix]',
@@ -193,7 +193,7 @@ class WPSEO_Customizer {
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
 				$this->wp_customize, 'wpseo-breadcrumbs-archiveprefix', array(
-					'label'    => __( 'Prefix for archive pages:', 'wordpress-seo' ),
+					'label'    => esc_html__( 'Prefix for archive pages:', 'wordpress-seo' ),
 					'type'     => 'text',
 					'section'  => 'wpseo_breadcrumbs_customizer_section',
 					'settings' => 'wpseo_internallinks[breadcrumbs-archiveprefix]',
@@ -218,7 +218,7 @@ class WPSEO_Customizer {
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
 				$this->wp_customize, 'wpseo-breadcrumbs-searchprefix', array(
-					'label'    => __( 'Prefix for search result pages:', 'wordpress-seo' ),
+					'label'    => esc_html__( 'Prefix for search result pages:', 'wordpress-seo' ),
 					'type'     => 'text',
 					'section'  => 'wpseo_breadcrumbs_customizer_section',
 					'settings' => 'wpseo_internallinks[breadcrumbs-searchprefix]',
@@ -243,7 +243,7 @@ class WPSEO_Customizer {
 		$this->wp_customize->add_control(
 			new WP_Customize_Control(
 				$this->wp_customize, 'wpseo-breadcrumbs-404crumb', array(
-					'label'    => __( 'Breadcrumb for 404 pages:', 'wordpress-seo' ),
+					'label'    => esc_html__( 'Breadcrumb for 404 pages:', 'wordpress-seo' ),
 					'type'     => 'text',
 					'section'  => 'wpseo_breadcrumbs_customizer_section',
 					'settings' => 'wpseo_internallinks[breadcrumbs-404crumb]',

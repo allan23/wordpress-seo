@@ -72,13 +72,13 @@ class WPSEO_Admin_Init {
 				return;
 			}
 			/* translators: %1$s expands to Yoast SEO, $2%s to the version number, %3$s and %4$s to anchor tags with link to intro page  */
-			$info_message = sprintf(
+			$info_message = wp_kses_post(sprintf(
 				__( '%1$s has been updated to version %2$s. %3$sClick here%4$s to find out what\'s new!', 'wordpress-seo' ),
 				'Yoast SEO',
 				WPSEO_VERSION,
 				'<a href="' . admin_url( 'admin.php?page=wpseo_dashboard&intro=1' ) . '">',
 				'</a>'
-			);
+			));
 
 			$notification_options = array(
 				'type' => 'updated',
@@ -116,11 +116,11 @@ class WPSEO_Admin_Init {
 				'url' => urlencode( $current_url ),
 			), wp_customize_url() );
 
-			$info_message = sprintf(
+			$info_message = wp_kses_post(sprintf(
 				__( 'You still have the default WordPress tagline, even an empty one is probably better. %1$sYou can fix this in the customizer%2$s.', 'wordpress-seo' ),
 				'<a href="' . esc_attr( $customize_url ) . '">',
 				'</a>'
-			);
+			));
 
 			$notification_options = array(
 				'type'  => 'error',
@@ -138,7 +138,7 @@ class WPSEO_Admin_Init {
 	 * @return bool
 	 */
 	public function has_default_tagline() {
-		return __( 'Just another WordPress site' ) === get_bloginfo( 'description' );
+		return esc_html__( 'Just another WordPress site' ) === esc_html(get_bloginfo( 'description' ));
 	}
 
 	/**

@@ -100,8 +100,8 @@ class WPSEO_Option_Social extends WPSEO_Option {
 		/* Auto-magically set the fb connect key */
 		$this->defaults['fbconnectkey'] = self::get_fbconnectkey();
 
-		self::$twitter_card_types['summary']             = __( 'Summary', 'wordpress-seo' );
-		self::$twitter_card_types['summary_large_image'] = __( 'Summary with large image', 'wordpress-seo' );
+		self::$twitter_card_types['summary']             = esc_html__( 'Summary', 'wordpress-seo' );
+		self::$twitter_card_types['summary_large_image'] = esc_html__( 'Summary with large image', 'wordpress-seo' );
 	}
 
 
@@ -237,7 +237,7 @@ class WPSEO_Option_Social extends WPSEO_Option {
 								add_settings_error(
 									$this->group_name, // Slug title of the setting.
 									'_' . $key, // Suffix-id for the error message box.
-									sprintf( __( '%s does not seem to be a valid Twitter user-id. Please correct.', 'wordpress-seo' ), '<strong>' . esc_html( sanitize_text_field( $dirty[ $key ] ) ) . '</strong>' ), // The error message.
+									wp_kses_post(sprintf( __( '%s does not seem to be a valid Twitter user-id. Please correct.', 'wordpress-seo' ), '<strong>' . esc_html( sanitize_text_field( $dirty[ $key ] ) ) . '</strong>' )), // The error message.
 									'error' // Error type, either 'error' or 'updated'.
 								);
 							}

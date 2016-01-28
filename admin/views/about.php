@@ -135,22 +135,22 @@ function wpseo_display_contributors( $contributors ) {
 			$leaders = array(
 				'jdevalk'   => (object) array(
 					'name'     => 'Joost de Valk',
-					'role'     => __( 'Project Lead', 'wordpress-seo' ),
+					'role'     => esc_html__( 'Project Lead', 'wordpress-seo' ),
 					'gravatar' => 'f08c3c3253bf14b5616b4db53cea6b78',
 				),
 				'omarreiss' => (object) array(
 					'name'     => 'Omar Reiss',
-					'role'     => __( 'Lead Architect', 'wordpress-seo' ),
+					'role'     => esc_html__( 'Lead Architect', 'wordpress-seo' ),
 					'gravatar' => '86aaa606a1904e7e0cf9857a663c376e',
 				),
 				'atimmer'   => (object) array(
 					'name'     => 'Anton Timmermans',
-					'role'     => __( 'Architect', 'wordpress-seo' ),
+					'role'     => esc_html__( 'Architect', 'wordpress-seo' ),
 					'gravatar' => 'b3acbabfdd208ecbf950d864b86fe968',
 				),
 				'tacoverdo' => (object) array(
 					'name'     => 'Taco Verdonschot',
-					'role'     => __( 'QA & Translations Manager', 'wordpress-seo' ),
+					'role'     => esc_html__( 'QA & Translations Manager', 'wordpress-seo' ),
 					'gravatar' => 'd2d3ecb38cacd521926979b5c678297b',
 				),
 			);
@@ -164,17 +164,17 @@ function wpseo_display_contributors( $contributors ) {
 			$contributors = array(
 				'CarolineGeven' => (object) array(
 					'name'     => 'Caroline Geven',
-					'role'     => __( 'Developer', 'wordpress-seo' ),
+					'role'     => esc_html__( 'Developer', 'wordpress-seo' ),
 					'gravatar' => 'f2596a568c3974e35f051266a63d791f',
 				),
 				'jrfnl'         => (object) array(
 					'name'     => 'Juliette Reinders Folmer',
-					'role'     => __( 'Developer', 'wordpress-seo' ),
+					'role'     => esc_html__( 'Developer', 'wordpress-seo' ),
 					'gravatar' => 'cbbac3e529102364dc3b026af3cc2988',
 				),
 				'terw-dan'      => (object) array(
 					'name'     => 'Danny Terwindt',
-					'role'     => __( 'Developer', 'wordpress-seo' ),
+					'role'     => esc_html__( 'Developer', 'wordpress-seo' ),
 					'gravatar' => '20a04b0736e630e80ce2dbefe3f1d62f',
 				),
 				'garyjones'     => (object) array(
@@ -184,7 +184,7 @@ function wpseo_display_contributors( $contributors ) {
 				),
 				'andizer'       => (object) array(
 					'name'     => 'Andy Meerwaldt',
-					'role'     => __( 'Developer', 'wordpress-seo' ),
+					'role'     => esc_html__( 'Developer', 'wordpress-seo' ),
 					'gravatar' => 'a9b43e766915b48031eab78f9916ca8e',
 				),
 				'rarst'         => (object) array(

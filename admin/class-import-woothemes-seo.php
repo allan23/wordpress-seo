@@ -26,7 +26,7 @@ class WPSEO_Import_WooThemes_SEO extends WPSEO_Import_External {
 
 		update_option( 'wpseo_titles', $this->options );
 
-		$this->set_msg( __( 'WooThemes SEO framework settings &amp; data successfully imported.', 'wordpress-seo' ) );
+		$this->set_msg( esc_html__( 'WooThemes SEO framework settings &amp; data successfully imported.', 'wordpress-seo' ) );
 	}
 
 	/**

@@ -175,9 +175,9 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 	 * @return void
 	 */
 	public function translate_defaults() {
-		$this->defaults['title-author-wpseo'] = sprintf( __( '%s, Author at %s', 'wordpress-seo' ), '%%name%%', '%%sitename%%' ) . ' %%page%% ';
-		$this->defaults['title-search-wpseo'] = sprintf( __( 'You searched for %s', 'wordpress-seo' ), '%%searchphrase%%' ) . ' %%page%% %%sep%% %%sitename%%';
-		$this->defaults['title-404-wpseo']    = __( 'Page not found', 'wordpress-seo' ) . ' %%sep%% %%sitename%%';
+		$this->defaults['title-author-wpseo'] = sprintf( esc_html__( '%s, Author at %s', 'wordpress-seo' ), '%%name%%', '%%sitename%%' ) . ' %%page%% ';
+		$this->defaults['title-search-wpseo'] = sprintf( esc_html__( 'You searched for %s', 'wordpress-seo' ), '%%searchphrase%%' ) . ' %%page%% %%sep%% %%sitename%%';
+		$this->defaults['title-404-wpseo']    = esc_html__( 'Page not found', 'wordpress-seo' ) . ' %%sep%% %%sitename%%';
 	}
 
 
@@ -209,7 +209,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 		}
 
 		if ( $post_type_objects_custom !== array() ) {
-			$archive = sprintf( __( '%s Archive', 'wordpress-seo' ), '%%pt_plural%%' );
+			$archive = sprintf( esc_html__( '%s Archive', 'wordpress-seo' ), '%%pt_plural%%' );
 			foreach ( $post_type_objects_custom as $pt ) {
 				if ( ! $pt->has_archive ) {
 					continue;
@@ -225,7 +225,7 @@ class WPSEO_Option_Titles extends WPSEO_Option {
 		}
 
 		if ( $taxonomy_names !== array() ) {
-			$archives = sprintf( __( '%s Archives', 'wordpress-seo' ), '%%term_title%%' );
+			$archives = sprintf( esc_html__( '%s Archives', 'wordpress-seo' ), '%%term_title%%' );
 			foreach ( $taxonomy_names as $tax ) {
 				$this->defaults[ 'title-tax-' . $tax ]       = $archives . ' %%page%% %%sep%% %%sitename%%'; // Text field.
 				$this->defaults[ 'metadesc-tax-' . $tax ]    = ''; // Text area.

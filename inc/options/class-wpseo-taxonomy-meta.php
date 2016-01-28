@@ -420,7 +420,13 @@ class WPSEO_Taxonomy_Meta extends WPSEO_Option {
 			$term = get_term_by( 'id', $term, $taxonomy );
 		}
 		elseif ( is_string( $term ) ) {
-			$term = get_term_by( 'slug', $term, $taxonomy );
+			$cache_key	 = md5( 'termlink_' . $term . $taxonomy );
+			$term		 = wp_cache_get( $cache_key, 'wpseo' );
+
+			if ( false === $term ) {
+				$term = get_term_by( 'slug', $term, $taxonomy );
+				wp_cache_set( $cache_key, $term, 'wpseo', 300 );
+			}
 		}
 
 		if ( is_object( $term ) && isset( $term->term_id ) ) {

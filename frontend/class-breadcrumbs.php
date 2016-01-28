@@ -162,7 +162,7 @@ class WPSEO_Breadcrumbs {
 	 */
 	private function filter_separator() {
 		$separator       = apply_filters( 'wpseo_breadcrumb_separator', $this->options['breadcrumbs-sep'] );
-		$this->separator = ' ' . $separator . ' ';
+		$this->separator = ' ' . wp_kses_post($separator) . ' ';
 	}
 
 	/**
@@ -698,8 +698,12 @@ class WPSEO_Breadcrumbs {
 		if ( ! is_string( $bctitle ) || $bctitle === '' ) {
 			$bctitle = $term->name;
 		}
-
-		$link['url']  = get_term_link( $term );
+		$cache_key	 = md5( 'term_' . $term->name );
+		$link[ 'url' ] = wp_cache_get( $cache_key, 'wpseo' );
+		if ( false === $link[ 'url' ] ) {
+			$link[ 'url' ] = get_term_link( $term );
+			wp_cache_set( $cache_key, $link[ 'url' ], 'wpseo', 300 );
+		}
 		$link['text'] = $bctitle;
 
 		return $link;
@@ -802,7 +806,7 @@ class WPSEO_Breadcrumbs {
 		 * @param array $link The link array.
 		 */
 
-		return apply_filters( 'wpseo_breadcrumb_single_link', $link_output, $link );
+		return wp_kses_post(apply_filters( 'wpseo_breadcrumb_single_link', $link_output, $link ));
 	}
 
 

@@ -105,7 +105,7 @@ class WPSEO_Import_External {
 			}
 			unset( $hs_meta, $meta );
 		}
-		$this->set_msg( __( 'HeadSpace2 data successfully imported', 'wordpress-seo' ) );
+		$this->set_msg( esc_html__( 'HeadSpace2 data successfully imported', 'wordpress-seo' ) );
 	}
 
 	/**
@@ -117,7 +117,7 @@ class WPSEO_Import_External {
 		$posts = $wpdb->get_results( "SELECT ID, robotsmeta FROM $wpdb->posts" );
 
 		if ( ! $posts ) {
-			$this->set_msg( __( 'Error: no Robots Meta data found to import.', 'wordpress-seo' ) );
+			$this->set_msg( esc_html__( 'Error: no Robots Meta data found to import.', 'wordpress-seo' ) );
 
 			return;
 		}
@@ -144,7 +144,7 @@ class WPSEO_Import_External {
 				}
 			}
 		}
-		$this->set_msg( __( sprintf( 'Robots Meta values imported. We recommend %sdisabling the Robots-Meta plugin%s to avoid any conflicts.', '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=import-export&deactivate_robots_meta=1#top#import-other' ) ) . '">', '</a>' ), 'wordpress-seo' ) );
+		$this->set_msg( wp_kses_post(__( sprintf( 'Robots Meta values imported. We recommend %sdisabling the Robots-Meta plugin%s to avoid any conflicts.', '<a href="' . esc_url( admin_url( 'admin.php?page=wpseo_tools&tool=import-export&deactivate_robots_meta=1#top#import-other' ) ) . '">', '</a>' ), 'wordpress-seo' ) ));
 	}
 
 	/**
@@ -165,7 +165,7 @@ class WPSEO_Import_External {
 			}
 		}
 		update_option( 'wpseo_rss', $optnew );
-		$this->set_msg( __( 'RSS Footer options imported successfully.', 'wordpress-seo' ) );
+		$this->set_msg( esc_html__( 'RSS Footer options imported successfully.', 'wordpress-seo' ) );
 	}
 
 	/**
@@ -186,10 +186,10 @@ class WPSEO_Import_External {
 			}
 			unset( $opt, $val );
 			update_option( 'wpseo_internallinks', $optnew );
-			$this->set_msg( __( 'Yoast Breadcrumbs options imported successfully.', 'wordpress-seo' ) );
+			$this->set_msg( esc_html__( 'Yoast Breadcrumbs options imported successfully.', 'wordpress-seo' ) );
 		}
 		else {
-			$this->set_msg( __( 'Yoast Breadcrumbs options could not be found', 'wordpress-seo' ) );
+			$this->set_msg( esc_html__( 'Yoast Breadcrumbs options could not be found', 'wordpress-seo' ) );
 		}
 	}
 }

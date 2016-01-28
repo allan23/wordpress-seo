@@ -40,10 +40,10 @@ class WPSEO_Meta_Columns {
 		}
 
 		return array_merge( $columns, array(
-			'wpseo-score'    => __( 'SEO', 'wordpress-seo' ),
-			'wpseo-title'    => __( 'SEO Title', 'wordpress-seo' ),
-			'wpseo-metadesc' => __( 'Meta Desc.', 'wordpress-seo' ),
-			'wpseo-focuskw'  => __( 'Focus KW', 'wordpress-seo' ),
+			'wpseo-score'    => esc_html__( 'SEO', 'wordpress-seo' ),
+			'wpseo-title'    => esc_html__( 'SEO Title', 'wordpress-seo' ),
+			'wpseo-metadesc' => esc_html__( 'Meta Desc.', 'wordpress-seo' ),
+			'wpseo-focuskw'  => esc_html__( 'Focus KW', 'wordpress-seo' ),
 		) );
 	}
 
@@ -60,7 +60,7 @@ class WPSEO_Meta_Columns {
 
 		switch ( $column_name ) {
 			case 'wpseo-score' :
-				echo $this->parse_column_score( $post_id );
+				echo $this->parse_column_score( $post_id ); // xss okay
 				break;
 			case 'wpseo-title' :
 				echo esc_html( apply_filters( 'wpseo_title', wpseo_replace_vars( $this->page_title( $post_id ), get_post( $post_id, ARRAY_A ) ) ) );
@@ -138,7 +138,7 @@ class WPSEO_Meta_Columns {
 		foreach ( $ranks as $rank ) {
 			$sel = selected( $current_seo_filter, $rank->get_rank(), false );
 			echo '
-				<option ', $sel, 'value="', esc_attr($rank->get_rank()), '">', esc_attr($rank->get_drop_down_label()). '</option>';
+				<option ', $sel, 'value="', esc_attr($rank->get_rank()), '">', esc_attr($rank->get_drop_down_label()). '</option>'; // xss okay
 		}
 		echo '
 			</select>';
@@ -327,12 +327,12 @@ class WPSEO_Meta_Columns {
 	private function parse_column_score( $post_id ) {
 		if ( '1' === WPSEO_Meta::get_value( 'meta-robots-noindex', $post_id ) ) {
 			$rank  = new WPSEO_Rank( WPSEO_Rank::NO_INDEX );
-			$title = __( 'Post is set to noindex.', 'wordpress-seo' );
+			$title = esc_html__( 'Post is set to noindex.', 'wordpress-seo' );
 			WPSEO_Meta::set_value( 'linkdex', 0, $post_id );
 		}
 		elseif ( '' === WPSEO_Meta::get_value( 'focuskw', $post_id ) ) {
 			$rank  = new WPSEO_Rank( WPSEO_Rank::NO_FOCUS );
-			$title = __( 'Focus keyword not set.', 'wordpress-seo' );
+			$title = esc_html__( 'Focus keyword not set.', 'wordpress-seo' );
 		}
 		else {
 			$score = (int) WPSEO_Meta::get_value( 'linkdex', $post_id );

@@ -106,7 +106,7 @@ $yform->admin_header( true, 'wpseo_titles' );
 						$yform->textinput( 'metakey-' . $name, esc_html__( 'Meta keywords template', 'wordpress-seo' ) );
 					}
 					$yform->checkbox( 'noindex-' . $name, '<code>noindex, follow</code>', esc_html__( 'Meta Robots', 'wordpress-seo' ) );
-					$yform->checkbox( 'showdate-' . $name, esc_html__( 'Show date in snippet preview?', 'wordpress-seo' ), __( 'Date in Snippet Preview', 'wordpress-seo' ) );
+					$yform->checkbox( 'showdate-' . $name, esc_html__( 'Show date in snippet preview?', 'wordpress-seo' ), esc_html__( 'Date in Snippet Preview', 'wordpress-seo' ) );
 					/* translators: %1$s expands to Yoast SEO */
 					$yform->checkbox( 'hideeditbox-' . $name, esc_html__( 'Hide', 'wordpress-seo' ), sprintf( esc_html__( '%1$s Meta Box', 'wordpress-seo' ), 'Yoast SEO' ) );
 					echo '</div>';

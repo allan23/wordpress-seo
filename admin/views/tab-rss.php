@@ -18,8 +18,8 @@ $textarea_atts = array(
 	'cols' => '50',
 	'rows' => '5',
 );
-$yform->textarea( 'rssbefore', __( 'Content to put before each post in the feed', 'wordpress-seo' ), '', $textarea_atts );
-$yform->textarea( 'rssafter', __( 'Content to put after each post in the feed', 'wordpress-seo' ), '', $textarea_atts );
+$yform->textarea( 'rssbefore', esc_html__( 'Content to put before each post in the feed', 'wordpress-seo' ), '', $textarea_atts );
+$yform->textarea( 'rssafter', esc_html__( 'Content to put after each post in the feed', 'wordpress-seo' ), '', $textarea_atts );
 ?>
 
 <p><?php esc_html_e( 'You can use the following variables within the content, they will be replaced by the value on the right.', 'wordpress-seo' ); ?></p>

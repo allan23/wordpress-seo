@@ -47,53 +47,53 @@ class WPSEO_Metabox extends WPSEO_Meta {
 	 * the main meta box definition array in the class WPSEO_Meta() as well!!!!
 	 */
 	public static function translate_meta_boxes() {
-		self::$meta_fields['general']['snippetpreview']['title'] = __( 'Snippet Editor', 'wordpress-seo' );
-		self::$meta_fields['general']['snippetpreview']['help']  = sprintf( __( 'This is a rendering of what this post might look like in Google\'s search results.<br/><br/>Read %sthis post%s for more info.', 'wordpress-seo' ), '<a href="https://yoast.com/snippet-preview/#utm_source=wordpress-seo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=snippet-preview">', '</a>' );
+		self::$meta_fields['general']['snippetpreview']['title'] = esc_html__( 'Snippet Editor', 'wordpress-seo' );
+		self::$meta_fields['general']['snippetpreview']['help']  = wp_kses_post(sprintf( __( 'This is a rendering of what this post might look like in Google\'s search results.<br/><br/>Read %sthis post%s for more info.', 'wordpress-seo' ), '<a href="https://yoast.com/snippet-preview/#utm_source=wordpress-seo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=snippet-preview">', '</a>' ));
 
-		self::$meta_fields['general']['pageanalysis']['title'] = __( 'Content Analysis', 'wordpress-seo' );
-		self::$meta_fields['general']['pageanalysis']['help']  = sprintf( __( 'This is the content analysis, a collection of content checks that analyze the content of your page. Read %sthis post%s for more info.', 'wordpress-seo' ), '<a href="https://yoast.com/real-time-content-analysis/#utm_source=wordpress-seo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=snippet-preview">', '</a>' );
+		self::$meta_fields['general']['pageanalysis']['title'] = esc_html__( 'Content Analysis', 'wordpress-seo' );
+		self::$meta_fields['general']['pageanalysis']['help']  = wp_kses_post(sprintf( __( 'This is the content analysis, a collection of content checks that analyze the content of your page. Read %sthis post%s for more info.', 'wordpress-seo' ), '<a href="https://yoast.com/real-time-content-analysis/#utm_source=wordpress-seo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=snippet-preview">', '</a>' ));
 
-		self::$meta_fields['general']['focuskw_text_input']['title'] = __( 'Focus Keyword', 'wordpress-seo' );
-		self::$meta_fields['general']['focuskw_text_input']['help']  = sprintf( __( 'Pick the main keyword or keyphrase that this post/page is about.<br/><br/>Read %sthis post%s for more info.', 'wordpress-seo' ), '<a href="https://yoast.com/focus-keyword/#utm_source=wordpress-seo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=focus-keyword">', '</a>' );
+		self::$meta_fields['general']['focuskw_text_input']['title'] = esc_html__( 'Focus Keyword', 'wordpress-seo' );
+		self::$meta_fields['general']['focuskw_text_input']['help']  = wp_kses_post(sprintf( __( 'Pick the main keyword or keyphrase that this post/page is about.<br/><br/>Read %sthis post%s for more info.', 'wordpress-seo' ), '<a href="https://yoast.com/focus-keyword/#utm_source=wordpress-seo-metabox&amp;utm_medium=inline-help&amp;utm_campaign=focus-keyword">', '</a>' ));
 
-		self::$meta_fields['general']['title']['title']       = __( 'SEO Title', 'wordpress-seo' );
+		self::$meta_fields['general']['title']['title']       = esc_html__( 'SEO Title', 'wordpress-seo' );
 
-		self::$meta_fields['general']['metadesc']['title']       = __( 'Meta description', 'wordpress-seo' );
+		self::$meta_fields['general']['metadesc']['title']       = esc_html__( 'Meta description', 'wordpress-seo' );
 
-		self::$meta_fields['general']['metakeywords']['title']       = __( 'Meta keywords', 'wordpress-seo' );
-		self::$meta_fields['general']['metakeywords']['description'] = __( 'If you type something above it will override your %smeta keywords template%s.', 'wordpress-seo' );
+		self::$meta_fields['general']['metakeywords']['title']       = esc_html__( 'Meta keywords', 'wordpress-seo' );
+		self::$meta_fields['general']['metakeywords']['description'] = esc_html__( 'If you type something above it will override your %smeta keywords template%s.', 'wordpress-seo' );
 
 
-		self::$meta_fields['advanced']['meta-robots-noindex']['title'] = __( 'Meta Robots Index', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-noindex']['title'] = esc_html__( 'Meta Robots Index', 'wordpress-seo' );
 		if ( '0' == get_option( 'blog_public' ) ) {
-			self::$meta_fields['advanced']['meta-robots-noindex']['description'] = '<p class="error-message">' . __( 'Warning: even though you can set the meta robots setting here, the entire site is set to noindex in the sitewide privacy settings, so these settings won\'t have an effect.', 'wordpress-seo' ) . '</p>';
+			self::$meta_fields['advanced']['meta-robots-noindex']['description'] = '<p class="error-message">' . esc_html__( 'Warning: even though you can set the meta robots setting here, the entire site is set to noindex in the sitewide privacy settings, so these settings won\'t have an effect.', 'wordpress-seo' ) . '</p>';
 		}
-		self::$meta_fields['advanced']['meta-robots-noindex']['options']['0'] = __( 'Default for post type, currently: %s', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-noindex']['options']['2'] = __( 'index', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-noindex']['options']['1'] = __( 'noindex', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-noindex']['options']['0'] = esc_html__( 'Default for post type, currently: %s', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-noindex']['options']['2'] = esc_html__( 'index', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-noindex']['options']['1'] = esc_html__( 'noindex', 'wordpress-seo' );
 
-		self::$meta_fields['advanced']['meta-robots-nofollow']['title']        = __( 'Meta Robots Follow', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-nofollow']['options']['0'] = __( 'Follow', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-nofollow']['options']['1'] = __( 'Nofollow', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-nofollow']['title']        = esc_html__( 'Meta Robots Follow', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-nofollow']['options']['0'] = esc_html__( 'Follow', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-nofollow']['options']['1'] = esc_html__( 'Nofollow', 'wordpress-seo' );
 
-		self::$meta_fields['advanced']['meta-robots-adv']['title']                   = __( 'Meta Robots Advanced', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-adv']['description']             = __( 'Advanced <code>meta</code> robots settings for this page.', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-adv']['options']['-']            = __( 'Site-wide default: %s', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-adv']['options']['none']         = __( 'None', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-adv']['options']['noodp']        = __( 'NO ODP', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-adv']['options']['noydir']       = __( 'NO YDIR', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-adv']['options']['noimageindex'] = __( 'No Image Index', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-adv']['options']['noarchive']    = __( 'No Archive', 'wordpress-seo' );
-		self::$meta_fields['advanced']['meta-robots-adv']['options']['nosnippet']    = __( 'No Snippet', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['title']                   = esc_html__( 'Meta Robots Advanced', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['description']             = esc_html__( 'Advanced <code>meta</code> robots settings for this page.', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['options']['-']            = esc_html__( 'Site-wide default: %s', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['options']['none']         = esc_html__( 'None', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['options']['noodp']        = esc_html__( 'NO ODP', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['options']['noydir']       = esc_html__( 'NO YDIR', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['options']['noimageindex'] = esc_html__( 'No Image Index', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['options']['noarchive']    = esc_html__( 'No Archive', 'wordpress-seo' );
+		self::$meta_fields['advanced']['meta-robots-adv']['options']['nosnippet']    = esc_html__( 'No Snippet', 'wordpress-seo' );
 
-		self::$meta_fields['advanced']['bctitle']['title']       = __( 'Breadcrumbs Title', 'wordpress-seo' );
-		self::$meta_fields['advanced']['bctitle']['description'] = __( 'Title to use for this page in breadcrumb paths', 'wordpress-seo' );
+		self::$meta_fields['advanced']['bctitle']['title']       = esc_html__( 'Breadcrumbs Title', 'wordpress-seo' );
+		self::$meta_fields['advanced']['bctitle']['description'] = esc_html__( 'Title to use for this page in breadcrumb paths', 'wordpress-seo' );
 
-		self::$meta_fields['advanced']['canonical']['title']       = __( 'Canonical URL', 'wordpress-seo' );
-		self::$meta_fields['advanced']['canonical']['description'] = sprintf( __( 'The canonical URL that this page should point to, leave empty to default to permalink. %sCross domain canonical%s supported too.', 'wordpress-seo' ), '<a target="_blank" href="http://googlewebmastercentral.blogspot.com/2009/12/handling-legitimate-cross-domain.html">', '</a>' );
+		self::$meta_fields['advanced']['canonical']['title']       = esc_html__( 'Canonical URL', 'wordpress-seo' );
+		self::$meta_fields['advanced']['canonical']['description'] = wp_kses_post(sprintf( __( 'The canonical URL that this page should point to, leave empty to default to permalink. %sCross domain canonical%s supported too.', 'wordpress-seo' ), '<a target="_blank" href="http://googlewebmastercentral.blogspot.com/2009/12/handling-legitimate-cross-domain.html">', '</a>' ));
 
-		self::$meta_fields['advanced']['redirect']['title']       = __( '301 Redirect', 'wordpress-seo' );
-		self::$meta_fields['advanced']['redirect']['description'] = __( 'The URL that this page should redirect to.', 'wordpress-seo' );
+		self::$meta_fields['advanced']['redirect']['title']       = esc_html__( '301 Redirect', 'wordpress-seo' );
+		self::$meta_fields['advanced']['redirect']['description'] = esc_html__( 'The URL that this page should redirect to.', 'wordpress-seo' );
 
 		do_action( 'wpseo_tab_translate' );
 	}
@@ -147,14 +147,14 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		$post = $this->get_metabox_post();
 		if ( self::get_value( 'meta-robots-noindex', $post->ID ) === '1' ) {
 			$score_label = 'noindex';
-			$title       = __( 'Post is set to noindex.', 'wordpress-seo' );
+			$title       = esc_html__( 'Post is set to noindex.', 'wordpress-seo' );
 			$score_title = $title;
 		}
 		else {
 			$score = self::get_value( 'linkdex', $post->ID );
 			if ( $score === '' ) {
 				$score_label = 'na';
-				$title       = __( 'No focus keyword set.', 'wordpress-seo' );
+				$title       = esc_html__( 'No focus keyword set.', 'wordpress-seo' );
 			}
 			else {
 				$score_label = WPSEO_Utils::translate_score( $score );
@@ -168,7 +168,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 
 		printf( '
 		<div title="%s" id="wpseo-score">
-			' . $this->traffic_light_svg() /* WPCS: XSS ok. */ . ' 
+			' . $this->traffic_light_svg() /* xss okay */ . ' 
 		</div>',
 			esc_html__( 'SEO score', 'wordpress-seo' ),
 			esc_attr( 'wpseo-score-icon ' . $score_label ),
@@ -219,7 +219,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			'base_url'          => $this->get_base_url_for_js(),
 			'title_template'    => WPSEO_Metabox::get_title_template( $post ),
 			'metadesc_template' => WPSEO_Metabox::get_metadesc_template( $post ),
-			'contentTab'        => __( 'Content:' , 'wordpress-seo' ),
+			'contentTab'        => esc_html__( 'Content:' , 'wordpress-seo' ),
 			'locale'            => get_locale(),
 		);
 	}
@@ -295,7 +295,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 	 */
 	public function localize_replace_vars_script() {
 		return array(
-			'no_parent_text' => __( '(no parent)', 'wordpress-seo' ),
+			'no_parent_text' => esc_html__( '(no parent)', 'wordpress-seo' ),
 			'replace_vars'   => $this->get_replace_vars(),
 		);
 	}
@@ -418,7 +418,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			$content,
 			esc_attr__( 'Advanced', 'wordpress-seo' ),
 			array(
-				'link_title' => __( 'Advanced', 'wordpress-seo' ),
+				'link_title' => esc_html__( 'Advanced', 'wordpress-seo' ),
 			)
 		);
 
@@ -675,7 +675,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 			}
 			else {
 				if ( isset( $_POST[ self::$form_prefix . $key ] ) ) {
-					$data = $_POST[ self::$form_prefix . $key ];
+					$data = $this->sanitize( $_POST[ self::$form_prefix . $key ] );
 				}
 			}
 			if ( isset( $data ) ) {
@@ -684,6 +684,19 @@ class WPSEO_Metabox extends WPSEO_Meta {
 		}
 
 		do_action( 'wpseo_saved_postdata' );
+	}
+
+	/**
+	 * Sanitizes value.
+	 * @param string|array|int $value
+	 */
+	private function sanitize( $value ) {
+		if ( is_array( $value ) ) {
+			$value = array_map( 'sanitize_text_field', $value );
+		} else {
+			$value = sanitize_text_field( $value );
+		}
+		return $value;
 	}
 
 	/**
@@ -743,7 +756,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 				wp_enqueue_style( 'featured-image', plugins_url( 'css/featured-image' . WPSEO_CSSJS_SUFFIX . '.css', WPSEO_FILE ), array(), WPSEO_VERSION );
 				wp_enqueue_script( 'wp-seo-featured-image', plugins_url( 'js/wp-seo-featured-image-' . '302' . WPSEO_CSSJS_SUFFIX . '.js', WPSEO_FILE ), array( 'jquery', 'yoast-seo' ), WPSEO_VERSION, true );
 
-				$featured_image_l10 = array( 'featured_image_notice' => __( 'The featured image should be at least 200x200 pixels to be picked up by Facebook and other social media sites.', 'wordpress-seo' ) );
+				$featured_image_l10 = array( 'featured_image_notice' => esc_html__( 'The featured image should be at least 200x200 pixels to be picked up by Facebook and other social media sites.', 'wordpress-seo' ) );
 				wp_localize_script( 'wp-seo-metabox', 'wpseoFeaturedImageL10n', $featured_image_l10 );
 			}
 		}
@@ -756,7 +769,7 @@ class WPSEO_Metabox extends WPSEO_Meta {
 	 */
 	public function localize_media_script() {
 		return array(
-			'choose_image' => __( 'Use Image', 'wordpress-seo' ),
+			'choose_image' => esc_html__( 'Use Image', 'wordpress-seo' ),
 		);
 	}
 

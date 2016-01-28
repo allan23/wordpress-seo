@@ -31,20 +31,20 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 	 */
 	public static function translate_meta_boxes() {
 		/* translators: %s expands to the social network's name */
-		$title_text       = __( 'If you don\'t want to use the post title for sharing the post on %s but instead want another title there, write it here.', 'wordpress-seo' );
+		$title_text       = esc_html__( 'If you don\'t want to use the post title for sharing the post on %s but instead want another title there, write it here.', 'wordpress-seo' );
 		/* translators: %s expands to the social network's name */
-		$description_text = __( 'If you don\'t want to use the meta description for sharing the post on %s but want another description there, write it here.', 'wordpress-seo' );
+		$description_text = esc_html__( 'If you don\'t want to use the meta description for sharing the post on %s but want another description there, write it here.', 'wordpress-seo' );
 		/* translators: %s expands to the social network's name */
-		$image_text       = __( 'If you want to override the image used on %s for this post, upload / choose an image or add the URL here.', 'wordpress-seo' );
+		$image_text       = esc_html__( 'If you want to override the image used on %s for this post, upload / choose an image or add the URL here.', 'wordpress-seo' );
 		/* translators: %1$s expands to the social network, %2$s to the recommended image size */
-		$image_size_text  = __( 'The recommended image size for %1$s is %2$spx.', 'wordpress-seo' );
+		$image_size_text  = esc_html__( 'The recommended image size for %1$s is %2$spx.', 'wordpress-seo' );
 
 		$options = WPSEO_Options::get_option( 'wpseo_social' );
 
 		$social_networks = array(
-			'opengraph'  => __( 'Facebook', 'wordpress-seo' ),
-			'twitter'    => __( 'Twitter', 'wordpress-seo' ),
-			'googleplus' => __( 'Google+', 'wordpress-seo' ),
+			'opengraph'  => esc_html__( 'Facebook', 'wordpress-seo' ),
+			'twitter'    => esc_html__( 'Twitter', 'wordpress-seo' ),
+			'googleplus' => esc_html__( 'Google+', 'wordpress-seo' ),
 		);
 
 		// Source: https://blog.bufferapp.com/ideal-image-sizes-social-media-posts.
@@ -60,13 +60,13 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 					$network = 'google-plus'; // Yuck, I know.
 				}
 
-				self::$meta_fields['social'][ $network . '-title' ]['title']       = sprintf( __( '%s Title', 'wordpress-seo' ), $label );
+				self::$meta_fields['social'][ $network . '-title' ]['title']       = esc_html(sprintf( __( '%s Title', 'wordpress-seo' ), $label ));
 				self::$meta_fields['social'][ $network . '-title' ]['description'] = sprintf( $title_text, $label );
 
-				self::$meta_fields['social'][ $network . '-description' ]['title']       = sprintf( __( '%s Description', 'wordpress-seo' ), $label );
+				self::$meta_fields['social'][ $network . '-description' ]['title']       = esc_html(sprintf( __( '%s Description', 'wordpress-seo' ), $label ));
 				self::$meta_fields['social'][ $network . '-description' ]['description'] = sprintf( $description_text, $label );
 
-				self::$meta_fields['social'][ $network . '-image' ]['title']       = sprintf( __( '%s Image', 'wordpress-seo' ), $label );
+				self::$meta_fields['social'][ $network . '-image' ]['title']       = esc_html(sprintf( __( '%s Image', 'wordpress-seo' ), $label ));
 				self::$meta_fields['social'][ $network . '-image' ]['description'] = sprintf( $image_text, $label ) . ' ' . sprintf( $image_size_text, $label, $recommended_image_sizes[ $network ] );
 			}
 		}
@@ -87,8 +87,8 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 				$this->get_social_tab_content( 'opengraph', $social_meta_fields ),
 				'<span class="dashicons dashicons-facebook-alt"></span>',
 				array(
-					'link_alt' => __( 'Facebook / Open Graph metadata', 'wordpress-seo' ),
-					'link_title' => __( 'Facebook / Open Graph metadata', 'wordpress-seo' ),
+					'link_alt' => esc_attr__( 'Facebook / Open Graph metadata', 'wordpress-seo' ),
+					'link_title' => esc_html__( 'Facebook / Open Graph metadata', 'wordpress-seo' ),
 				)
 			);
 		}
@@ -99,8 +99,8 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 				$this->get_social_tab_content( 'twitter', $social_meta_fields ),
 				'<span class="dashicons dashicons-twitter"></span>',
 				array(
-					'link_alt' => __( 'Twitter metadata', 'wordpress-seo' ),
-					'link_title' => __( 'Twitter metadata', 'wordpress-seo' ),
+					'link_alt' => esc_attr__( 'Twitter metadata', 'wordpress-seo' ),
+					'link_title' => esc_html__( 'Twitter metadata', 'wordpress-seo' ),
 				)
 			);
 		}
@@ -111,8 +111,8 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 				$this->get_social_tab_content( 'google-plus', $social_meta_fields ),
 				'<span class="dashicons dashicons-googleplus"></span>',
 				array(
-					'link_alt' => __( 'Google+ metadata', 'wordpress-seo' ),
-					'link_title' => __( 'Google+ metadata', 'wordpress-seo' ),
+					'link_alt' => esc_attr__( 'Google+ metadata', 'wordpress-seo' ),
+					'link_title' => esc_html__( 'Google+ metadata', 'wordpress-seo' ),
 				)
 			);
 		}
@@ -122,7 +122,7 @@ class WPSEO_Social_Admin extends WPSEO_Metabox {
 			'<span class="dashicons dashicons-share"></span>',
 			$tabs,
 			array(
-				'link_alt' => esc_html__( 'Social', 'wordpress-seo' ),
+				'link_alt' => esc_attr__( 'Social', 'wordpress-seo' ),
 				'link_title' => esc_html__( 'Social', 'wordpress-seo' ),
 			)
 		);

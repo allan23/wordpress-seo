@@ -150,7 +150,7 @@ class WPSEO_Option_MS extends WPSEO_Option {
 							$this->group_name, // Slug title of the setting.
 							'_' . $key, // Suffix-id for the error message box.
 							/* translators: %1$s expands to the option name and %2$sexpands to Yoast SEO */
-							sprintf( __( '%1$s is not a valid choice for who should be allowed access to the %2$s settings. Value reset to the default.', 'wordpress-seo' ), esc_html( sanitize_text_field( $dirty[ $key ] ) ), 'Yoast SEO' ), // The error message.
+							sprintf( esc_html__( '%1$s is not a valid choice for who should be allowed access to the %2$s settings. Value reset to the default.', 'wordpress-seo' ), esc_html( sanitize_text_field( $dirty[ $key ] ) ), 'Yoast SEO' ), // The error message.
 							'error' // Error type, either 'error' or 'updated'.
 						);
 					}

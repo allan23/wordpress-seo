@@ -52,7 +52,7 @@ else {
 	$sites = wp_get_sites( array( 'deleted' => 0 ) );
 	if ( is_array( $sites ) && $sites !== array() ) {
 		$dropdown_input = array(
-			'-' => __( 'None', 'wordpress-seo' ),
+			'-' => esc_html__( 'None', 'wordpress-seo' ),
 		);
 
 		foreach ( $sites as $site ) {
@@ -60,16 +60,16 @@ else {
 
 			$blog_states = array();
 			if ( $site['public'] === '1' ) {
-				$blog_states[] = __( 'public', 'wordpress-seo' );
+				$blog_states[] = esc_html__( 'public', 'wordpress-seo' );
 			}
 			if ( $site['archived'] === '1' ) {
-				$blog_states[] = __( 'archived', 'wordpress-seo' );
+				$blog_states[] = esc_html__( 'archived', 'wordpress-seo' );
 			}
 			if ( $site['mature'] === '1' ) {
-				$blog_states[] = __( 'mature', 'wordpress-seo' );
+				$blog_states[] = esc_html__( 'mature', 'wordpress-seo' );
 			}
 			if ( $site['spam'] === '1' ) {
-				$blog_states[] = __( 'spam', 'wordpress-seo' );
+				$blog_states[] = esc_html__( 'spam', 'wordpress-seo' );
 			}
 			if ( $blog_states !== array() ) {
 				$dropdown_input[ $site['blog_id'] ] .= ' [' . implode( ', ', $blog_states ) . ']';
@@ -95,8 +95,8 @@ $yform->select(
 	/* translators: %1$s expands to Yoast SEO */
 	sprintf( esc_html__( 'Who should have access to the %1$s settings', 'wordpress-seo' ), 'Yoast SEO' ),
 	array(
-		'admin'      => __( 'Site Admins (default)', 'wordpress-seo' ),
-		'superadmin' => __( 'Super Admins only', 'wordpress-seo' ),
+		'admin'      => esc_html__( 'Site Admins (default)', 'wordpress-seo' ),
+		'superadmin' => esc_html__( 'Super Admins only', 'wordpress-seo' ),
 	),
 	'wpseo_ms'
 );
@@ -104,7 +104,7 @@ $yform->select(
 if ( $use_dropdown === true ) {
 	$yform->select(
 		'defaultblog',
-		__( 'New sites in the network inherit their SEO settings from this site', 'wordpress-seo' ),
+		esc_html__( 'New sites in the network inherit their SEO settings from this site', 'wordpress-seo' ),
 		$dropdown_input,
 		'wpseo_ms'
 	);

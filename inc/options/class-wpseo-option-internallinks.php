@@ -65,10 +65,10 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 	 * @return void
 	 */
 	public function translate_defaults() {
-		$this->defaults['breadcrumbs-404crumb']      = __( 'Error 404: Page not found', 'wordpress-seo' );
-		$this->defaults['breadcrumbs-archiveprefix'] = __( 'Archives for', 'wordpress-seo' );
-		$this->defaults['breadcrumbs-home']          = __( 'Home', 'wordpress-seo' );
-		$this->defaults['breadcrumbs-searchprefix']  = __( 'You searched for', 'wordpress-seo' );
+		$this->defaults['breadcrumbs-404crumb']      = esc_html__( 'Error 404: Page not found', 'wordpress-seo' );
+		$this->defaults['breadcrumbs-archiveprefix'] = esc_html__( 'Archives for', 'wordpress-seo' );
+		$this->defaults['breadcrumbs-home']          = esc_html__( 'Home', 'wordpress-seo' );
+		$this->defaults['breadcrumbs-searchprefix']  = esc_html__( 'You searched for', 'wordpress-seo' );
 	}
 
 
@@ -162,7 +162,7 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 								add_settings_error(
 									$this->group_name, // Slug title of the setting.
 									'_' . $key, // Suffix-id for the error message box.
-									sprintf( __( 'Please select a valid taxonomy for post type "%s"', 'wordpress-seo' ), $post_type ), // The error message.
+									sprintf( esc_html__( 'Please select a valid taxonomy for post type "%s"', 'wordpress-seo' ), $post_type ), // The error message.
 									'error' // Error type, either 'error' or 'updated'.
 								);
 							}
@@ -201,7 +201,7 @@ class WPSEO_Option_InternalLinks extends WPSEO_Option {
 								add_settings_error(
 									$this->group_name, // Slug title of the setting.
 									'_' . $tax, // Suffix-id for the error message box.
-									sprintf( __( 'Please select a valid post type for taxonomy "%s"', 'wordpress-seo' ), $tax ), // The error message.
+									sprintf( esc_html__( 'Please select a valid post type for taxonomy "%s"', 'wordpress-seo' ), $tax ), // The error message.
 									'error' // Error type, either 'error' or 'updated'.
 								);
 								unset( $tax );

@@ -99,7 +99,7 @@ class WPSEO_Admin_Pages {
 	 */
 	public function localize_media_script() {
 		return array(
-			'choose_image' => __( 'Use Image', 'wordpress-seo' ),
+			'choose_image' => esc_html__( 'Use Image', 'wordpress-seo' ),
 		);
 	}
 
@@ -113,7 +113,7 @@ class WPSEO_Admin_Pages {
 	public function localize_admin_script() {
 		return array(
 			/* translators: %s: '%%term_title%%' variable used in titles and meta's template that's not compatible with the given template */
-			'variable_warning' => sprintf( __( 'Warning: the variable %s cannot be used in this template.', 'wordpress-seo' ), '<code>%s</code>' ) . ' ' . __( 'See the help tab for more info.', 'wordpress-seo' ),
+			'variable_warning' => sprintf( esc_html__( 'Warning: the variable %s cannot be used in this template.', 'wordpress-seo' ), '<code>%s</code>' ) . ' ' . esc_html__( 'See the help tab for more info.', 'wordpress-seo' ),
 			'locale' => get_locale(),
 		);
 	}
@@ -349,7 +349,7 @@ class WPSEO_Admin_Pages {
 		?>
 			<div id="<?php echo esc_attr( $id ); ?>" class="yoastbox">
 				<h1><?php echo esc_html($title); ?></h1>
-				<?php echo $content; ?>
+				<?php echo wp_kses_post($content); ?>
 			</div>
 		<?php
 	}

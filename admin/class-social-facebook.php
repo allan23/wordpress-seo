@@ -110,13 +110,13 @@ class Yoast_Social_Facebook {
 	private function get_response_body( $type ) {
 		switch ( $type ) {
 			case 'not_present':
-				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . __( 'Please make sure both fields are filled.', 'wordpress-seo' ) . '</span></p>';
+				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . esc_html__( 'Please make sure both fields are filled.', 'wordpress-seo' ) . '</span></p>';
 				break;
 			case 'invalid_format':
-				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . __( 'Your input contains invalid characters. Please make sure both fields are filled in correctly.', 'wordpress-seo' ) . '</span></p>';
+				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . esc_html__( 'Your input contains invalid characters. Please make sure both fields are filled in correctly.', 'wordpress-seo' ) . '</span></p>';
 				break;
 			case 'already_exists':
-				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . __( 'This Facebook user has already been added as an admin.', 'wordpress-seo' ) . '</span></p>';
+				$return = "<p class='notice-error notice'><span style='margin-left: 5px'>" . esc_html__( 'This Facebook user has already been added as an admin.', 'wordpress-seo' ) . '</span></p>';
 				break;
 			default:
 				$return = '';
@@ -152,7 +152,7 @@ class Yoast_Social_Facebook {
 			unset( $this->options['fb_admins'][ $admin_id ] );
 
 			$this->save_options();
-			$this->success_notice( sprintf( __( 'Successfully removed admin %s', 'wordpress-seo' ), $fbadmin ) );
+			$this->success_notice( sprintf( esc_html__( 'Successfully removed admin %s', 'wordpress-seo' ), $fbadmin ) );
 
 			unset( $fbadmin );
 		}
@@ -175,7 +175,7 @@ class Yoast_Social_Facebook {
 		$this->options['fb_admins'] = WPSEO_Options::get_default( 'wpseo_social', 'fb_admins' );
 
 		$this->save_options();
-		$this->success_notice( __( 'Successfully cleared all Facebook Data', 'wordpress-seo' ) );
+		$this->success_notice( esc_html__( 'Successfully cleared all Facebook Data', 'wordpress-seo' ) );
 
 		// Clean up the referrer url for later use.
 		if ( filter_input( INPUT_SERVER, 'REQUEST_URI' ) ) {
@@ -298,7 +298,7 @@ class Yoast_Social_Facebook_Form {
 		);
 		echo ' ';
 		/* translators: %1$s and %2$s expand to a link to the Yoast Knowledge Base */
-		printf( __( 'More info can be found %1$son our knowledge base%2$s.', 'wordpress-seo' ), '<a target="_blank" href="http://kb.yoast.com/article/254-gaining-access-to-facebook-insights">', '</a>' );
+		echo wp_kses_post( __( 'More info can be found %1$son our knowledge base%2$s.', 'wordpress-seo' ), '<a target="_blank" href="http://kb.yoast.com/article/254-gaining-access-to-facebook-insights">', '</a>' );
 		echo '</p>';
 
 		return $this;
@@ -315,23 +315,23 @@ class Yoast_Social_Facebook_Form {
 		echo "<div class='form-wrap wpseo_content_wrapper'>";
 		echo '<p>';
 		/* translators: %1$s and %2$s expand to a link to Facebook Insights */
-		printf( __( 'To be able to access %1$sFacebook Insights%2$s, you need to add a user here. The name is used for reference only, the ID is used for verification.', 'wordpress-seo' ), '<a target="_blank" href="https://www.facebook.com/insights">', '</a>' );
+		echo wp_kses_post( __( 'To be able to access %1$sFacebook Insights%2$s, you need to add a user here. The name is used for reference only, the ID is used for verification.', 'wordpress-seo' ), '<a target="_blank" href="https://www.facebook.com/insights">', '</a>' );
 		echo '</p>';
 		echo '<p>';
 		/* translators: %1$s and %2$s expand to a link to the Yoast Knowledge Base */
-		printf( __( 'If you don\'t know where to find the needed ID, see %1$sthis knowledge base article%2$s.', 'wordpress-seo' ), '<a target="_blank" href="http://kb.yoast.com/article/254-gaining-access-to-facebook-insights">', '</a>' );
+		echo wp_kses_post( __( 'If you don\'t know where to find the needed ID, see %1$sthis knowledge base article%2$s.', 'wordpress-seo' ), '<a target="_blank" href="http://kb.yoast.com/article/254-gaining-access-to-facebook-insights">', '</a>' );
 		echo '</p>';
 		echo '<div class="form-field form-required">';
-		echo '<label for="fb_admin_name">' . __( 'Admin\'s name:', 'wordpress-seo' ) . '</label>';
+		echo '<label for="fb_admin_name">' . esc_html__( 'Admin\'s name:', 'wordpress-seo' ) . '</label>';
 		echo '<input type="text" id="fb_admin_name" name="fb_admin_name" value="" maxlength="255" />';
 		echo '</div>';
 		echo '<div class="form-field form-required">';
-		echo '<label for="fb_admin_id">' . __( 'Admin\'s Facebook user ID:', 'wordpress-seo' ) . '</label>';
+		echo '<label for="fb_admin_id">' . esc_html__( 'Admin\'s Facebook user ID:', 'wordpress-seo' ) . '</label>';
 		echo '<input type="text" id="fb_admin_id" name="fb_admin_id" value="" maxlength="255"  />';
 		echo '</div>';
 		echo "<p class='submit'>";
 		echo '<input type="hidden" name="fb_admin_nonce" value="' . wp_create_nonce( 'wpseo_fb_admin_nonce' ) . '" />';
-		echo '<input type="submit" value="' . __( 'Add Facebook admin', 'wordpress-seo' ) . '" class="button-primary" onclick="javascript:wpseo_add_fb_admin();" />';
+		echo '<input type="submit" value="' . esc_attr__( 'Add Facebook admin', 'wordpress-seo' ) . '" class="button-primary" onclick="javascript:wpseo_add_fb_admin();" />';
 		echo '</p>';
 		echo '</div>';
 		echo '</div>';
@@ -345,18 +345,18 @@ class Yoast_Social_Facebook_Form {
 	 * @return $this
 	 */
 	private function manage_user_admin() {
-		$button_text = __( 'Add Facebook admin', 'wordpress-seo' );
+		$button_text = esc_html__( 'Add Facebook admin', 'wordpress-seo' );
 		$nonce       = false;
 		$style       = 'style="display:none"';
 
 		if ( is_array( $this->options['fb_admins'] ) && $this->options['fb_admins'] !== array() ) {
 			$nonce       = $this->get_delete_nonce();
-			$button_text = __( 'Add Another Facebook Admin', 'wordpress-seo' );
+			$button_text = esc_html__( 'Add Another Facebook Admin', 'wordpress-seo' );
 			$style       = '';
 		}
 
 		echo "<div id='connected_fb_admins' {$style}>";
-		echo '<p>' . __( 'Currently connected Facebook admins:', 'wordpress-seo' ) . '</p>';
+		echo '<p>' . esc_html__( 'Currently connected Facebook admins:', 'wordpress-seo' ) . '</p>';
 		echo '<ul id="user_admin">';
 		$this->show_user_admins( $nonce );
 		echo '</ul>';
@@ -383,7 +383,7 @@ class Yoast_Social_Facebook_Form {
 	 */
 	private function manage_app_as_admin() {
 		echo '<div class="clear"></div><br />';
-		Yoast_Form::get_instance()->textinput( 'fbadminapp', __( 'Facebook App ID', 'wordpress-seo' ) );
+		Yoast_Form::get_instance()->textinput( 'fbadminapp', esc_html__( 'Facebook App ID', 'wordpress-seo' ) );
 
 		return $this;
 	}
@@ -395,7 +395,7 @@ class Yoast_Social_Facebook_Form {
 	 */
 	private function show_user_admins( $nonce ) {
 		foreach ( $this->options['fb_admins'] as $admin_id => $admin ) {
-			echo $this->get_admin_link( $admin_id, $admin, $nonce );
+			echo $this->get_admin_link( $admin_id, $admin, $nonce ); // xss ok.
 		}
 	}
 
@@ -451,7 +451,7 @@ class Yoast_Social_Facebook_Form {
 						'nonce'      => wp_create_nonce( 'fbclearall' ),
 						'fbclearall' => 'true',
 					), admin_url( $this->admin_url . '#top#facebook' ) ),
-					'value' => __( 'Clear all Facebook Data', 'wordpress-seo' ),
+					'value' => esc_html__( 'Clear all Facebook Data', 'wordpress-seo' ),
 				)
 			);
 		}

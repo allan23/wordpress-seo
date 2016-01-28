@@ -130,7 +130,7 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	 */
 	private function verify_nonce() {
 		if ( $this->should_verify_nonce() && ! wp_verify_nonce( filter_input( INPUT_GET, 'nonce' ), 'bulk-editor-table' ) ) {
-			Yoast_Notification_Center::get()->add_notification( new Yoast_Notification( __( 'You are not allowed to access this page.', 'wordpress-seo' ), array( 'type' => 'error' ) ) );
+			Yoast_Notification_Center::get()->add_notification( new Yoast_Notification( esc_html__( 'You are not allowed to access this page.', 'wordpress-seo' ), array( 'type' => 'error' ) ) );
 			Yoast_Notification_Center::get()->display_notifications();
 			die;
 		}
@@ -280,13 +280,16 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		$all_states      = "'" . implode( "', '", $states ) . "'";
 
 		$subquery = $this->get_base_subquery();
-
-		$total_posts = $wpdb->get_var(
-			"
+		$query		 = "
 					SELECT COUNT(ID) FROM {$subquery}
 					WHERE post_status IN ({$all_states})
-				"
-		);
+				";
+		$cache_key	 = md5( $query );
+		$total_posts = wp_cache_get( $cache_key, 'wpseo' );
+		if ( false === $total_posts ) {
+			$total_posts = $wpdb->get_var( $query );
+			wp_cache_set( $cache_key, $total_posts, 'wpseo', 60 );
+		}
 
 
 		$post_status         = filter_input( INPUT_GET, 'post_status' );
@@ -298,17 +301,18 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 			foreach ( $post_stati as $status ) {
 
 				$status_name = esc_sql( $status->name );
-
-				$total = (int) $wpdb->get_var(
-					$wpdb->prepare(
-						"
+				$query		 = $wpdb->prepare(
+				"
 								SELECT COUNT(ID) FROM {$subquery}
 								WHERE post_status = %s
-							",
-						$status_name
-					)
+							", $status_name
 				);
-
+				$cache_key	 = md5( $query );
+				$total		 = wp_cache_get( $cache_key, 'wpseo' );
+				if ( false === $total ) {
+					$total = (int) $wpdb->get_var( $query );
+					wp_cache_set( $cache_key, $total, 'wpseo', 60 );
+				}
 				if ( $total === 0 ) {
 					continue;
 				}
@@ -322,13 +326,16 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 			}
 		}
 		unset( $post_stati, $status, $status_name, $total, $class );
-
-		$trashed_posts = $wpdb->get_var(
-			"
+		$query=			"
 					SELECT COUNT(ID) FROM {$subquery}
 					WHERE post_status IN ('trash')
-				"
-		);
+				";
+					$cache_key=md5($query);
+		$trashed_posts = wp_cache_get( $cache_key, 'wpseo' );
+		if ( false === $trashed_posts ) {
+			$trashed_posts = $wpdb->get_var($query);
+			wp_cache_set( $cache_key, $trashed_posts, 'wpseo', 60 );
+		}
 
 		$class = '';
 		if ( 'trash' === $post_status ) {
@@ -362,15 +369,17 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 				$all_states      = "'" . implode( "', '", $states ) . "'";
 
 				$subquery = $this->get_base_subquery();
-
-				$post_types = $wpdb->get_results(
-					"
+				$query		 = "
 							SELECT DISTINCT post_type FROM {$subquery}
 							WHERE post_status IN ({$all_states})
 							ORDER BY 'post_type' ASC
-						"
-				);
-
+						";
+				$cache_key	 = md5( $query );
+				$post_types	 = wp_cache_get( $cache_key, 'wpseo' );
+				if ( false === $post_types ) {
+					$post_types = $wpdb->get_results($query);
+					wp_cache_set( $cache_key, $post_types, 'wpseo', 60 );
+				}
 				$post_type_filter = filter_input( INPUT_GET, 'post_type_filter' );
 				$selected         = ( ! empty( $post_type_filter ) ) ? sanitize_text_field( $post_type_filter ) : '-1';
 
@@ -497,14 +506,17 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	 */
 	protected function count_items( $subquery, $all_states, $post_type_clause ) {
 		global $wpdb;
-		$total_items = $wpdb->get_var(
-			"
+		$query		 = "
 					SELECT COUNT(ID)
 					FROM {$subquery}
 					WHERE post_status IN ({$all_states}) $post_type_clause
-				"
-		);
-
+				";
+		$cache_key	 = md5( $query );
+		$total_items = wp_cache_get( $cache_key, 'wpseo' );
+		if ( false === $total_items ) {
+			$total_items = $wpdb->get_var($query);
+			wp_cache_set( $cache_key, $total_items, 'wpseo', 60 );
+		}
 		return $total_items;
 	}
 
@@ -638,14 +650,15 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	 */
 	protected function get_items( $query ) {
 		global $wpdb;
-
-		$this->items = $wpdb->get_results(
-			$wpdb->prepare(
-				$query,
-				$this->pagination['offset'],
-				$this->pagination['per_page']
-			)
+		$query		 = $wpdb->prepare(
+		$query, $this->pagination[ 'offset' ], $this->pagination[ 'per_page' ]
 		);
+		$cache_key	 = md5( $query );
+		$this->items = wp_cache_get( $cache_key, 'wpseo' );
+		if ( false === $this->items ) {
+			$this->items = $wpdb->get_results( $query );
+			wp_cache_set( $cache_key, $this->items, 'wpseo', 60 );
+		}
 	}
 
 	/**
@@ -745,17 +758,17 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 		$actions = array();
 
 		if ( $can_edit_post && 'trash' !== $rec->post_status ) {
-			$actions['edit'] = '<a href="' . esc_url( get_edit_post_link( $rec->ID, true ) ) . '" title="' . esc_attr( __( 'Edit this item', 'wordpress-seo' ) ) . '">' . __( 'Edit', 'wordpress-seo' ) . '</a>';
+			$actions['edit'] = '<a href="' . esc_url( get_edit_post_link( $rec->ID, true ) ) . '" title="' . esc_attr__( 'Edit this item', 'wordpress-seo' ) . '">' . esc_html__( 'Edit', 'wordpress-seo' ) . '</a>';
 		}
 
 		if ( $post_type_object->public ) {
 			if ( in_array( $rec->post_status, array( 'pending', 'draft', 'future' ) ) ) {
 				if ( $can_edit_post ) {
-					$actions['view'] = '<a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $rec->ID ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;', 'wordpress-seo' ), $rec->post_title ) ) . '">' . __( 'Preview', 'wordpress-seo' ) . '</a>';
+					$actions['view'] = '<a href="' . esc_url( add_query_arg( 'preview', 'true', get_permalink( $rec->ID ) ) ) . '" title="' . esc_attr( sprintf( __( 'Preview &#8220;%s&#8221;', 'wordpress-seo' ), $rec->post_title ) ) . '">' . esc_html__( 'Preview', 'wordpress-seo' ) . '</a>';
 				}
 			}
 			elseif ( 'trash' !== $rec->post_status ) {
-				$actions['view'] = '<a href="' . esc_url( get_permalink( $rec->ID ) ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;', 'wordpress-seo' ), $rec->post_title ) ) . '" rel="bookmark">' . __( 'View', 'wordpress-seo' ) . '</a>';
+				$actions['view'] = '<a href="' . esc_url( get_permalink( $rec->ID ) ) . '" title="' . esc_attr( sprintf( __( 'View &#8220;%s&#8221;', 'wordpress-seo' ), $rec->post_title ) ) . '" rel="bookmark">' . esc_html__( 'View', 'wordpress-seo' ) . '</a>';
 			}
 		}
 
@@ -882,14 +895,17 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	 */
 	protected function get_meta_data_result( $post_ids ) {
 		global $wpdb;
-
-		$meta_data = $wpdb->get_results(
-			"
+		$query		 = "
 				 	SELECT *
 				 	FROM {$wpdb->postmeta}
 				 	WHERE post_id IN({$post_ids}) && meta_key = '" . WPSEO_Meta::$meta_prefix . $this->target_db_field . "'
-				"
-		);
+				";
+		$cache_key	 = md5( $query );
+		$meta_data	 = wp_cache_get( $cache_key, 'wpseo' );
+		if ( false === $meta_data ) {
+			$meta_data = $wpdb->get_results( $query );
+			wp_cache_set( $cache_key, $meta_data, 'wpseo', 60 );
+		}
 
 		return $meta_data;
 	}
@@ -917,16 +933,16 @@ class WPSEO_Bulk_List_Table extends WP_List_Table {
 	protected function merge_columns( $columns = array() ) {
 		$columns = array_merge(
 			array(
-				'col_page_title'  => __( 'WP Page Title', 'wordpress-seo' ),
-				'col_post_type'   => __( 'Post Type', 'wordpress-seo' ),
-				'col_post_status' => __( 'Post Status', 'wordpress-seo' ),
-				'col_post_date'   => __( 'Publication date', 'wordpress-seo' ),
-				'col_page_slug'   => __( 'Page URL/Slug', 'wordpress-seo' ),
+				'col_page_title'  => esc_html__( 'WP Page Title', 'wordpress-seo' ),
+				'col_post_type'   => esc_html__( 'Post Type', 'wordpress-seo' ),
+				'col_post_status' => esc_html__( 'Post Status', 'wordpress-seo' ),
+				'col_post_date'   => esc_html__( 'Publication date', 'wordpress-seo' ),
+				'col_page_slug'   => esc_html__( 'Page URL/Slug', 'wordpress-seo' ),
 			),
 			$columns
 		);
 
-		$columns['col_row_action'] = __( 'Action', 'wordpress-seo' );
+		$columns['col_row_action'] = esc_html__( 'Action', 'wordpress-seo' );
 
 		return $columns;
 	}

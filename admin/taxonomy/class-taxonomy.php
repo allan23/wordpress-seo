@@ -99,7 +99,7 @@ class WPSEO_Taxonomy {
 				'jquery-ui-core',
 			), WPSEO_VERSION, true );
 			wp_localize_script( 'wpseo-admin-media', 'wpseoMediaL10n', array(
-				'choose_image' => __( 'Use Image', 'wordpress-seo' ),
+				'choose_image' => esc_html__( 'Use Image', 'wordpress-seo' ),
 			) );
 		}
 	}

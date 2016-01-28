@@ -38,7 +38,7 @@ class Yoast_Dashboard_Widget {
 		wp_add_dashboard_widget(
 			'wpseo-dashboard-overview',
 			/* translators: %s is the plugin name */
-			sprintf( __( '%s Posts Overview', 'wordpress-seo' ), 'Yoast SEO' ),
+			esc_html(sprintf( __( '%s Posts Overview', 'wordpress-seo' ), 'Yoast SEO' )),
 			array( $this, 'display_dashboard_widget' )
 		);
 	}
@@ -152,12 +152,12 @@ class Yoast_Dashboard_Widget {
 	 */
 	private function get_title_for_rank( WPSEO_Rank $rank ) {
 		$labels = array(
-			WPSEO_Rank::NO_FOCUS => __( 'Posts without focus keyword', 'wordpress-seo' ),
-			WPSEO_Rank::BAD      => __( 'Posts with bad SEO score', 'wordpress-seo' ),
-			WPSEO_Rank::OK       => __( 'Posts with OK SEO score', 'wordpress-seo' ),
-			WPSEO_Rank::GOOD     => __( 'Posts with good SEO score', 'wordpress-seo' ),
+			WPSEO_Rank::NO_FOCUS => esc_html__( 'Posts without focus keyword', 'wordpress-seo' ),
+			WPSEO_Rank::BAD      => esc_html__( 'Posts with bad SEO score', 'wordpress-seo' ),
+			WPSEO_Rank::OK       => esc_html__( 'Posts with OK SEO score', 'wordpress-seo' ),
+			WPSEO_Rank::GOOD     => esc_html__( 'Posts with good SEO score', 'wordpress-seo' ),
 			/* translators: %s expands to <code>noindex</code> */
-			WPSEO_Rank::NO_INDEX => sprintf( __( 'Posts that are set to %s', 'wordpress-seo' ), '<code>noindex</code>' ),
+			WPSEO_Rank::NO_INDEX => wp_kses_post(sprintf( __( 'Posts that are set to %s', 'wordpress-seo' ), '<code>noindex</code>' )),
 		);
 
 		return $labels[ $rank->get_rank() ];

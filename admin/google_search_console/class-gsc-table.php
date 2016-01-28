@@ -104,10 +104,10 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	public function get_columns() {
 		$columns = array(
 			'cb'             => '<input type="checkbox" />',
-			'url'            => __( 'URL', 'wordpress-seo' ),
-			'last_crawled'   => __( 'Last crawled', 'wordpress-seo' ),
-			'first_detected' => __( 'First detected', 'wordpress-seo' ),
-			'response_code'  => __( 'Response code', 'wordpress-seo' ),
+			'url'            => esc_html__( 'URL', 'wordpress-seo' ),
+			'last_crawled'   => esc_html__( 'Last crawled', 'wordpress-seo' ),
+			'first_detected' => esc_html__( 'First detected', 'wordpress-seo' ),
+			'response_code'  => esc_html__( 'Response code', 'wordpress-seo' ),
 		);
 
 		return $columns;
@@ -136,7 +136,7 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	 */
 	protected function get_bulk_actions() {
 		return array(
-			'mark_as_fixed' => __( 'Mark as fixed', 'wordpress-seo' ),
+			'mark_as_fixed' => esc_html__( 'Mark as fixed', 'wordpress-seo' ),
 		);
 	}
 
@@ -161,7 +161,7 @@ class WPSEO_GSC_Table extends WP_List_Table {
 	 */
 	protected function column_cb( $item ) {
 		return sprintf(
-			'<input type="checkbox" name="wpseo_crawl_issues[]" value="%s" />', $item['url']
+			'<input type="checkbox" name="wpseo_crawl_issues[]" value="%s" />', esc_attr($item['url'])
 		);
 	}
 
@@ -203,11 +203,11 @@ class WPSEO_GSC_Table extends WP_List_Table {
 			 */
 			$modal_height = $this->modal_box( $item['url'] );
 
-			$actions['create_redirect'] = '<a title="' . __( 'Create a redirect', 'wordpress-seo' ) . '" href="#TB_inline?width=600&height=' . $this->modal_heights[ $modal_height ] . '&inlineId=redirect-' . md5( $item['url'] ) . '" class="thickbox">' . __( 'Create redirect', 'wordpress-seo' ) . '</a>';
+			$actions['create_redirect'] = '<a title="' . esc_attr__( 'Create a redirect', 'wordpress-seo' ) . '" href="#TB_inline?width=600&height=' . esc_attr($this->modal_heights[ $modal_height]) . '&inlineId=redirect-' . md5( $item['url'] ) . '" class="thickbox">' . esc_html__( 'Create redirect', 'wordpress-seo' ) . '</a>';
 		}
 
-		$actions['view']        = '<a href="' . $item['url'] . '" target="_blank">' . __( 'View', 'wordpress-seo' ) . '</a>';
-		$actions['markasfixed'] = '<a href="javascript:wpseo_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . __( 'Mark as fixed', 'wordpress-seo' ) . '</a>';
+		$actions['view']        = '<a href="' . esc_url($item['url']) . '" target="_blank">' . esc_html__( 'View', 'wordpress-seo' ) . '</a>';
+		$actions['markasfixed'] = '<a href="javascript:wpseo_mark_as_fixed(\'' . urlencode( $item['url'] ) . '\');">' . esc_html__( 'Mark as fixed', 'wordpress-seo' ) . '</a>';
 
 		return sprintf(
 			'<span class="value">%1$s</span> %2$s',
